@@ -81,7 +81,7 @@
               <input type="text" placeholder="Targa" id="targa">
               <input type="text" placeholder="Data" id="data" name="dates" value="" autocomplete="off">
               <input type="number" placeholder="Bil" id="bil">
-              <a style="border: 1px solid lightgray; padding: 5px; border-radius: 5px;"><input type="checkbox" id="tipo">Non chiuse</a>
+              <a style="border: 1px solid lightgray; padding: 5px; border-radius: 5px;" id="nonChiuse"><input type="checkbox" id="tipo">Non chiuse</a>
             </div>
             <div>
               <input type="submit" value="Cerca" id="cerca" onclick="submitForm()">
@@ -97,11 +97,11 @@
 	      <th>Fornitore</th>
 	      <th>Materiale</th>
 	      <th>Netto</th>
-	      <th>Data ora 1</th>
-	      <th>Pesata 1</th>
-	      <th>Data ora 2</th>
-	      <th>Pesata 2</th>
-	      <th>Pid 1 / Pid 2</th>
+	      <th id="titleDateTimeOne">Data ora 1</th>
+        <th id="titleWeightOne">Pesata 1</th>
+	      <th id="titleDateTimeTwo">Data ora 2</th>
+	      <th id="titleWeightTwo">Pesata 2</th>
+	      <th id="titlePid">Pid 1 / Pid 2</th>
 	      <th>Bil</th>
 	    </tr>
 	  </thead>

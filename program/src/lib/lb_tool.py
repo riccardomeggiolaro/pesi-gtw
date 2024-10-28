@@ -8,6 +8,7 @@ import random
 from datetime import datetime, date, timedelta
 import lb_config
 import hashlib
+from typing import Union
 
 class login_res(BaseModel):
     token: str
@@ -40,6 +41,20 @@ class setup_opcua(BaseModel):
 class setup_nameserial(BaseModel):
 	token: str
 	name_serial: str
+
+class list_settings(BaseModel):
+	progr: Union[bool, None]
+	pid: Union[bool, None]
+	bil: Union[bool, None]
+	customer: Union[bool, None]
+	supplier: Union[bool, None]
+	material: Union[bool, None]
+	plate: Union[bool, None]
+	net_weight: Union[bool, None]
+	date_time_one: Union[bool, None]
+	weight_one: Union[bool, None]
+	date_time_two: Union[bool, None]
+	weight_two: Union[bool, None]
 
 ######## UTILITY ############################
 

@@ -587,6 +587,21 @@ def mainprg():
 		except:
 			return HTTPException(status_code=400, detail="SYNTAX ERROR")
 			
+	# function to set list view
+	@app.post("/setup/list/{token}")
+	async def SetList(token: str, setup: lb_tool.list_settings):
+		try:
+			if lb_tool.IsAuthorizated(token):
+				for key, value in setup:
+					if value != None:
+						lb_config.setup["settings_machine"]["list_settings"][key] = value					
+				lb_config.saveconfig()
+				return lb_config.setup["settings_machine"]["list_settings"]
+			else:
+				return HTTPException(status_code=404, detail="NOT AUTHORIZATION")
+		except:
+			return HTTPException(status_code=400, details="SYNTAX ERROR")
+
 	# function to set max weight
 	@app.get("/setup/maxweigth/{weigth}/{token}")
 	async def MaxWeigth(weigth: int, token: str):

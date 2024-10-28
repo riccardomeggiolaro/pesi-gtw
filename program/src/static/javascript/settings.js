@@ -16,6 +16,18 @@ let inputRepeatPassword = document.getElementById("repeatPassword")
 let formPassword = document.getElementById("formPassword")
 let formSetup = document.getElementById("formSetup")
 let checkbox = document.getElementById("flexCheckChecked")
+let progrCheckbox = document.getElementById("progr")
+let pidCheckbox = document.getElementById("pid")
+let bilCheckbox = document.getElementById("bil")
+let customerCheckbox = document.getElementById("customer")
+let supplierCheckbox = document.getElementById("supplier")
+let materialCheckbox = document.getElementById("material")
+let plateCheckbox = document.getElementById("plate")
+let netWeightCheckbox = document.getElementById("netWeight")
+let dateTimeOneCheckbox = document.getElementById("dateTimeOne")
+let weightOneCheckbox = document.getElementById("weightOne")
+let dateTimeTwoCheckbox = document.getElementById("dateTimeTwo")
+let weightTwoCheckbox = document.getElementById("weightTwo")
 let tableUsers = document.getElementById("tableUsers")
 let infomachine = document.getElementById("infomachine")
 let token
@@ -66,6 +78,35 @@ window.onload = function(){
 			}else{
 				checkbox.checked = false
 			}
+			Object.keys(response.message.list_settings).forEach(element => {
+				console.log(element)
+				switch(element){
+					case "progr":
+						progrCheckbox.checked = response.message.list_settings.progr;
+					case "pid":
+						pidCheckbox.checked = response.message.list_settings.pid;
+					case "bil":
+						bilCheckbox.checked = response.message.list_settings.bil;
+					case "customer":
+						customerCheckbox.checked = response.message.list_settings.customer;
+					case "supplier":
+						supplierCheckbox.checked = response.message.list_settings.supplier;
+					case "material":
+						materialCheckbox.checked = response.message.list_settings.material;
+					case "plate":
+						plateCheckbox.checked = response.message.list_settings.plate;
+					case "net_weight":
+						netWeightCheckbox.checked = response.message.list_settings.net_weight;
+					case "date_time_one":
+						dateTimeOneCheckbox.checked = response.message.list_settings.date_time_one;
+					case "weight_one":
+						weightOneCheckbox.checked = response.message.list_settings.weight_one;
+					case "date_time_two":
+						dateTimeTwoCheckbox.checked = response.message.list_settings.date_time_two;
+					case "weight_two":
+						weightTwoCheckbox.checked = response.message.list_settings.weight_two;
+				}
+			})
 			for(let i=0; i<response.message.options_divisions.length; i++){
 	  			let option = document.createElement("option")
 	  			option.text = response.message.options_divisions[i]
@@ -77,7 +118,6 @@ window.onload = function(){
 			}
 			maxWeight.placeholder = response.message.max_weigth
 			nameSerial.placeholder = response.message.name_serial
-			console.log(response.message)
 		})
 		body.classList.remove("displayNone")
 	}
@@ -288,6 +328,61 @@ function LicensePlateRequired(){
 	.then(response => response.json())
 	.then(response => {
 		console.log(response.message)
+	})
+}
+
+function IsRequired(key) {
+	let checked_value = null
+
+	switch (key) {
+		case "progr":
+			checked_value = progrCheckbox.checked
+			break
+		case "pid":
+			checked_value = pidCheckbox.checked
+			break
+		case "bil":
+			checked_value = bilCheckbox.checked
+			break
+		case "customer":
+			checked_value = customerCheckbox.checked
+			break
+		case "supplier":
+			checked_value = supplierCheckbox.checked
+			break
+		case "material":
+			checked_value = materialCheckbox.checked
+			break
+		case "plate":
+			checked_value = plateCheckbox.checked
+			break
+		case "net_weight":
+			checked_value = netWeightCheckbox.checked
+			break
+		case "date_time_one":
+			checked_value = dateTimeOneCheckbox.checked
+			break
+		case "weight_one":
+			checked_value = weightOneCheckbox.checked
+			break
+		case "date_time_two":
+			checked_value = dateTimeTwoCheckbox.checked
+			break
+		case "weight_two":
+			checked_value = weightTwoCheckbox.checked
+			break
+	}
+	console.log({[key]: checked_value})
+	fetch("http://" + hostname + ":8000/setup/list/" + token, {
+		method: "POST",
+		headers: {
+		  "Content-Type": "application/json"
+		},
+		body: JSON.stringify({ [key]: checked_value })
+	})
+	.then(response => response.json())
+	.then(response => {
+		console.log(response);
 	})
 }
 

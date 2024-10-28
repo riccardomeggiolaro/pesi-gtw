@@ -75,7 +75,7 @@ def initialize():
 	global anagrafica_in_corso
 	global timeRepeat
 	global timeRead
-	
+
 	anagrafica_in_corso = ""
 	config_path = os.path.dirname(__file__)
 	pesigtw_path = config_path.replace("/src/lib", "")
@@ -146,7 +146,7 @@ def initialize():
 	minWeight = setup["settings_machine"]["division_selected"] * 20
 	timeRead = 1
 	timeRepeat = 0.5
-	
+
 	# DB
 	db = {}
 	db["_info"] = {"updated": []}

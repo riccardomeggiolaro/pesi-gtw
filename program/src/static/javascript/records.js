@@ -28,6 +28,12 @@ let targa = document.getElementById("targa")
 let data = document.getElementById("data")
 let bil = document.getElementById("bil")
 let tipo = document.getElementById("tipo")
+let nonChiuse = document.getElementById("nonChiuse")
+let titleDateTimeOne = document.getElementById("titleDateTimeOne")
+let titleWeightOne = document.getElementById("titleWeightOne")
+let titleDateTimeTwo = document.getElementById("titleDateTimeTwo")
+let titleWeightTwo = document.getElementById("titleWeightTwo")
+let titlePid = document.getElementById("titlePid")
 let prog_value = prog.value
 let cliente_value = cliente.value
 let targa_value = targa.value
@@ -36,7 +42,7 @@ let data_value = data.value
 let tipo_value = tipo.checked
 
 window.onload = (event) => {  
-    value = ('; '+document.cookie).split(`; tokenBaron=`).pop().split(';')[0];
+	value = ('; '+document.cookie).split(`; tokenBaron=`).pop().split(';')[0];
     if(value == ""){
 		window.location.replace("http://"+host+"/login.html")
 	}else{
@@ -73,6 +79,62 @@ window.onload = (event) => {
 	.then(response => response.json())
 	.then(json => {
 		infomachine.textContent = "Firmware: " + json.firmware + " | Model name: " + json.model_name + " | Serial number: " + json.serial_number
+	})
+	let urlsettingsmachine = "http://"+hostname+":8000/setup/settingsmachine"
+	fetch(urlsettingsmachine)
+	.then(response => response.json())
+	.then(response => {
+		let weightTwo = false;
+
+		// Mappa per associare le chiavi a un numero di colonna
+		const columnMapping = {
+		  "progr": 1,
+		  "customer": 2,
+		  "plate": 3,
+		  "supplier": 4,
+		  "material": 5,
+		  "net_weight": 6,
+		  "date_time_one": 7,
+		  "weight_one": 8,
+		  "date_time_two": 9,
+		  "weight_two": 10,
+		  "pid": 11,
+		  "bil": 12
+		};
+		Object.keys(response.message.list_settings).forEach(element => {
+			const index = columnMapping[element];
+			if (response.message.list_settings[element] === false) {
+				const style = document.createElement('style');
+				style.innerHTML = `
+					tr:nth-child(2) th:nth-child(${index}),
+					td:nth-child(${index}) {
+						display: none;
+					}
+				`;
+				if (element === 'weight_two') {
+					titleWeightOne.innerHTML = "Pesata"
+					titlePid.innerHTML = "Pid"
+					nonChiuse.style.display = "none"
+				} else if (element === 'weight_one') {
+					titleWeightTwo.innerHTML = "Pesata"
+					titlePid.innerHTML = "Pid"
+				} else if (element === 'date_time_one') {
+					titleDateTimeTwo.innerHTML = "Data e ora"
+				} else if (element === 'date_time_two') {
+					titleDateTimeOne.innerHTML = "Data e ora"
+				} else if (element === 'progr') {
+					prog.style.display = "none"
+				} else if (element === 'customer') {
+					cliente.style.display = "none"
+				} else if (element === 'plate') {
+					targa.style.display = "none"
+				} else if (element === 'bil') {
+					bil.style.display = "none"
+				}
+				// Aggiungi la regola al documento
+				document.head.appendChild(style);
+			}
+		})
 	})
 	body.classList.remove("displayNone")
 	

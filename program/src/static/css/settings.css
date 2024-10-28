@@ -14,7 +14,8 @@ html, body {
 	background-color: white !important;
 	height: 60%;
 	padding: 10px;
-	border-radius: 10px
+	border-radius: 10px;
+	overflow: auto;
 }
 .visited{
 	border-radius: 10px;

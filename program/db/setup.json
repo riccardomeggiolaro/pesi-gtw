@@ -13,6 +13,20 @@
             200
         ],
         "division_selected": 10,
-        "max_weigth": 60000
+        "max_weigth": 60000,
+        "list_settings": {
+            "progr": false,
+            "pid": true,
+            "bil": true,
+            "customer": true,
+            "supplier": true,
+            "material": true,
+            "plate": true,
+            "netWeight": true,
+            "date_time_one": true,
+            "weight_one": true,
+            "date_time_two": true,
+            "weight_two": true
+        }
     }
 }
