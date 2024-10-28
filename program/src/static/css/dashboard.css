@@ -1,0 +1,237 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: cornflowerblue;
+}
+.buttons{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around
+}
+.displayNone{
+	display: none
+}
+.visited{
+	border-radius: 10px;
+	background-color: white;
+	color: cornflowerblue;
+	padding: 10px
+}
+#username{
+	text-decoration: none
+}
+#logout{
+	width: 100%;
+	padding: 2px;
+	border: 1px solid cornflowerblue;
+	border-radius: 5px;
+	background-color: cornflowerblue;
+	color: white;
+	font-size: 80%;
+	margin-top: 10px
+}
+*{
+    font-family: 'Roboto', sans-serif;
+}
+h1{
+    color: white;
+    text-align: center
+}
+tr{
+	border: 2px solid cornflowerblue;
+}
+th {
+	border: 2px solid cornflowerblue;
+	background-color: white 
+}
+.info{
+    color: white !important; 
+    text-align: left;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+table {
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+  border-radius: 10px !important;
+  width: 100% ;
+}
+.uniteMisure{
+  	width: 10%;
+  	text-align: center
+}
+.weight {
+	width: 90%;
+	text-align: right
+}
+.buttons button:hover{
+	opacity: 0.8;
+}
+.buttons button:active{
+	opacity: 0.6;
+}
+@media screen and (min-width: 1200px){
+	body{
+		width: 1200px;
+		margin-left: auto;
+		margin-right: auto
+	}
+	table{
+		max-width: 1200px
+	}
+	th {
+		font-size: 300%
+	}
+	.fontpeso {
+		font-size: 800%
+	 }
+	 .uniteMisure{
+	 	font-size: 250%
+	 }
+	.buttons button{
+		margin: 10px;
+		width: 25%;
+		height: auto;
+		font-size: 200%;
+		background-color: white;
+		border: 1px solid white;
+		border-radius: 10px;
+		color: cornflowerblue
+	}
+	.buttons-sm{
+		display: none
+	}
+}	
+@media screen and (max-height: 700px) {
+	html, body{
+		display: block;
+	}
+	.info{
+		margin-top: 70px;
+	}
+	.logo{
+		position: static !important;
+	}
+}	
+@media screen and (min-width: 600px) and (max-width: 1200px){
+	body{
+		width: 100%
+	}
+	.info,
+	table{
+		width: 95%
+	}
+	th {
+		font-size:250%
+	}
+	.uniteMisure{
+		font-size: 200%;
+	}
+	.fontpeso {
+		font-size: 700%
+	 }
+}
+@media screen and (max-width: 600px){
+	body{
+		width: 100%
+	}
+	.info,
+	table{
+		max-width: 95%
+	}
+	th {
+		font-size:250%
+	}
+	.uniteMisure{
+		font-size: 100%;
+	}
+	.fontpeso {
+		font-size: 350%
+	 }
+}
+@media screen and (min-width: 800px) and (max-width: 1200px){
+	.buttons-sm{
+		display: none
+	}
+	.buttons button{
+	margin: 10px;
+	width: 25%;
+	height: auto;
+	font-size: 250%;
+	background-color: white;
+	border: 1px solid white;
+	border-radius: 10px;
+	color: cornflowerblue
+}
+}
+@media screen and (max-width: 800px){
+	.buttons-pc{
+		display: none
+	}
+	.buttons button{
+		margin: 10px;
+		margin-bottom: 0px !important;
+		width: 45%;
+		height: auto;
+		font-size: 150%;
+		background-color: white;
+		border: 1px solid white;
+		border-radius: 10px;
+		color: cornflowerblue
+	}
+	table{
+		margin-bottom: 0px !important
+	}
+}
+header{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	background-color: cornflowerblue;
+	z-index: 500;
+	justify-content: end;
+}
+.logo{
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	text-align: center
+}
+img{
+	bottom: 10px;
+	width: 180px;
+}
+@media screen and (max-width: 600px){
+	img{
+		width: 130px
+	}
+}
+.infomachine{
+	color: white
+}
+.buttons-pc{
+	margin-bottom: 60px
+}
+.buttons-sm{
+	margin-bottom: 100px
+}
+.btnmenu{
+	width: 150px
+}
+#type,
+#status{
+	text-align: center !important;
+	background-color: #e9ecef
+}
+#weight:active{
+	background-color: darkgreen !important
+}

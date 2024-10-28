@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Excel to HTML Table</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    th {
+        text-align: center; /* Allineamento al centro per le celle delle intestazioni delle colonne */
+    }
+</style>
+</head>
+<body>
+    <input type="file" id="fileInput" accept=".xlsx, .xls" />
+    <div id="tableContainer"></div>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            var file = e.target.files[0];
+            var reader = new FileReader();
+        
+            reader.onload = function(e) {
+                var data = new Uint8Array(e.target.result);
+                var workbook = XLSX.read(data, {type: 'array'});
+                var sheetName = workbook.SheetNames[0];
+                var sheet = workbook.Sheets[sheetName];
+                var html = XLSX.utils.sheet_to_html(sheet, { blankrows: false });
+                                
+                // Split the HTML table by rows
+                var rows = html.split('<tr>');
+                
+                // Add row numbers with at least four digits
+                for (var i = 1; i < rows.length; i++) {
+                    if (i > 1){
+                        var paddedRowNumber = String(i-1).padStart(4, '0');
+                        rows[i] = '<td>' + paddedRowNumber + '</td>' + rows[i];
+                    }else{
+                        rows[i] = '<td>POS</td>' + rows[i];
+                    }
+                }
+                
+                // Reassemble the HTML table
+                html = rows.join('<tr>');
+        
+                // Create a temporary container to hold the table
+                var tempContainer = document.createElement('div');
+                tempContainer.innerHTML = html;
+        
+                // Make all cells contenteditable
+                var cells = tempContainer.querySelectorAll('td');
+
+                // Check the number of rows
+                var totalRows = tempContainer.querySelectorAll('tr').length;
+
+                let n_cells = 0;
+                let tr = tempContainer.querySelector('tr');
+                let td = tr.querySelectorAll('td');
+                td.forEach(cell => {
+                    n_cells = n_cells + 1;
+                })
+
+                let n = 0;
+                tempContainer.querySelectorAll('tr').forEach(tr => {
+                    if (n > 0){
+                        let i = 0;
+                        tr.querySelectorAll('td').forEach(td => {
+                            if (i > 0){
+                                td.setAttribute('contenteditable', 'true');
+                            }
+                            i++;
+                        })
+                    }
+                    n++;
+                })
+
+                // Add empty rows if necessary
+                if (totalRows < 500) {
+                    for (var j = totalRows; j < 500; j++) {
+                        var paddedRowNumber = String(j + 1).padStart(4, '0');
+                        var emptyRow = '<tr><td>' + paddedRowNumber + '</td>';
+                        for (var k = 1; k < n_cells; k++) {
+                            emptyRow += '<td contenteditable="true"></td>';
+                        }
+                        emptyRow += '</tr>';
+                        tempContainer.querySelector('table').innerHTML += emptyRow;
+                    }
+                }
+        
+                // Get the modified HTML content
+                html = tempContainer.innerHTML;
+                
+                document.getElementById('tableContainer').innerHTML = '<table>' + html + '</table>';
+            };
+        
+            reader.readAsArrayBuffer(file);
+        });        
+    </script>
+</body>
+</html>

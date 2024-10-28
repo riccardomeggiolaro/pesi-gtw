@@ -1,0 +1,14 @@
+[
+    {
+        "username": "baronpesi",
+        "password": "51b06d3bbfe3f1aa0ed2585137b44a057803c4c1b6ed82cd6b912e05b93b285d",
+        "descrizione": "amministratore",
+        "seclev": 5
+    },
+    {
+        "username": "olivotto",
+        "password": "d5bf5f1f1b55f98ff2198f2d8d59279fc99f61e73bb3362499401341363ffb7d",
+        "descrizione": "olivotto",
+        "seclev": 4
+    }
+]

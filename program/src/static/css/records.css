@@ -1,0 +1,131 @@
+html, body {
+	margin: 0;
+	background-color: cornflowerblue !important;
+}
+.displayNone{
+	display: none
+}
+.visited{
+	border-radius: 10px;
+	background-color: white;
+	color: cornflowerblue;
+	padding: 10px
+}
+*{
+	font-family: 'Roboto', sans-serif;
+}
+h1{
+	color: white;
+}
+body{
+	width: 100% !important;
+	margin-left: auto;
+	margin-right: auto;
+}
+input[type=number]{
+	width: 100px
+}
+input[type=text]{
+	width: 100px
+}
+input[name=dates]{
+	width: 195px;
+}
+input{
+	border: 0;
+	border-radius: 5px;
+	box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+header{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	display: flex;
+	justify-content: end;
+	background-color: cornflowerblue;
+	z-index: 500;
+}
+.logo{
+	margin-top: 60px;
+	width: 100%;
+	text-align: center !important
+}
+img{
+	bottom: 10px;
+	width: 180px;
+}
+@media screen and (max-width: 600px){
+	img{
+		width: 130px
+	}
+}
+.nospace{
+	white-space: nowrap
+}
+.infomachine{
+	color: white
+}
+#example_wrapper{
+	background-color: white;
+	margin-top: 60px;
+	border: 5px solid white;
+	border-radius: 10px;
+	overflow-x: auto;
+	z-index: 101;			
+	margin-right: 5px;
+	margin-left: 5px
+}
+#example tr td:nth-child(11)
+{
+	white-space: nowrap;
+}​		
+table.dataTable thead th, 
+table.dataTable thead td, 
+table.dataTable tfoot th, 
+table.dataTable tfoot td {
+	text-align: center !important
+}
+#datatables_buttons_info{
+	z-index: 300 !important;
+}
+.containerrole{
+	position: fixed;
+	width: 100%;
+	justify-content: center;
+	text-align: center;
+	z-index: 400;
+	margin-top: 200px;
+}
+.role{
+	text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.form{
+	display: flex;
+	flex-direction: row;
+}
+@media screen and (max-width: 800px){
+	.form{
+		flex-direction: column;
+	}
+	.form div:last-child {
+		position: -webkit-sticky; /* For Safari */
+		position: sticky;
+		top: 0; /* Stick to the top of the container or viewport */
+		left: 0; /* Stick to the left side */
+		background-color: #f2f2f2; /* Background color for the sticky element */
+		padding: 10px;
+	  }
+}
+.row:first-child,
+.row:last-child{
+	margin-left: 5px;
+}
+.row:first-child{
+	margin-top: 10px !important;
+}
+thead tr button{
+	margin-bottom: 10px;
+}

@@ -1,0 +1,1 @@
+# leggere config con python e inserire li i dati costanti(porte, percorsi file)

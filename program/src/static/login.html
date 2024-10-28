@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BARON PE.S.I. | Login</title>
+    <link rel="stylesheet" href=" {{url_for('css', path='/login.css')}} ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>LOGIN</h1>
+    <div class="form">
+        <input type="text" placeholder="username" id="inputUsername"><br>
+        <input type="password" placeholder="password" id="inputPassword"><br>
+        <button id="inputSumbit">Accedi</button><br>
+    </div>
+    <p id="loginInfo" class="displayNone" style="color: white;"></p>
+    <img src=" {{url_for('img', path='/LOGO.png')}} " alt="BARON PE.S.I.">
+    <p class="infomachine" id="infomachine"></p>    
+
+    <script src=" {{url_for('javascript', path='/login.js')}} "></script>
+</body>
+</html>

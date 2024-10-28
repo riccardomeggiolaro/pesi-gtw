@@ -1,0 +1,13 @@
+{
+    "application": {
+        "module": "PES001"
+    },
+    "log": {
+        "max-size-mb": 10
+    },
+    "port": {
+        "md_webservice": 8000,
+        "md_webservice_html": 8001
+    },
+    "db_path": "/data/dat/PesiGTW/db/"
+}

@@ -1,0 +1,18 @@
+{
+    "settings_machine": {
+        "name_serial": "",
+        "license_plate_required": false,
+        "options_divisions": [
+            1,
+            2,
+            5,
+            10,
+            20,
+            50,
+            100,
+            200
+        ],
+        "division_selected": 10,
+        "max_weigth": 60000
+    }
+}

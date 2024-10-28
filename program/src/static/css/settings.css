@@ -1,0 +1,135 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: cornflowerblue;
+}
+.displayNone{
+	display: none !important
+}
+.settings{
+	margin-bottom: 60px;
+	background-color: white !important;
+	height: 60%;
+	padding: 10px;
+	border-radius: 10px
+}
+.visited{
+	border-radius: 10px;
+	background-color: white;
+	color: cornflowerblue;
+	padding: 10px
+}
+#username{
+	text-decoration: none
+}
+*{
+    font-family: 'Roboto', sans-serif;
+}
+h1{
+    color: white;
+    text-align: center
+}
+tr{
+	border: 2px solid cornflowerblue;
+}
+th {
+	border: 2px solid cornflowerblue;
+	background-color: white 
+}
+@media screen and (min-width: 1200px){
+	body{
+		width: 1200px;
+		margin-left: auto;
+		margin-right: auto
+	}
+	table{
+		max-width: 1200px
+	}
+}		
+@media screen and (max-height: 700px) {
+	html, body{
+		display: block;
+		height: auto !important;
+	}
+	h1{
+		margin-top: 70px;
+	}
+	.logo{
+		position: static !important;
+	}
+}	
+@media screen and (min-width: 600px) and (max-width: 1200px){
+	body{
+		width: 100%
+	}
+	table{
+		width: 95%
+	}
+}
+@media screen and (max-width: 600px){
+	body{
+		width: 100%
+	}
+	table{
+		max-width: 95%
+	}
+}
+header{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	display: flex;
+	justify-content: end;
+	background-color: cornflowerblue;
+	z-index: 500;
+}
+.logo{
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	text-align: center
+}
+img{
+	bottom: 10px;
+	width: 180px;
+}
+@media screen and (max-width: 600px){
+	img{
+		width: 130px
+	}
+}
+.infomachine{
+	color: white
+}
+#tableUsers{
+	overflow: auto !important;
+	height: 80%;
+	border-top: 2px solid #E8E8E8;
+}
+#formProfile,
+#formPassword{
+	border: 2px solid #E8E8E8;
+	padding: 10px;
+}
+table{
+	background-color: white;
+	border-radius: 10px;
+	border: 2px solid #E8E8E8
+}
+tr, th, td{
+	border: None !important
+}
+th, td{
+	text-align: center
+}
+table thead th{
+	position: sticky;
+	top: 0;
+	z-index: 101;
+	background-color: white !important
+}
