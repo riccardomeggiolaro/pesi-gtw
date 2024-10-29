@@ -83,7 +83,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-ExecStart=/etc/PesiGTW/program/start-program.sh
+ExecStart=/etc/pesi-gtw/program/start-program.sh
 
 [Install]
 WantedBy=multi-user.target"

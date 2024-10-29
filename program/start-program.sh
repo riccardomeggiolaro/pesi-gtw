@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python3 /etc/PesiGTW/program/src/main.py
+python3 /etc/pesi-gtw/program/src/main.py
