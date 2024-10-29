@@ -595,8 +595,23 @@ def mainprg():
 				for key, value in setup:
 					if value != None:
 						lb_config.setup["settings_machine"]["list_settings"][key] = value					
-				lb_config.saveconfig()
+				lb_tool.Save(lb_config.path_setup, lb_config.setup)
 				return lb_config.setup["settings_machine"]["list_settings"]
+			else:
+				return HTTPException(status_code=404, detail="NOT AUTHORIZATION")
+		except:
+			return HTTPException(status_code=400, details="SYNTAX ERROR")
+
+	# function to set buttons view
+	@app.post("/setup/buttons/{token}")
+	async def SetList(token: str, setup: lb_tool.buttons_settings):
+		try:
+			if lb_tool.IsAuthorizated(token):
+				for key, value in setup:
+					if value != None:
+						lb_config.setup["settings_machine"]["buttons_settings"][key] = value					
+				lb_tool.Save(lb_config.path_setup, lb_config.setup)
+				return lb_config.setup["settings_machine"]["buttons_settings"]
 			else:
 				return HTTPException(status_code=404, detail="NOT AUTHORIZATION")
 		except:

@@ -28,6 +28,12 @@ let dateTimeOneCheckbox = document.getElementById("dateTimeOne")
 let weightOneCheckbox = document.getElementById("weightOne")
 let dateTimeTwoCheckbox = document.getElementById("dateTimeTwo")
 let weightTwoCheckbox = document.getElementById("weightTwo")
+let buttonTare = document.getElementById("tare")
+let buttonPTare = document.getElementById("p_tare")
+let buttonZero = document.getElementById("zero")
+let buttonPrint = document.getElementById("print")
+let buttonWeightOne = document.getElementById("weight_one")
+let buttonWeightTwo = document.getElementById("weight_two")
 let tableUsers = document.getElementById("tableUsers")
 let infomachine = document.getElementById("infomachine")
 let token
@@ -105,6 +111,23 @@ window.onload = function(){
 						dateTimeTwoCheckbox.checked = response.message.list_settings.date_time_two;
 					case "weight_two":
 						weightTwoCheckbox.checked = response.message.list_settings.weight_two;
+				}
+			})
+			Object.keys(response.message.buttons_settings).forEach(element => {
+				console.log(element)
+				switch(element){
+					case "tare":
+						buttonTare.checked = response.message.buttons_settings.tare;
+					case "p_tare":
+						buttonPTare.checked = response.message.buttons_settings.p_tare;
+					case "zero":
+						buttonZero.checked = response.message.buttons_settings.zero;
+					case "print":
+						buttonPrint.checked = response.message.buttons_settings.print;
+					case "weight_one":
+						buttonWeightOne.checked = response.message.buttons_settings.weight_one;
+					case "weight_two":
+						buttonWeightTwo.checked = response.message.buttons_settings.weight_two;
 				}
 			})
 			for(let i=0; i<response.message.options_divisions.length; i++){
@@ -374,6 +397,43 @@ function IsRequired(key) {
 	}
 	console.log({[key]: checked_value})
 	fetch("http://" + hostname + ":8000/setup/list/" + token, {
+		method: "POST",
+		headers: {
+		  "Content-Type": "application/json"
+		},
+		body: JSON.stringify({ [key]: checked_value })
+	})
+	.then(response => response.json())
+	.then(response => {
+		console.log(response);
+	})
+}
+
+function IsActive(key) {
+	let checked_value = null
+
+	switch (key) {
+		case "tare":
+			checked_value = buttonTare.checked
+			break
+		case "p_tare":
+			checked_value = buttonPTare.checked
+			break
+		case "zero":
+			checked_value = buttonZero.checked
+			break
+		case "print":
+			checked_value = buttonPrint.checked
+			break
+		case "weight_one":
+			checked_value = buttonWeightOne.checked
+			break
+		case "weight_two":
+			checked_value = buttonWeightTwo.checked
+			break
+	}
+	console.log({[key]: checked_value})
+	fetch("http://" + hostname + ":8000/setup/buttons/" + token, {
 		method: "POST",
 		headers: {
 		  "Content-Type": "application/json"

@@ -6,13 +6,18 @@ let type = document.getElementById("type")
 let weight = document.getElementById("weight")
 let tare = document.getElementById("tare")
 let status = document.getElementById("status")
-let btnTara = document.getElementById("btn-tara")
-let btnZero = document.getElementById("btn-zero")
-let btnpcWeight1 = document.getElementById("btnpc-weight1")
-let btnsmWeight1 = document.getElementById("btnsm-weight1")
+let btnpcTara = document.getElementById("btnpc-tara")
+let btnsmTara = document.getElementById("btnsm-tara")
+let btnpcPresetTara = document.getElementById("btnpc-preset-tara")
+let btnsmPresetTara = document.getElementById("btnsm-preset-tara")
+let btnpcZero = document.getElementById("btnpc-zero")
+let btnsmZero = document.getElementById("btnsm-zero")
 let btnpcPrint = document.getElementById("btnpc-print")
 let btnsmPrint = document.getElementById("btnsm-print")
-let btnPrint = document.getElementById("btn-print")
+let btnpcWeight1 = document.getElementById("btnpc-weight1")
+let btnsmWeight1 = document.getElementById("btnsm-weight1")
+let btnpcWeight2 = document.getElementById("btnpc-weight2")
+let btnsmWeight2 = document.getElementById("btnsm-weight2")
 let infomachine = document.getElementById("infomachine")
 let licensePlate = document.getElementById("licensePlate")
 let licensePlate2 = document.getElementById("licensePlate2")
@@ -156,8 +161,33 @@ window.onload = function(){
 			let text = `Max: ${response.message.max_weigth} | Min: ${_min} | e: ${response.message.division_selected}` 
 			infoMovimenti2.textContent = text
 			console.log(text)
+			Object.keys(response.message.buttons_settings).forEach(element => {
+				console.log(element)
+				switch(element){
+					case "tare":
+						btnpcTara.style.display = response.message.buttons_settings[element] ? 'block' : 'none'
+						btnsmTara.style.display = response.message.buttons_settings[element] ? 'block' : 'none'
+					case "p_tare":
+						btnpcPresetTara.style.display = response.message.buttons_settings[element] ? 'block' : 'none'
+						btnsmPresetTara.style.display = response.message.buttons_settings[element] ? 'block' : 'none'
+					case "zero":
+						btnpcZero.style.display = response.message.buttons_settings[element] ? 'block' : 'none'
+						btnsmZero.style.display = response.message.buttons_settings[element] ? 'block' : 'none'
+					case "print":
+						btnpcPrint.style.display = response.message.buttons_settings[element] ? 'block' : 'none'
+						btnsmPrint.style.display = response.message.buttons_settings[element] ? 'block' : 'none'
+					case "weight_one":
+						btnpcWeight1.style.display = response.message.buttons_settings[element] ? 'block' : 'none'
+						btnsmWeight1.style.display = response.message.buttons_settings[element] ? 'block' : 'none'
+					case "weight_two":
+						btnpcWeight2.style.display = response.message.buttons_settings[element] ? 'block' : 'none'
+						btnsmWeight2.style.display = response.message.buttons_settings[element] ? 'block' : 'none'
+				}
+			})
 		})
-		body.classList.remove("displayNone")
+		setTimeout(() => {
+			body.classList.remove("displayNone")	
+		}, 300)
 	}
 }
 

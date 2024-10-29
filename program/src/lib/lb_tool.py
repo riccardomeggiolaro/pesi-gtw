@@ -56,6 +56,14 @@ class list_settings(BaseModel):
 	date_time_two: Union[bool, None]
 	weight_two: Union[bool, None]
 
+class buttons_settings(BaseModel):
+	tare: Union[bool, None]
+	p_tare: Union[bool, None]
+	zero: Union[bool, None]
+	print: Union[bool, None]
+	weight_one: Union[bool, None]
+	weight_two: Union[bool, None]
+
 ######## UTILITY ############################
 
 import os
