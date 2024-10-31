@@ -1,0 +1,75 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: cornflowerblue;
+}
+*{
+    font-family: 'Roboto', sans-serif;
+}
+h1{
+    color: white;
+}
+.form{
+    width: 300px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    border: solid 2px white;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: white;
+}
+input,
+button{    
+    font-size:140%;
+    margin: 5px;
+    height: 33%;
+    text-align: center;
+    border: solid 2px cornflowerblue;
+    background-color: white;
+    border-radius: 10px;
+}
+input:focus{
+    outline: none;
+    border: solid 3px cornflowerblue;
+}
+button{
+    background-color: cornflowerblue;
+    color: white;
+    border-radius: 5px;
+}
+button:hover{
+    background-color: white;
+    color: cornflowerblue;
+    transition: .2s;
+}
+button:active{
+    background-color: cornflowerblue;
+    color: white;
+}
+#loginInfo{
+    color: red;
+}
+.displayNone{
+    display: none;
+}
+img{
+    margin-top: 40px;
+    width: 200px;
+}
+@media screen and (max-width: 600px){
+	img{
+		width: 170px
+	}
+}
+p, a{
+    color: white;
+}
+a{
+    border-bottom: solid white 2px;
+    text-decoration: none;
+}

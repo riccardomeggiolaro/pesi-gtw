@@ -1,0 +1,16 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="pythonProject.Program.src.modules.md_webservice.lb_tool" />
+          <option value="lb_utility" />
+          <option value="lb_tool" />
+          <option value="lb_config" />
+          <option value="lb_log" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

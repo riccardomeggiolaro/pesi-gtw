@@ -1,0 +1,62 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: cornflowerblue;
+    align-items: center
+}
+*{
+    font-family: 'Roboto', sans-serif;
+}
+h1{
+    color: white;
+    text-decoration: underline;
+    font-size: 800%;
+    text-align: center;
+    margin: 0px;
+}
+h2{
+	color: white;
+	font-size: 200%;
+	margin: 0px;
+	text-align: center
+}
+p{
+	color: white;
+	font-size: 200%;
+	margin: 0px;
+	text-align:center
+}
+p a{
+	color: white
+}
+@media screen and (min-width: 1200px){
+	body{
+		width: 1200px;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center
+	}
+}		
+@media screen and (min-width: 600px) and (max-width: 1200px){
+	body{
+		width: 100%
+	}		
+}
+@media screen and (max-width: 600px){
+	body{
+		width: 100%
+	}
+	
+}
+img{
+    margin-top: 40px;
+    width: 200px;
+}
+@media screen and (max-width: 600px){
+	img{
+		width: 170px
+	}
+}

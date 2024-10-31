@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BARON PE.S.I. | Records</title>
+    <!--CSS, JAVASCRIPT, FONT-->
+    <link rel="stylesheet" href="{{url_for('css', path='/records.css')}}">
+	<script defer src=" {{url_for('javascript', path='/script.js')}} "></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <!--DATATABLES-->
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+  	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+  	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.bootstrap5.min.css">
+    <script defer src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script defer src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script defer src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+    <script defer src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.bootstrap5.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script defer src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+    <script defer src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+    <script defer src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
+	<!--DATERANGEPICKER-->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<!--BOOTSTRAP CSS-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+</head>
+<body id="body">
+
+    <header>
+        <a class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" style="border: 2px solid white; border-radius: 10px">
+	        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#ffffff" class="bi bi-list" viewBox="0 0 16 16">
+  				<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+			</svg>
+        </a>
+    </header>
+    <div style="width: 200px; background-color: cornflowerblue !important" class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel"><a href="#" style="color: white; text-decoration: none">Menu</a></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="dropdown mt-3">
+              <button onclick="location.href='/dashboard.html'" class="btn btn-light btnmenu" type="button" style="width: 150px !important"><a style="color: cornflowerblue; text-decoration: none">Dashboard</a></button><br><br>
+              <button onclick="location.href='/records.html'" class="btn btn-light btnmenu" type="button" style="width: 150px !important"><a style="color: cornflowerblue; text-decoration: none">Pesate</a></button><br><br>
+              <button onclick="location.href='/messages.html'" class="btn btn-light btnmenu" type="button" style="width: 150px !important"><a style="color: cornflowerblue; text-decoration: none">Messaggi</a></button><br><br>
+              <button onclick="location.href='/diagnostic.html'" class="btn btn-light btnmenu" type="button" style="width: 150px !important"><a style="color: cornflowerblue; text-decoration: none">Diagnostica</a></button><br><br>
+              <button class="btn btn-light dropdown-toggle btnmenu" id="username" type="button" data-bs-toggle="dropdown" style="color: cornflowerblue; width: 150px !important">Profilo</button>
+              <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/settings.html" style="color: cornflowerblue">Impostazioni</a></li>
+                  <li><a class="dropdown-item" href="#" onclick="Logout()" style="color: cornflowerblue">Logout</a></li>
+              </ul>
+            </div>
+        </div>
+    </div>
+    <div id="containerrole" class="containerrole displayNone">
+		<div class="spinner-border text-primary role" style="width: 3rem; height: 3rem;" role="status" style="text-align: center">
+		  <span class="visually-hidden">Caricamento...</span>
+		</div>
+	</div>
+	<table id="example" class="container table table-striped" style="width:100%;">
+	  <thead>
+      <tr>
+        <th colspan="13">
+          <button class="btn btn-success" onclick="exportData('xlsx')">EXCEL</button>
+          <button class="btn btn-primary" onclick="exportData('csv')">CSV</button>
+	  <button class="btn btn-warning" id="btnpc-weight2" data-bs-toggle="modal" data-bs-target="#pesata2Modal" data-bs-whatever="@getbootstrap">ELIMINA</button>    
+          <form class="form" id="form">
+            <div>
+              <input type="number" placeholder="prog" class="prog" id="prog">
+              <input type="text" placeholder="Cliente" id="cliente">
+              <input type="text" placeholder="Targa" id="targa">
+              <input type="text" placeholder="Data" id="data" name="dates" value="" autocomplete="off">
+              <input type="number" placeholder="Bil" id="bil">
+              <a style="border: 1px solid lightgray; padding: 5px; border-radius: 5px;"><input type="checkbox" id="tipo">Non chiuse</a>
+            </div>
+            <div>
+              <input type="submit" value="Cerca" id="cerca" onclick="submitForm()">
+              <input type="submit" value="Cancella filtri" id="cancella" onclick="submitForm()">
+            </div>
+          </form>
+        </th>
+    </tr>
+	    <tr>
+	      <th>Prog</th>
+	      <th>Cliente</th>
+	      <th>Targa</th>
+	      <th>Fornitore</th>
+	      <th>Materiale</th>
+	      <th>Netto</th>
+	      <th>Data ora 1</th>
+	      <th>Pesata 1</th>
+	      <th>Data ora 2</th>
+	      <th>Pesata 2</th>
+	      <th>Pid 1 / Pid 2</th>
+	      <th>Bil</th>
+	    </tr>
+	  </thead>
+	</table>
+	
+	<div class="logo" style="text-align: center">
+      <img src=" {{url_for('img', path='/LOGO.png')}} " alt="BARON PE.S.I.">
+			<p id="infomachine" class="infomachine"></p>
+	</div>	
+
+	<div class="modal fade" id="pesata2Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-header">
+		    <h5 class="modal-title" id="exampleModalLabel">Elimina</h5>
+		    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+		    <form id="formDropdown">
+		      <div class="mb-3">
+			<p>Sei sicuro di voler eliminare le pesate?</p>
+      <p>Verranno eliminate tutte le pesate</p>
+      <p id="prog_delete"></p>
+      <p id="cliente_delete"></p>
+      <p id="targa_delete"></p>
+      <p id="range"></p>
+      <p id="bil_delete"></p>
+      <p id="tipo_delete"></p>
+        </div>
+		    </form>
+		  </div>
+		  <div class="modal-footer">
+		    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Esci</button>
+		    <button type="button" class="btn btn-primary" onclick="Elimina()" data-bs-dismiss="modal">OK</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+
+    <script src=" {{url_for('javascript', path='/records.js')}} "></script>
+	<!--BOXICONS-->
+	<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+	<!--BOOTSTRAP JAVASCRIPT-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+html, body {
+    margin: 0;
+    display: flex;
+    height: 100% !important;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    background-color: cornflowerblue !important;
+}
+.displayNone{
+	display: none
+}
+.visited{
+	border-radius: 10px;
+	background-color: white;
+	color: cornflowerblue;
+	padding: 10px
+}
+#username{
+	text-decoration: none
+}
+#logout{
+	width: 100%;
+	padding: 2px;
+	border: 1px solid cornflowerblue;
+	border-radius: 5px;
+	background-color: cornflowerblue;
+	color: white;
+	font-size: 80%;
+	margin-top: 10px
+}
+*{
+    font-family: 'Roboto', sans-serif;
+}
+h1{
+    color: white;
+}
+@media screen and (min-width: 1200px){
+	body{
+		margin-left: auto;
+		margin-right: auto
+	}
+}		
+@media screen and (max-height: 600px) {
+	html, body{
+		display: block;
+		height: auto !important;
+	}
+	.form{
+		margin-top: 70px;
+	}
+	.logo{
+		position: static !important;
+	}
+}	
+@media screen and (min-width: 600px) and (max-width: 1200px){
+	body{
+		width: 100%
+	}
+
+}
+@media screen and (max-width: 600px){
+	body{
+		width: 100%
+	}
+}
+header{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	display: flex;
+	background-color: cornflowerblue;
+	z-index: 500;
+	justify-content: end;
+}
+nav{
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
+	margin-left: 0px
+}
+nav div{
+	margin: 20px;
+	font-size: 150%
+}
+nav .toggle span{
+	margin-right: 20px
+}	
+nav span a{
+	color: white;
+	text-decoration: none
+}
+
+.logout{
+display: inline-block
+}	
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  width: auto;
+  font-size: 100%;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  margin: 0px;
+  z-index: 1;
+  border-radius: 10px;
+  padding: 10px
+}
+.dropdown-content a{
+	color: cornflowerblue;
+	text-decoration: underline
+}		.show {display: block;}
+.logo{
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	text-align: center
+}
+img{
+	bottom: 10px;
+	width: 180px;
+}
+@media screen and (max-width: 600px){
+	img{
+		width: 130px
+	}
+}
+.form{
+	width: 100%;
+	max-width: 1000px;
+	text-align: center;
+	margin-bottom: 80px;
+	margin-left: auto;
+	margin-right: auto
+}
+label{
+	font-size: 140%;
+	color: white;
+	margin-bottom: 5px
+}
+textarea{
+	width: 80%;
+	height: 250px;
+	font-size: 140%;
+	border: 1px solid white;
+	border-radius: 10px
+}
+input{
+	font-size: 250%;
+	border: 1px solid white;
+	border-radius: 10px;
+	width: 150px;
+	height: 30px;
+	background-color: white;
+	margin: 5px;
+	color: cornflowerblue;
+}
+input:hover{
+	background-color: cornflowerblue;
+	color: white;
+}
+input:active{
+	background-color: white;
+	color: cornflowerblue;
+}
+.infomachine{
+	color: white
+}
