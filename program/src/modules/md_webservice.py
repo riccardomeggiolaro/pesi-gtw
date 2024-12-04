@@ -333,7 +333,7 @@ def mainprg():
 			file_db_pesate = "../db/database.db"
 			async with aiosqlite.connect(file_db_pesate) as db:
 				async with db.cursor() as cursor:
-					await cursor.execute("SELECT * FROM pesate ORDER BY max(coalesce((datetime(substr(DATA1, 7, 4) || '-' || substr(DATA1, 4, 2) || '-' || substr(DATA1, 1, 2) || ' ' || substr(ORA1, 1, 2) || ':' || substr(ORA1, 4, 5))), 0), coalesce((datetime(substr(DATA2, 7, 4) || '-' || substr(DATA2, 4, 2) || '-' || substr(DATA2, 1, 2) || ' ' || substr(ORA2, 1, 2) || ':' || substr(ORA2, 4, 5))), 0)) DESC %s;"% (string))
+					await cursor.execute("SELECT * FROM pesate ORDER BY id DESC %s;"% (string))
 					pesate = await cursor.fetchall()
 					if pesate:
 						return pesate
@@ -445,37 +445,102 @@ def mainprg():
 				else:					
 					pesate = await ListaPesate("")
 					file = await Export(pesate, type)
+					lb_log.info(pesate)
 					return file
 			else:
 				return HTTPException(status_code=404, detail="NOT AUTHENTICATED")
-		except:
-			return HTTPException(status_code=400, detail="SYNTAX ERROR")
+		except Exception as e:
+			return HTTPException(status_code=400, detail=f"{e}")
 
 	# function to format list of weight by type pass as parameter 
 	async def Export(pesate: list, type: string):
+		df = pd.DataFrame(
+			pesate,			
+			columns=["TIPO", "ID", "BIL", "DATA1", "ORA1", "DATA2", "ORA2", "PROG1", "PROG2", "BADGE", "TARGA", "CLIENTE", "FORNITORE", "MATERIALE",
+				"NOTE1", "NOTE2", "PESO1", "PID1", "PESO2", "PID2", "NETTO"]
+		)
+
+		# Reorder columns to match the specified order
+		columns_order = ["TIPO", "ID", "PROG1", "PROG2", "CLIENTE", "TARGA", "FORNITORE", "MATERIALE", "BADGE", "NETTO", "DATA1", "ORA1", "PESO1", "DATA2", "ORA2", "PESO2", "PID1", "PID2", "NOTE1", "NOTE2", "BIL"]
+		# Filter columns that are present in the dataframe and reorder them
+		df = df[[col for col in columns_order if col in df.columns]]  
+  
+		df.drop(columns=["ID"], inplace=True)
+		df.drop(columns=["TIPO"], inplace=True)
+		if lb_config.setup["settings_machine"]["list_settings"]["prog_one"] == False:
+			df.drop(columns=["PROG1"], inplace=True)
+			if lb_config.setup["settings_machine"]["list_settings"]["prog_two"] == True:
+				df.rename(columns={"PROG2": "PROG"}, inplace=True)
+		if lb_config.setup["settings_machine"]["list_settings"]["prog_two"] == False:
+			df.drop(columns=["PROG2"], inplace=True)
+			if lb_config.setup["settings_machine"]["list_settings"]["prog_one"] == True:
+				df.rename(columns={"PROG1": "PROG"}, inplace=True)
+		if lb_config.setup["settings_machine"]["list_settings"]["pid_one"] == False:
+			df.drop(columns=["PID1"], inplace=True)
+			if lb_config.setup["settings_machine"]["list_settings"]["pid_two"] == True:
+				df.rename(columns={"PID2": "PID"}, inplace=True)
+		if lb_config.setup["settings_machine"]["list_settings"]["pid_two"] == False:
+			df.drop(columns=["PID2"], inplace=True)
+			if lb_config.setup["settings_machine"]["list_settings"]["pid_one"] == True:
+				df.rename(columns={"PID1": "PID"}, inplace=True)
+		if lb_config.setup["settings_machine"]["list_settings"]["bil"] == False:
+			df.drop(columns=["BIL"], inplace=True)
+		if lb_config.setup["settings_machine"]["list_settings"]["customer"] == False:
+			df.drop(columns=["CLIENTE"], inplace=True)
+		if lb_config.setup["settings_machine"]["list_settings"]["supplier"] == False:
+			df.drop(columns=["FORNITORE"], inplace=True)
+		if lb_config.setup["settings_machine"]["list_settings"]["material"] == False:
+			df.drop(columns=["MATERIALE"], inplace=True)
+		if lb_config.setup["settings_machine"]["list_settings"]["plate"] == False:
+			df.drop(columns=["TARGA"], inplace=True)
+		if lb_config.setup["settings_machine"]["list_settings"]["net_weight"] == False:
+			df.drop(columns=["NETTO"], inplace=True)
+		if lb_config.setup["settings_machine"]["list_settings"]["date_time_one"] == False:
+			df.drop(columns=["DATA1", "ORA1"], inplace=True)
+			if lb_config.setup["settings_machine"]["list_settings"]["date_time_two"] == True:
+				df.rename(columns={"DATA2": "DATA"}, inplace=True)
+				df.rename(columns={"ORA2": "ORA"}, inplace=True)
+		if lb_config.setup["settings_machine"]["list_settings"]["weight_one"] == False:
+			df.drop(columns=["PESO1"], inplace=True)
+			if lb_config.setup["settings_machine"]["list_settings"]["weight_two"] == True:
+				df.rename(columns={"PESO2": "PESO"}, inplace=True)
+		if lb_config.setup["settings_machine"]["list_settings"]["date_time_two"] == False:
+			df.drop(columns=["DATA2", "ORA2"], inplace=True)
+			if lb_config.setup["settings_machine"]["list_settings"]["date_time_one"] == True:
+				df.rename(columns={"DATA1": "DATA"}, inplace=True)
+				df.rename(columns={"ORA1": "ORA"}, inplace=True)
+		if lb_config.setup["settings_machine"]["list_settings"]["weight_two"] == False:
+			df.drop(columns=["PESO2"], inplace=True)
+			if lb_config.setup["settings_machine"]["list_settings"]["weight_one"] == True:
+				df.rename(columns={"PESO1": "PESO"}, inplace=True)
+		if lb_config.setup["settings_machine"]["list_settings"]["note_one"] == False:
+			df.drop(columns=["NOTE1"], inplace=True)
+			if lb_config.setup["settings_machine"]["list_settings"]["note_two"] == True:
+				df.rename(columns={"NOTE2": "NOTE"}, inplace=True)
+		if lb_config.setup["settings_machine"]["list_settings"]["note_two"] == False:
+			df.drop(columns=["NOTE2"], inplace=True)
+			if lb_config.setup["settings_machine"]["list_settings"]["note_one"] == True:
+				df.rename(columns={"NOTE1": "NOTE"}, inplace=True)
+		if lb_config.setup["settings_machine"]["list_settings"]["badge"] == False:
+			df.drop(columns=["BADGE"], inplace=True)
+
 		if type == "csv":
-			df = pd.DataFrame(
-				pesate,			
-				columns=["TIPO", "ID", "BIL", "DATA1", "ORA1", "DATA2", "ORA2", "PROG1", "PROG2", "BADGE", "TARGA", "CLIENTE", "FORNITORE", "MATERIALE",
-			        "NOTE1", "NOTE2", "PESO1", "PID1", "PESO2", "PID2", "NETTO"]
-			)
 			return StreamingResponse(
 				iter([df.to_csv(index=False)]),
 				media_type="text/csv",
 				headers={"Content-Disposition": "attachment; filename=data.csv"}
 			)
+		# Se il tipo è XLSX
 		else:
-			workbook = openpyxl.Workbook()
-			worksheet = workbook.active
-			worksheet.append(["TIPO", "ID", "BIL", "DATA1", "ORA1", "DATA2", "ORA2", "PROG1", "PROG2", "BADGE", "TARGA", "CLIENTE", "FORNITORE", "MATERIALE",
-			        "NOTE1", "NOTE2", "PESO1", "PID1", "PESO2", "PID2", "NETTO"])
-			for pesata in pesate:
-				worksheet.append(pesata)
-			excel_data = BytesIO()
-			workbook.save(excel_data)
-			excel_data.seek(0)
+			# Creare un file Excel in memoria
+			output = BytesIO()
+			with pd.ExcelWriter(output, engine="openpyxl") as writer:
+				df.to_excel(writer, index=False, sheet_name="Sheet1")
+			output.seek(0)
+
+			# Restituire il file Excel come risposta in streaming
 			return StreamingResponse(
-				content=excel_data,
+				output,
 				media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
 				headers={"Content-Disposition": "attachment; filename=data.xlsx"}
 			)

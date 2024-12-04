@@ -43,8 +43,10 @@ class setup_nameserial(BaseModel):
 	name_serial: str
 
 class list_settings(BaseModel):
-	progr: Union[bool, None]
-	pid: Union[bool, None]
+	prog_one: Union[bool, None]
+	prog_two: Union[bool, None]
+	pid_one: Union[bool, None]
+	pid_two: Union[bool, None]
 	bil: Union[bool, None]
 	customer: Union[bool, None]
 	supplier: Union[bool, None]

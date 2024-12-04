@@ -16,8 +16,10 @@ let inputRepeatPassword = document.getElementById("repeatPassword")
 let formPassword = document.getElementById("formPassword")
 let formSetup = document.getElementById("formSetup")
 let checkbox = document.getElementById("flexCheckChecked")
-let progrCheckbox = document.getElementById("progr")
-let pidCheckbox = document.getElementById("pid")
+let progOneCheckbox = document.getElementById("prog_one")
+let progTwoCheckbox = document.getElementById("prog_two")
+let pidOneCheckbox = document.getElementById("pid_one")
+let pidTwoCheckbox = document.getElementById("pid_two")
 let bilCheckbox = document.getElementById("bil")
 let customerCheckbox = document.getElementById("customer")
 let supplierCheckbox = document.getElementById("supplier")
@@ -87,10 +89,14 @@ window.onload = function(){
 			Object.keys(response.message.list_settings).forEach(element => {
 				console.log(element)
 				switch(element){
-					case "progr":
-						progrCheckbox.checked = response.message.list_settings.progr;
-					case "pid":
-						pidCheckbox.checked = response.message.list_settings.pid;
+					case "prog_one":
+						progOneCheckbox.checked = response.message.list_settings.prog_one;
+					case "prog_two":
+						progTwoCheckbox.checked = response.message.list_settings.prog_two;
+					case "pid_one":
+						pidOneCheckbox.checked = response.message.list_settings.pid_one;
+					case "pid_one":
+						pidTwoCheckbox.checked = response.message.list_settings.pid_two;
 					case "bil":
 						bilCheckbox.checked = response.message.list_settings.bil;
 					case "customer":
@@ -358,11 +364,17 @@ function IsRequired(key) {
 	let checked_value = null
 
 	switch (key) {
-		case "progr":
-			checked_value = progrCheckbox.checked
+		case "prog_one":
+			checked_value = progOneCheckbox.checked
 			break
-		case "pid":
-			checked_value = pidCheckbox.checked
+		case "prog_two":
+			checked_value = progTwoCheckbox.checked
+			break
+		case "pid_one":
+			checked_value = pidOneCheckbox.checked
+			break
+		case "pid_two":
+			checked_value = pidTwoCheckbox.checked
 			break
 		case "bil":
 			checked_value = bilCheckbox.checked

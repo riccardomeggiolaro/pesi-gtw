@@ -1,6 +1,6 @@
 {
     "settings_machine": {
-        "name_serial": "",
+        "name_serial": "/dev/ttyS0",
         "license_plate_required": false,
         "options_divisions": [
             1,
@@ -15,8 +15,10 @@
         "division_selected": 10,
         "max_weigth": 60000,
         "list_settings": {
-            "progr": true,
-            "pid": true,
+            "prog_one": true,
+            "prog_two": false,
+            "pid_one": true,
+            "pid_two": false,
             "bil": true,
             "customer": false,
             "supplier": false,
@@ -26,13 +28,16 @@
             "date_time_one": true,
             "weight_one": false,
             "date_time_two": false,
-            "weight_two": false
+            "weight_two": false,
+            "note_one": false,
+            "note_two": false,
+            "badge": false
         },
         "buttons_settings": {
             "tare": true,
             "p_tare": true,
             "zero": true,
-            "print": true,
+            "print": false,
             "weight_one": false,
             "weight_two": false
         }

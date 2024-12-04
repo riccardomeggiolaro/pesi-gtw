@@ -34,12 +34,17 @@ let titleWeightOne = document.getElementById("titleWeightOne")
 let titleDateTimeTwo = document.getElementById("titleDateTimeTwo")
 let titleWeightTwo = document.getElementById("titleWeightTwo")
 let titlePid = document.getElementById("titlePid")
+let titleProg = document.getElementById("titleProg")
 let prog_value = prog.value
 let cliente_value = cliente.value
 let targa_value = targa.value
 let bil_value = bil.value
 let data_value = data.value
 let tipo_value = tipo.checked
+let prog_one_display = true
+let prog_two_display = true
+let pid_one_display = true
+let pid_two_display = true
 
 window.onload = (event) => {  
 	value = ('; '+document.cookie).split(`; tokenBaron=`).pop().split(';')[0];
@@ -84,11 +89,10 @@ window.onload = (event) => {
 	fetch(urlsettingsmachine)
 	.then(response => response.json())
 	.then(response => {
-		let weightTwo = false;
-
 		// Mappa per associare le chiavi a un numero di colonna
 		const columnMapping = {
-		  "progr": 1,
+		  "prog_one": 1,
+		  "prog_two": 2,
 		  "customer": 2,
 		  "plate": 3,
 		  "supplier": 4,
@@ -98,22 +102,42 @@ window.onload = (event) => {
 		  "weight_one": 8,
 		  "date_time_two": 9,
 		  "weight_two": 10,
-		  "pid": 11,
+		  "pid_one": 11,
+		  "pid_two": 11,
 		  "bil": 12
 		};
 		Object.keys(response.message.list_settings).forEach(element => {
 			const index = columnMapping[element];
 			if (response.message.list_settings[element] === false) {
-				const style = document.createElement('style');
-				style.innerHTML = `
-					tr:nth-child(2) th:nth-child(${index}),
-					td:nth-child(${index}) {
-						display: none;
+				let exe = true
+				if (['prog_one', 'prog_two', 'pid_one', 'pid_two'].includes(element)) {
+					exe = true ? element === 'prog_one' && response.message.list_settings.prog_two === false : false
+					exe = true ? element === 'prog_two' && response.message.list_settings.prog_one === false : false
+					exe = true ? element === 'pid_one' && response.message.list_settings.pid_two === false : false
+					exe = true ? element === 'pid_two' && response.message.list_settings.pid_one === false : false
+					if (element === 'prog_one') {
+						prog_one_display = exe
+					} else if (element === 'prog_two') {
+						prog_two_display = exe
+					} else if (element === 'pid_one') {
+						pid_one_display = exe
+					} else if (element === 'pid_two') {
+						pid_two_display = exe
 					}
-				`;
+				}
+				if (exe) {
+					const style = document.createElement('style');
+					style.innerHTML = `
+						tr:nth-child(2) th:nth-child(${index}),
+						td:nth-child(${index}) {
+							display: none;
+						}
+					`;				
+					// Aggiungi la regola al documento
+					document.head.appendChild(style);
+				}
 				if (element === 'weight_two') {
 					titleWeightOne.innerHTML = "Pesata"
-					titlePid.innerHTML = "Pid"
 					nonChiuse.style.display = "none"
 				} else if (element === 'weight_one') {
 					titleWeightTwo.innerHTML = "Pesata"
@@ -122,8 +146,14 @@ window.onload = (event) => {
 					titleDateTimeTwo.innerHTML = "Data e ora"
 				} else if (element === 'date_time_two') {
 					titleDateTimeOne.innerHTML = "Data e ora"
-				} else if (element === 'progr') {
-					prog.style.display = "none"
+				} else if (element === 'prog_one') {
+					if (response.message.list_settings.prog_two === false) {
+						prog.style.display = "none"
+					}
+				} else if (element === 'prog_two') {
+					if (response.message.list_settings.prog_one === false) {
+						prog.style.display = "none"
+					}
 				} else if (element === 'customer') {
 					cliente.style.display = "none"
 				} else if (element === 'plate') {
@@ -131,8 +161,6 @@ window.onload = (event) => {
 				} else if (element === 'bil') {
 					bil.style.display = "none"
 				}
-				// Aggiungi la regola al documento
-				document.head.appendChild(style);
 			}
 		})
 	})
@@ -357,14 +385,8 @@ function AddRows(data){
 	    $("#example").DataTable().rows().remove().draw();
 		for(var i = 0; i < length; i++) {
 		  var d = data[i];
-		  let progs = "";
-		  if(d[7] != "" && d[8] != "") progs = d[7] + "<br> \n" + d[8]
-		  else if(d[7] != "" && d[8] == "") progs = d[7]
-		  else if(d[7] == "" && d[8] != "") progs = d[8]
-		  let pids = "";
-		  if(d[17] != "" && d[19] != "") pids = d[17] + "<br> \n" + d[19]
-		  else if(d[17] != "" && d[19] == "") pids = d[17]
-		  else if(d[17] == "" && d[19] != "") pids = d[19]
+		  let progs = `${prog_one_display ? d[7] : ""} ${prog_one_display && d[7] && prog_two_display && d[8] ? '<br> \n' : ""} ${prog_two_display ? d[8] : ""}`;
+		  let pids = `${pid_one_display ? d[17] : ""} ${pid_one_display && d[17] && pid_two_display && d[18] ? '<br> \n' : ""} ${pid_two_display ? d[19] : ""}`;
 		  const pesata = [
 			progs,
 			d[11],
