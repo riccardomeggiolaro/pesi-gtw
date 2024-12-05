@@ -51,12 +51,8 @@ window.onload = function(){
 			if(pesata.tare.startsWith("PT") || pesata.type == "NT"){
 				btnpcWeight1.disabled = true
 				btnsmWeight1.disabled = true	
-				btnpcPrint.disabled = true
-				btnsmPrint.disabled = true
 				btnpcWeight1.style.opacity = 0.5
 				btnsmWeight1.style.opacity = 0.5
-				btnpcPrint.style.opacity = 0.5
-				btnsmPrint.style.opacity = 0.5
 				if(!formDropdown.classList.contains("displayNone")){
 					formDropdown.classList.toggle("displayNone")
 				}
@@ -67,12 +63,8 @@ window.onload = function(){
 			}else{
 				btnpcWeight1.disabled = false
 				btnsmWeight1.disabled = false
-				btnpcPrint.disabled = false
-				btnsmPrint.disabled = false
 				btnpcWeight1.style.opacity = 1
 				btnsmWeight1.style.opacity = 1
-				btnpcPrint.style.opacity = 1
-				btnsmPrint.style.opacity = 1
 				presetTareActive = false
 				if(formDropdown.classList.contains("displayNone")){
 					formDropdown.classList.remove("displayNone")
@@ -270,7 +262,7 @@ function Zero(){
 }
 
 function PresetTara() {
-   var presetTara = prompt("Enter a tare:", "");
+   var presetTara = prompt("Enter a tare:", 0);
    if (presetTara != null && presetTara != ""){
 	   if(!isNaN(presetTara)){
 			let urlTara = "http://"+hostname+":8000/comando/TMAN"+presetTara
@@ -283,7 +275,7 @@ function PresetTara() {
 	   		return
 	   }
 	} else if(presetTara == "") {
-		alert("Necessario inserire targa")
+		alert("Necessario inserire tara")
 	} else {
 		console.log("No tare")
 	}
@@ -441,4 +433,3 @@ weight.addEventListener("dblclick", function(event){
 	.then(response => response.json())
 	.then(response => console.log(response))
 })
-
