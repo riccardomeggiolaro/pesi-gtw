@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Range Picker Personalizzato</title>
+    <style>
+        .range-container {
+            width: 300px;
+            margin: 50px;
+        }
+        .value-display {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="range-container">
+        <input type="range" id="myRange" min="0" max="100" step="1" value="50">
+        <div class="value-display">
+            Valore selezionato: <span id="rangeValue">50</span>
+        </div>
+    </div>
+
+    <script>
+        const rangeInput = document.getElementById("myRange");
+        const valueDisplay = document.getElementById("rangeValue");
+
+        // Mostra valore all'interno del display
+        rangeInput.addEventListener("input", function() {
+            valueDisplay.textContent = rangeInput.value;
+        });
+    </script>
+</body>
+</html>

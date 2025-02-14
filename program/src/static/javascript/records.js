@@ -46,6 +46,8 @@ let prog_two_display = true
 let pid_one_display = true
 let pid_two_display = true
 
+moment.locale('it'); // Imposta la lingua italiana per moment.js
+
 window.onload = (event) => {  
 	value = ('; '+document.cookie).split(`; tokenBaron=`).pop().split(';')[0];
     if(value == ""){
@@ -343,17 +345,17 @@ function AddFilters(){
 	if (f_data.value != "" && f_data.value != null && f_data.value != undefined){
 		let arrdt = f_data.value.split(" ")
 		if (arrdt.length == 3){
-			let f_data = arrdt[0]
-			let t_data = arrdt[2]
-			let from_data1 = {"campo": "DATA1", "operatore": ">=", "valore": f_data, "separatore": "and"}
-			let to_data1 = {"campo": "DATA1", "operatore": "<=", "valore": t_data, "separatore": "or"}
-			let from_data2 = {"campo": "DATA2", "operatore": ">=", "valore": f_data, "separatore": "and"}
-			let to_data2 = {"campo": "DATA2", "operatore": "<=", "valore": t_data, "separatore": "and"}
+			let _f_data = arrdt[0]
+			let _t_data = arrdt[2]
+			let from_data1 = {"campo": "DATA1", "operatore": ">=", "valore": _f_data, "separatore": "and"}
+			let to_data1 = {"campo": "DATA1", "operatore": "<=", "valore": _t_data, "separatore": "or"}
+			let from_data2 = {"campo": "DATA2", "operatore": ">=", "valore": _f_data, "separatore": "and"}
+			let to_data2 = {"campo": "DATA2", "operatore": "<=", "valore": _t_data, "separatore": "and"}
 			arr_filters.push(from_data1)
 			arr_filters.push(to_data1)
 			arr_filters.push(from_data2)
 			arr_filters.push(to_data2)
-			range.textContent = `- dalla data "${f_data}" alla data "${t_data}"`
+			range.textContent = `- dalla data "${_f_data}" alla data "${_t_data}"`
 		}
 	}else{
 		range.textContent = ""
@@ -412,23 +414,32 @@ function AddRows(data){
 //DA SISTEMARE
 	$(function() {
 
-	  $('input[name="dates"]').daterangepicker({
-		"opens": "center",
-		"drops": "auto",
-		"showDropdowns": true,
-		"ranges": {
-		    'Oggi': [moment(), moment()],
-		    'Ieri': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-		    'Questa settimana': [moment().subtract(6, 'days'), moment()],
-		    'Questo mese': [moment().startOf('month'), moment().endOf('month')],
-		    'Lo scorso mese': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-		},
-		autoUpdateInput: false,
-		locale: {
-		    cancelLabel: 'Cancella',
-			format: "DD/MM/YYYY"
-		},
-	  });
+		// Inizializza il Date Range Picker
+		$('input[name="dates"]').daterangepicker({
+			"opens": "center", 
+			"drops": "down", 
+			"showDropdowns": true, 
+			"ranges": {
+				'Oggi': [moment(), moment()],
+				'Ieri': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+				'Questa settimana': [moment().subtract(6, 'days'), moment()],
+				'Questo mese': [moment().startOf('month'), moment().endOf('month')],
+				'Lo scorso mese': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+			},
+			autoUpdateInput: false,
+			locale: {
+				cancelLabel: 'Cancella',
+				format: "DD/MM/YYYY", // formato della data
+				separator: " - ",
+				applyLabel: "Applica",
+				weekLabel: "Settimana",
+				customRangeLabel: "Intervallo personalizzato",
+				daysOfWeek: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],
+				monthNames: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
+				firstDay: 1 // La settimana inizia di lunedì
+			},
+			linkedCalendars: false // Disabilita la sincronizzazione tra i due calendari
+		});
 
 	  $('input[name="dates"]').on('apply.daterangepicker', function(ev, picker) {
 		  $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
