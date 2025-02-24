@@ -20,6 +20,7 @@ from threading import Timer
 import re
 import asyncio
 import time
+from typing import Union
 
 from datetime import datetime,timedelta, date
 from dateutil.parser import parse
@@ -37,7 +38,7 @@ def mainprg():
 		try:
 			lb_config.read_seriale = lb_config.seriale.readline().decode().replace("\r\n", "")
 		except Exception as e:
-			lb_log.info(e)
+			lb_log.error(e)
 #		print(lb_config.read_seriale)
 		if not lb_config.read_seriale:
 			lb_config.diagnostic["vl"] = ""
@@ -89,9 +90,18 @@ def mainprg():
 					try:
 						#gestisco i valori delle pesate
 						gwstring = lst_peso[2].lstrip()
-						gw = int(re.sub('[KkGg\x00\n]', '', lst_peso[2].lstrip()))
+						gw = None
+						if "." in gwstring:
+						    gw = float(re.sub('[KkGg\x00\n]', '', lst_peso[2].lstrip()))
+						else:
+						    gw = int(re.sub('[KkGg\x00\n]', '', lst_peso[2].lstrip()))
 						tpt = re.sub('[KkGg\x00\n]', '', lst_peso[3].lstrip())
-						t = int(re.sub('[PTKkGg\x00\n]', '', lst_peso[3].lstrip()))
+						tstring = lst_peso[3].lstrip()
+						t = None
+						if "." in tstring:
+						    t = float(re.sub('[PTKkGg\x00\n]', '', lst_peso[3].lstrip()))
+						else:
+						    t = int(re.sub('[PTKkGg\x00\n]', '', lst_peso[3].lstrip()))
 						lb_config.pesa_real_time["status"] = lst_peso[0]
 						#calcolo il tipo di peso
 						lb_config.pesa_real_time["type"] = TypeWeight(lst_peso[3])
@@ -101,9 +111,8 @@ def mainprg():
 						lb_config.pesa_real_time["net_weight"] = NetWeight(gw, t)
 						#calcolo l'unità di misura
 						lb_config.pesa_real_time["unite_measure"] = UniteMeasure(gwstring)
-		#				print(lb_config.pesa_real_time)
 					except Exception as e:
-						lb_log.info(e)
+						lb_log.warning(e)
 			elif lb_config.read_seriale.split(",")[1] == "VL":
 				lst_vl = lb_config.read_seriale.split(",")
 				lb_config.diagnostic["vl"] = str(lst_vl[2]) + " " + str(lst_vl[3])
@@ -182,12 +191,12 @@ def TypeWeight(tare: str):
 	return "NT"
 
 #ritorno la differenza tra il peso lordo e la tara
-def NetWeight(gross_weight: int, tare: int):
+def NetWeight(gross_weight: Union[float, int], tare: Union[float, int]):
 	net = gross_weight - tare
 	return net
 
 #ottengo le lettere che indicano l'unità di misura da uns stringa contente un peso e l'unità di misura	
-def UniteMeasure(weight: str):
+def UniteMeasure(weight: Union[float, int]):
 	um = ""
 	for l in weight:
 		if l in "KkGg":

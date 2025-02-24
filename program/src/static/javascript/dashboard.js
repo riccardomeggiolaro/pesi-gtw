@@ -44,10 +44,10 @@ window.onload = function(){
 		console.log("Connessione websocket")
 		websocket_pesata.addEventListener("message", (event) => {
 			pesata = JSON.parse(event.data)
-			type.textContent = TypeWeight(pesata.type)
 			weight.textContent = String(pesata.net_weight) + pesata.unite_measure 
 			tare.textContent = String(pesata.tare) + pesata.unite_measure
 			status.textContent = Status(pesata.status)
+			type.textContent = TypeWeight(pesata.type)
 			if(pesata.tare.startsWith("PT") || pesata.type == "NT"){
 				btnpcWeight1.disabled = true
 				btnsmWeight1.disabled = true	
