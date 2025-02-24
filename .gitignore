@@ -1,7 +1,7 @@
-/.vscode/
-**/.vscode/
-**/**/.vscode/
-**/**/**/.vscode/
+/.vscode
+**/.vscode
+**/**/.vscode
+**/**/**/.vscode
 **/.idea/
 **/.pycache/
 **/**/.pycache/
