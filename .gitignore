@@ -3,4 +3,7 @@
 **/**/.vscode/
 **/**/**/.vscode/
 **/.idea/
+**/.pycache/
+**/**/.pycache/
+**/**/**/.pycache/
 /.env
