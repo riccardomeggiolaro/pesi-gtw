@@ -73,21 +73,24 @@
         <th colspan="13">
           <button class="btn btn-success" onclick="exportData('xlsx')">EXCEL</button>
           <button class="btn btn-primary" onclick="exportData('csv')">CSV</button>
-	  <button class="btn btn-warning" id="btnpc-weight2" data-bs-toggle="modal" data-bs-target="#pesata2Modal" data-bs-whatever="@getbootstrap">ELIMINA</button>    
-          <form class="form" id="form">
-            <div>
-              <input type="number" placeholder="prog" class="prog" id="prog">
-              <input type="text" placeholder="Cliente" id="cliente">
-              <input type="text" placeholder="Targa" id="targa">
-              <input type="text" placeholder="Data" id="data" name="dates" value="" autocomplete="off">
-              <input type="number" placeholder="Bil" id="bil">
-              <a style="border: 1px solid lightgray; padding: 5px; border-radius: 5px;" id="nonChiuse"><input type="checkbox" id="tipo">Non chiuse</a>
-            </div>
-            <div>
-              <input type="submit" value="Cerca" id="cerca" onclick="submitForm()">
-              <input type="submit" value="Cancella filtri" id="cancella" onclick="submitForm()">
-            </div>
-          </form>
+      	  <button class="btn btn-warning" id="btnpc-weight2" data-bs-toggle="modal" data-bs-target="#pesata2Modal" data-bs-whatever="@getbootstrap">ELIMINA</button>    
+          <div class="filters">
+            <form class="form" id="form">
+              <div>
+                <input type="number" placeholder="prog" class="prog" id="prog">
+                <input type="text" placeholder="Cliente" id="cliente">
+                <input type="text" placeholder="Targa" id="targa">
+                <input type="text" placeholder="Data" id="data" name="dates" value="" autocomplete="off">
+                <input type="number" placeholder="Bil" id="bil">
+                <a style="border: 1px solid lightgray; padding: 5px; border-radius: 5px;" id="nonChiuse"><input type="checkbox" id="tipo">Non chiuse</a>
+              </div>
+              <div>
+                <input type="submit" value="Cerca" id="cerca" onclick="submitForm()">
+                <input type="submit" value="Cancella filtri" id="cancella" onclick="submitForm()">
+              </div>
+            </form>
+            <p>Totale: <span id="total"></span></p>
+          </div>
         </th>
     </tr>
 	    <tr>

@@ -129,3 +129,8 @@ table.dataTable tfoot td {
 thead tr button{
 	margin-bottom: 10px;
 }
+.filters {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}

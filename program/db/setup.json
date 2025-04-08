@@ -1,6 +1,6 @@
 {
     "settings_machine": {
-        "name_serial": "/dev/ttyS0",
+        "name_serial": "/dev/ttyUSB0",
         "license_plate_required": false,
         "options_divisions": [
             1,
