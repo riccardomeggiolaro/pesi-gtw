@@ -212,7 +212,7 @@ def ver():
 	while True:
 		try:
 			if lb_config.nome_seriale:
-				lb_config.seriale = serial.Serial(lb_config.nome_seriale, 9600, timeout=lb_config.timeRead)
+				lb_config.seriale = serial.Serial(lb_config.nome_seriale, 19200, timeout=lb_config.timeRead)
 				comando("VER")
 				lb_config.read_seriale = lb_config.seriale.readline().decode().replace("\r\n", "")
 				values = lb_config.read_seriale.split(",")

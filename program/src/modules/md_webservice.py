@@ -275,7 +275,7 @@ def mainprg():
 
 	# function get list of weight filtered
 	@app.post("/pesate/{token}")
-	async def Pesate(filtri: list, token: str):
+	async def Pesate(filtri: list, token: str, offset: int = 0, limit: int = 3000):
 		try:
 			if lb_tool.TokenTrue(token):
 				if filtri != []:
@@ -298,47 +298,109 @@ def mainprg():
 							else:
 								filtra = filtra + " and "
 					lb_log.info(filtra)
-					pesate = await FiltraPesate(filtra, "LIMIT 100")
+					pesate = await FiltraPesate(filtra, offset, limit)
 					return pesate
 				else:
-					return await ListaPesate("LIMIT 100")
+					return await ListaPesate(offset, limit)
 			else:
 				return HTTPException(status_code=404, detail="NOT AUTHENTICATED")
 		except:
 			return HTTPException(status_code=400, detail="SYNTAX ERROR")
 
-	# function to filter weight
 	@app.get("/filtra_pesate")
-	async def FiltraPesate(filtri: str, string: str):
+	async def FiltraPesate(filtri: str, offset: int = 0, limit: int = 100):
 		try:
 			file_db_pesate = "../db/database.db"
 			async with aiosqlite.connect(file_db_pesate) as db:
 				async with db.cursor() as cursor:
-					await cursor.execute('''SELECT *
-											FROM pesate
-											WHERE %s
-											ORDER BY max(coalesce((datetime(substr(DATA1, 7, 4) || '-' || substr(DATA1, 4, 2) || '-' || substr(DATA1, 1, 2) || ' ' || substr(ORA1, 1, 2) || ':' || substr(ORA1, 4, 5))), 0), coalesce((datetime(substr(DATA2, 7, 4) || '-' || substr(DATA2, 4, 2) || '-' || substr(DATA2, 1, 2) || ' ' || substr(ORA2, 1, 2) || ':' || substr(ORA2, 4, 5))), 0)) DESC %s'''% (filtri, string))
+					# First query to get the total count of matching records
+					count_query = f"SELECT COUNT(*) FROM pesate WHERE {filtri}"
+					await cursor.execute(count_query)
+					total_count = (await cursor.fetchone())[0]
+					
+					# For the main query, use parameterized queries for pagination
+					# Keep the original complex ORDER BY clause
+					main_query = f'''SELECT *
+					FROM pesate
+					WHERE {filtri}
+					ORDER BY max(coalesce((datetime(substr(DATA1, 7, 4) || '-' || substr(DATA1, 4, 2) || '-' || substr(DATA1, 1, 2) || ' ' || substr(ORA1, 1, 2) || ':' || substr(ORA1, 4, 5))), 0), coalesce((datetime(substr(DATA2, 7, 4) || '-' || substr(DATA2, 4, 2) || '-' || substr(DATA2, 1, 2) || ' ' || substr(ORA2, 1, 2) || ':' || substr(ORA2, 4, 5))), 0)) DESC
+    				LIMIT {limit} OFFSET {offset}'''
+					
+					await cursor.execute(main_query)
+					
 					pesate = await cursor.fetchall()
+					
+					# Third query to calculate the sum of both PESO1 and PESO2
+					sum_query = f'''
+					SELECT IFNULL(SUM(CAST(NETTO AS REAL)), 0) AS total_netto 
+					FROM pesate 
+					WHERE {filtri}
+					'''
+					await cursor.execute(sum_query)
+					result = await cursor.fetchone()
+					somma = result[0] if result[0] is not None else 0
+					
 					if pesate:
-						return pesate
+						return {
+							"pesate": pesate, 
+							"somma": somma,
+							"total_count": total_count,
+							"offset": offset,
+							"limit": limit
+						}
 					else:
-						return []
+						return {
+							"pesate": [], 
+							"somma": 0,
+							"total_count": 0,
+							"offset": offset,
+							"limit": limit
+						}
 		except aiosqlite.Error as e:
 			return f"Errore nel recupero dei dati: {str(e)}"
 
-	# function to get list of weight
 	@app.get("/lista_pesate")
-	async def ListaPesate(string: str):
+	async def ListaPesate(offset: int = 0, limit: int = 100):
 		try:
 			file_db_pesate = "../db/database.db"
 			async with aiosqlite.connect(file_db_pesate) as db:
 				async with db.cursor() as cursor:
-					await cursor.execute("SELECT * FROM pesate ORDER BY id DESC %s;"% (string))
+					# First query to get the total count
+					await cursor.execute("SELECT COUNT(*) FROM pesate")
+					total_count = (await cursor.fetchone())[0]
+					
+					# Second query to get the paginated list of weights
+					# Use parameterized queries for pagination
+					query = f"SELECT * FROM pesate ORDER BY id DESC LIMIT {limit} OFFSET {offset}"
+					
+					await cursor.execute(query)
+					
 					pesate = await cursor.fetchall()
+					
+					# Third query to calculate the sum of both PESO1 and PESO2
+					await cursor.execute('''
+					SELECT IFNULL(SUM(CAST(NETTO AS REAL)), 0) AS total_netto 
+					FROM pesate 
+					''')
+					result = await cursor.fetchone()
+					somma = result[0] if result[0] is not None else 0
+					
 					if pesate:
-						return pesate
+						return {
+							"pesate": pesate, 
+							"somma": somma,
+							"total_count": total_count,
+							"offset": offset,
+							"limit": limit
+						}
 					else:
-						return []
+						return {
+							"pesate": [], 
+							"somma": 0,
+							"total_count": 0,
+							"offset": offset,
+							"limit": limit
+						}
 		except aiosqlite.Error as e:
 			return f"Errore nel recupero dei dati: {str(e)}"
 
