@@ -35,7 +35,7 @@ let titleDateTimeTwo = document.getElementById("titleDateTimeTwo")
 let titleWeightTwo = document.getElementById("titleWeightTwo")
 let titlePid = document.getElementById("titlePid")
 let titleProg = document.getElementById("titleProg")
-let total = document.getElementById("total");
+let totalNet = document.getElementById("totalNet");
 let prog_value = prog.value
 let cliente_value = cliente.value
 let targa_value = targa.value
@@ -65,9 +65,9 @@ window.onload = (event) => {
 		})
 		.then(response => response.json())
 		.then(response => {
-			AddRows(response.pesate)
-			total.textContent = `${response.somma} kg`;
-			console.log(response.pesate)
+			AddRows(response.weighings)
+			totalNet.textContent = `${response.total_net} kg`;
+			console.log(response.weighings)
 			containerrole.classList.toggle("displayNone")
 		})
 		.catch((e) => {
@@ -217,9 +217,9 @@ function Cerca() {
 	})
 	.then(response => response.json())
 	.then(response => {
-		AddRows(response.pesate)
-		total.textContent = `${response.somma} kg`;
-		console.log(response.pesate)
+		AddRows(response.weighings)
+		totalNet.textContent = `${response.total_net} kg`;
+		console.log(response.weighings)
 		containerrole.classList.toggle("displayNone")
 	})
 	.catch((e) => {
