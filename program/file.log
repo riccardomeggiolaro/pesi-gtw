@@ -239,3 +239,5 @@ I 2025/04/08 13:53:55 lb_config |config initialize
 I 2025/04/08 13:53:55 lb_config |read config file: config.json
 I 2025/04/08 13:54:48 lb_config |config initialize
 I 2025/04/08 13:54:48 lb_config |read config file: config.json
+I 2025/04/08 13:58:42 lb_config |config initialize
+I 2025/04/08 13:58:42 lb_config |read config file: config.json
