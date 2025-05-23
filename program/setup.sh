@@ -1,17 +1,17 @@
 #!/bin/bash
 
 SERVICE_FILE="/etc/systemd/system/pesigtw.service"
+VENV_DIR=".env"
 
 # Chiedi all'utente di inserire l'indirizzo IP desiderato
 read -p "Vuoi inserire un'indirizzo IP statico: (Y/n) " risposta
 
 # Applica la configurazione IP statico
-
 if [ "$risposta" = "Y" ] && [ -e "$SERVICE_FILE" ]; then
     ./stop-program.sh
     ./set-network-connection.sh
     sudo systemctl restart pesigtw.service
-elif [ "$risposta" = "Y" ] &&  ! [ -e "$SERVICE_FILE" ]; then
+elif [ "$risposta" = "Y" ] && ! [ -e "$SERVICE_FILE" ]; then
     ./set-network-connection.sh
 fi
 
@@ -24,11 +24,11 @@ fi
 
 # Verifica se sudo è installato
 if ! dpkg -l | grep -q "sudo"; then
-	echo "Sudo non è installato. Installazione in corso..."
-	sudo apt-get update
-	sudo apt-get install sudo -y
-	sudo adduser baronpesi sudo
-	echo "Sudo è stato installato"
+    echo "Sudo non è installato. Installazione in corso..."
+    sudo apt-get update
+    sudo apt-get install sudo -y
+    sudo adduser baronpesi sudo
+    echo "Sudo è stato installato"
 fi
 
 # Verifica se Python 3 è installato
@@ -66,7 +66,21 @@ fi
 # Torna alla directory padre
 cd ..
 
+# Crea un ambiente virtuale se non esiste
+if [ ! -d "$VENV_DIR" ]; then
+    echo "Creando un ambiente virtuale..."
+    python3 -m venv "$VENV_DIR"
+    echo "Ambiente virtuale creato in $VENV_DIR"
+fi
+
+# Attiva l'ambiente virtuale
+source "$VENV_DIR/bin/activate"
+
+# Installa i pacchetti da requirements.txt
 pip install -r requirements.txt --break-system-packages
+
+# Disattiva l'ambiente virtuale
+deactivate
 
 cd ..
 

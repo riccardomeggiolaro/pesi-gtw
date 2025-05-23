@@ -1,18 +1,9 @@
 import os
 import json
 import time
-import shutil
-
-import lb_utility
 import lb_log
 import lb_tool
-
-from datetime import datetime
 from dateutil import tz
-
-import subprocess
-
-import serial
 
 def initialize():
 

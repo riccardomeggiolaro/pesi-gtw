@@ -5,10 +5,8 @@ import time
 import json
 import os
 import hashlib
-
 import lb_config
 import lb_log
-import lb_utility
 
 # ==== MAINLOOP ===============================================
 def mainprg():
@@ -41,11 +39,11 @@ def mainprg():
 					if rlen >= maxrecordset:
 						# Raggiunta la massima lunghezza ammessa per un recordset
 						break
-				if lb_client.transmit(32,recordset):
-					for rec in lstb:
-						lb_config.db["pathfinder"].remove(rec)
-						savedata("pathfinder")
-					lb_log.inline(str(rcpr)+"/"+str(rcnt))
+				# if lb_client.transmit(32,recordset):
+				# 	for rec in lstb:
+				# 		lb_config.db["pathfinder"].remove(rec)
+				# 		savedata("pathfinder")
+				# 	lb_log.inline(str(rcpr)+"/"+str(rcnt))
 				else:
 					# Errore nella trasmissione del dataset
 					lb_log.warning("error sync: pathfinder")
