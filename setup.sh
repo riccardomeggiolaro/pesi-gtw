@@ -1,35 +1,16 @@
 #!/bin/bash
 
-SERVICE_FILE="/etc/systemd/system/pesigtw.service"
-VENV_DIR=".env"
+# Ottieni la directory dove si trova il file start.sh
+SCRIPT_DIR=$(dirname "$0")
 
-# Chiedi all'utente di inserire l'indirizzo IP desiderato
-read -p "Vuoi inserire un'indirizzo IP statico: (Y/n) " risposta
+echo "Directory dello script: $SCRIPT_DIR"
 
-# Applica la configurazione IP statico
-if [ "$risposta" = "Y" ] && [ -e "$SERVICE_FILE" ]; then
-    ./stop-program.sh
-    ./set-network-connection.sh
-    sudo systemctl restart pesigtw.service
-elif [ "$risposta" = "Y" ] && ! [ -e "$SERVICE_FILE" ]; then
-    ./set-network-connection.sh
-fi
+# Percorso dell'ambiente virtuale relativo alla stessa directory di start.sh
+VENV_DIR="$SCRIPT_DIR/.env"
 
-# Verifica se Midnight Commander (mc) è installato
-if ! dpkg -l | grep -q 'mc '; then
-    echo "Midnight Commander (mc) non è installato. Installazione in corso..."
-    sudo apt-get install mc -y
-    echo "Midnight Commander (mc) è stato installato"
-fi
+echo "Percorso dell'ambiente virtuale: $VENV_DIR"
 
-# Verifica se sudo è installato
-if ! dpkg -l | grep -q "sudo"; then
-    echo "Sudo non è installato. Installazione in corso..."
-    sudo apt-get update
-    sudo apt-get install sudo -y
-    sudo adduser baronpesi sudo
-    echo "Sudo è stato installato"
-fi
+SERVICE_FILE="/etc/systemd/system/pesi-gtw.service"
 
 # Verifica se Python 3 è installato
 if ! command -v python3 &> /dev/null; then
@@ -57,15 +38,6 @@ if command -v ufw &> /dev/null; then
     sudo ufw allow 8000
 fi
 
-if [ ! -w /dev/ttyS0 ] || [ ! -w /dev/ttyS1 ]; then
-    echo "Abilitando le porte seriali..."
-    sudo chmod 777 /dev/ttyS0
-    sudo chmod 777 /dev/ttyS1
-fi
-
-# Torna alla directory padre
-cd ..
-
 # Crea un ambiente virtuale se non esiste
 if [ ! -d "$VENV_DIR" ]; then
     echo "Creando un ambiente virtuale..."
@@ -77,12 +49,10 @@ fi
 source "$VENV_DIR/bin/activate"
 
 # Installa i pacchetti da requirements.txt
-pip install -r requirements.txt --break-system-packages
+pip install -r requirements.txt
 
 # Disattiva l'ambiente virtuale
 deactivate
-
-cd ..
 
 # Verifica se il file di servizio esiste già
 if [ -e "$SERVICE_FILE" ]; then
@@ -97,7 +67,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-ExecStart=/etc/pesi-gtw/program/start-program.sh
+ExecStart=$SCRIPT_DIR/start.sh
 
 [Install]
 WantedBy=multi-user.target"
@@ -108,8 +78,8 @@ echo "$SERVICE_CONTENT" | sudo tee "$SERVICE_FILE" > /dev/null
 if [ $? -eq 0 ]; then
     echo "Il file di servizio $SERVICE_FILE è stato creato con successo."
     sudo systemctl daemon-reload
-    sudo systemctl enable pesigtw.service
-    sudo systemctl start pesigtw.service
+    sudo systemctl enable pesi-gtw.service
+    sudo systemctl start pesi-gtw.service
 else
     echo "Si è verificato un errore durante la creazione del file di servizio."
 fi
