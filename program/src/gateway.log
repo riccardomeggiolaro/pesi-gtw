@@ -6573,3 +6573,181 @@ I 2025/05/23 09:42:11 main      |SIGTEM exit
 I 2025/05/23 09:42:12 main      |SIGTEM exit
 I 2025/05/23 09:42:13 lb_log    |end
 I 2025/05/23 09:42:14 lb_config |end
+I 2025/05/23 10:23:59 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/05/23 10:23:59 main      |loading modules...
+I 2025/05/23 10:23:59 main      |...md_webservice_html
+I 2025/05/23 10:23:59 main      |...md_pesa_dini
+I 2025/05/23 10:23:59 md_webser~|start
+I 2025/05/23 10:23:59 main      |...md_webservice
+I 2025/05/23 10:23:59 main      |loading app module :PES001
+
+
+I 2025/05/23 10:23:59 md_webser~|startI 2025/05/23 10:23:59 pes001    |app.initI 2025/05/23 10:23:59 md_pesa_d~|start
+
+I 2025/05/23 10:23:59 lb_config |startI 2025/05/23 10:23:59 lb_log    |start
+I 2025/05/23 10:23:59 lb_data   |start
+I 2025/05/23 10:24:04 main      |SIGTEM exit
+I 2025/05/23 10:24:04 main      |exitpoint.
+
+
+I 2025/05/23 10:24:04 lb_log    |endI 2025/05/23 10:24:04 pes001    |PES001:endI 2025/05/23 10:24:04 lb_config |end
+I 2025/05/23 10:24:04 lb_data   |end
+I 2025/05/23 10:24:38 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/05/23 10:24:38 main      |loading modules...
+I 2025/05/23 10:24:38 main      |...md_webservice_html
+I 2025/05/23 10:24:38 main      |...md_pesa_dini
+I 2025/05/23 10:24:38 md_webser~|start
+I 2025/05/23 10:24:38 main      |...md_webservice
+I 2025/05/23 10:24:38 main      |loading app module :PES001
+
+
+I 2025/05/23 10:24:38 pes001    |app.initI 2025/05/23 10:24:38 md_pesa_d~|startI 2025/05/23 10:24:38 md_webser~|start
+
+I 2025/05/23 10:24:38 lb_log    |startI 2025/05/23 10:24:38 lb_config |start
+I 2025/05/23 10:24:38 lb_data   |start
+I 2025/05/23 10:24:42 main      |SIGTEM exit
+I 2025/05/23 10:24:42 pes001    |PES001:end
+I 2025/05/23 10:24:42 main      |exitpoint.
+I 2025/05/23 10:24:42 lb_data   |end
+I 2025/05/23 10:24:43 main      |SIGTEM exit
+I 2025/05/23 10:24:43 main      |SIGTEM exit
+
+I 2025/05/23 10:24:43 lb_config |endI 2025/05/23 10:24:43 lb_log    |end
+I 2025/05/23 10:30:28 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/05/23 10:30:28 main      |loading modules...
+I 2025/05/23 10:30:28 main      |...md_webservice_html
+I 2025/05/23 10:30:28 main      |...md_pesa_dini
+I 2025/05/23 10:30:28 md_webser~|start
+I 2025/05/23 10:30:29 main      |...md_webservice
+I 2025/05/23 10:30:29 main      |loading app module :PES001
+
+
+I 2025/05/23 10:30:29 pes001    |app.initI 2025/05/23 10:30:29 md_pesa_d~|startI 2025/05/23 10:30:29 md_webser~|start
+I 2025/05/23 10:30:29 lb_config |start
+I 2025/05/23 10:30:29 lb_log    |start
+I 2025/05/23 10:30:29 lb_data   |start
+I 2025/05/23 10:30:31 main      |SIGTEM exit
+
+I 2025/05/23 10:30:31 main      |exitpoint.I 2025/05/23 10:30:31 lb_data   |end
+I 2025/05/23 10:30:31 pes001    |PES001:end
+I 2025/05/23 10:30:32 main      |SIGTEM exit
+I 2025/05/23 10:30:32 main      |SIGTEM exit
+I 2025/05/23 10:30:32 main      |SIGTEM exit
+I 2025/05/23 10:30:34 lb_config |end
+I 2025/05/23 10:30:34 lb_log    |end
+I 2025/05/23 10:33:31 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/05/23 10:33:31 main      |loading modules...
+I 2025/05/23 10:33:31 main      |...md_webservice_html
+I 2025/05/23 10:33:31 main      |...md_pesa_dini
+I 2025/05/23 10:33:31 md_webser~|start
+
+I 2025/05/23 10:33:31 main      |...md_webserviceI 2025/05/23 10:33:31 md_pesa_d~|start
+I 2025/05/23 10:33:31 main      |loading app module :PES001
+
+I 2025/05/23 10:33:31 pes001    |app.initI 2025/05/23 10:33:31 md_webser~|start
+
+I 2025/05/23 10:33:33 lb_log    |startI 2025/05/23 10:33:33 lb_config |start
+I 2025/05/23 10:33:33 lb_data   |start
+I 2025/05/23 10:33:34 main      |SIGTEM exit
+I 2025/05/23 10:33:34 pes001    |PES001:end
+I 2025/05/23 10:33:34 lb_data   |end
+I 2025/05/23 10:33:36 main      |SIGTEM exit
+
+I 2025/05/23 10:33:38 lb_log    |endI 2025/05/23 10:33:38 lb_config |end
+I 2025/05/23 10:33:36 main      |SIGTEM exit
+I 2025/05/23 10:33:39 main      |SIGTEM exit
+I 2025/05/23 10:33:39 main      |SIGTEM exit
+I 2025/05/23 10:33:39 main      |SIGTEM exit
+I 2025/05/23 10:33:39 main      |SIGTEM exit
+I 2025/05/23 10:33:39 main      |SIGTEM exit
+I 2025/05/23 10:33:39 main      |SIGTEM exit
+I 2025/05/23 10:33:39 main      |SIGTEM exit
+I 2025/05/23 10:33:38 main      |SIGTEM exit
+I 2025/05/23 10:33:35 main      |SIGTEM exit
+I 2025/05/23 10:33:35 main      |SIGTEM exit
+I 2025/05/23 10:33:35 main      |SIGTEM exit
+I 2025/05/23 10:33:35 main      |SIGTEM exit
+I 2025/05/23 10:33:35 main      |SIGTEM exit
+I 2025/05/23 10:33:35 main      |SIGTEM exit
+I 2025/05/23 10:33:34 main      |SIGTEM exit
+I 2025/05/23 10:33:34 main      |SIGTEM exit
+I 2025/05/23 10:33:34 main      |SIGTEM exit
+I 2025/05/23 10:33:34 main      |SIGTEM exit
+I 2025/05/23 10:33:34 main      |SIGTEM exit
+I 2025/05/23 10:33:34 main      |SIGTEM exit
+I 2025/05/23 10:33:34 main      |SIGTEM exit
+I 2025/05/23 10:33:34 main      |SIGTEM exit
+I 2025/05/23 10:33:34 main      |SIGTEM exit
+I 2025/05/23 10:33:34 main      |SIGTEM exit
+I 2025/05/23 10:33:34 main      |exitpoint.
+I 2025/05/23 10:34:02 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/05/23 10:34:02 main      |loading modules...
+I 2025/05/23 10:34:02 main      |...md_webservice_html
+I 2025/05/23 10:34:02 main      |...md_pesa_dini
+I 2025/05/23 10:34:02 md_webser~|start
+I 2025/05/23 10:34:02 main      |...md_webservice
+
+I 2025/05/23 10:34:02 md_pesa_d~|startI 2025/05/23 10:34:02 main      |loading app module :PES001
+
+I 2025/05/23 10:34:02 md_webser~|startI 2025/05/23 10:34:02 pes001    |app.init
+I 2025/05/23 10:34:03 lb_log    |start
+
+I 2025/05/23 10:34:03 lb_config |startI 2025/05/23 10:34:03 lb_data   |start
+I 2025/05/23 10:34:13 main      |SIGTEM exit
+I 2025/05/23 10:34:13 main      |exitpoint.
+I 2025/05/23 10:34:13 pes001    |PES001:end
+
+
+I 2025/05/23 10:34:13 lb_config |end
+I 2025/05/23 10:34:13 lb_data   |endI 2025/05/23 10:34:13 main      |SIGTEM exitI 2025/05/23 10:34:13 lb_log    |end
+I 2025/05/23 10:34:19 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/05/23 10:34:19 main      |loading modules...
+I 2025/05/23 10:34:19 main      |...md_webservice_html
+I 2025/05/23 10:34:19 main      |...md_pesa_dini
+I 2025/05/23 10:34:19 md_webser~|start
+I 2025/05/23 10:34:19 main      |...md_webservice
+I 2025/05/23 10:34:19 main      |loading app module :PES001
+
+
+I 2025/05/23 10:34:19 md_pesa_d~|startI 2025/05/23 10:34:19 pes001    |app.initI 2025/05/23 10:34:19 md_webser~|start
+
+I 2025/05/23 10:34:19 lb_config |start
+I 2025/05/23 10:34:19 lb_log    |startI 2025/05/23 10:34:19 lb_data   |start
+I 2025/05/23 10:34:24 main      |SIGTEM exit
+
+I 2025/05/23 10:34:24 pes001    |PES001:end
+I 2025/05/23 10:34:24 main      |exitpoint.
+I 2025/05/23 10:34:24 lb_config |end
+I 2025/05/23 10:34:24 lb_log    |endI 2025/05/23 10:34:24 lb_data   |end
+I 2025/05/23 10:42:45 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/05/23 10:42:45 main      |loading modules...
+I 2025/05/23 10:42:45 main      |...md_webservice_html
+I 2025/05/23 10:42:45 main      |...md_pesa_dini
+I 2025/05/23 10:42:45 md_webser~|start
+I 2025/05/23 10:42:46 main      |...md_webservice
+I 2025/05/23 10:42:46 main      |loading app module :PES001
+
+
+I 2025/05/23 10:42:46 md_webser~|startI 2025/05/23 10:42:46 md_pesa_d~|startI 2025/05/23 10:42:46 pes001    |app.init
+
+I 2025/05/23 10:42:46 lb_config |start
+I 2025/05/23 10:42:46 lb_log    |startI 2025/05/23 10:42:46 lb_data   |start
+I 2025/05/23 10:42:55 main      |SIGTEM exit
+I 2025/05/23 10:42:55 main      |exitpoint.
+I 2025/05/23 10:42:55 pes001    |PES001:end
+I 2025/05/23 10:42:55 lb_data   |end
+I 2025/05/23 10:42:56 lb_config |end
+I 2025/05/23 10:42:56 lb_log    |end
+I 2025/05/23 10:43:07 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/05/23 10:43:07 main      |loading modules...
+I 2025/05/23 10:43:07 main      |...md_webservice_html
+I 2025/05/23 10:43:07 main      |...md_pesa_dini
+I 2025/05/23 10:43:07 md_webser~|start
+I 2025/05/23 10:43:07 main      |...md_webservice
+I 2025/05/23 10:43:07 main      |loading app module :PES001
+
+
+I 2025/05/23 10:43:07 md_pesa_d~|startI 2025/05/23 10:43:07 pes001    |app.initI 2025/05/23 10:43:07 md_webser~|start
+I 2025/05/23 10:43:07 lb_config |start
+I 2025/05/23 10:43:07 lb_log    |start
+I 2025/05/23 10:43:07 lb_data   |start
