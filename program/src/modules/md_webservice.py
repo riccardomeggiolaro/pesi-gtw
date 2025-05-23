@@ -1,28 +1,20 @@
 from io import BytesIO
 import os
-
 import aiosqlite
-import openpyxl
 import lb_config
 import lb_log
 import lb_config
-from http.server import HTTPServer, BaseHTTPRequestHandler
-from fastapi import FastAPI, HTTPException, Response, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
 from typing import Union
 import uvicorn
 import lb_tool
 import lb_utility
 from lb_tool import *
 from fastapi.middleware.cors import CORSMiddleware
-import subprocess
 import asyncio
 import serial
 import md_pesa_dini
-from datetime import datetime, date
-from fastapi.encoders import jsonable_encoder
-from pydantic import BaseModel
 import pandas as pd
-from fastapi.responses import FileResponse
 import sqlite3
 
 # ==== MAINLOOP ===============================================

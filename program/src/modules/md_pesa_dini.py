@@ -9,7 +9,6 @@
 # ==============================================================
 import time
 import json
-import os
 import lb_config
 import lb_tool
 import lb_utility
@@ -18,12 +17,9 @@ import serial
 import md_webservice
 from threading import Timer
 import re
-import asyncio
 import time
 from typing import Union
-
-from datetime import datetime,timedelta, date
-from dateutil.parser import parse
+from datetime import datetime
 
 class RepeatTimer(Timer):
 	def run(self):
@@ -60,7 +56,7 @@ def mainprg():
 				if lb_config.pesata_pid["PID1"]:
 					pesataTrovata = lb_utility.getByPid("PID1", lb_config.pesata_pid["PID1"])
 				else:
-				    pesataTrovata = lb_utility.getById(lb_config.pesata_pid["ID"], lb_config.pesata_pid["DATA1"], lb_config.pesata_pid["ORA1"])
+					pesataTrovata = lb_utility.getById(lb_config.pesata_pid["ID"], lb_config.pesata_pid["DATA1"], lb_config.pesata_pid["ORA1"])
 				#per ogni chiave valore di pesata 1 controllo se è vuoto o se ha un valore, così da riempirlo in base alle condizioni
 				if pesataTrovata != None:
 					for key, value in pesataTrovata.items():
@@ -92,16 +88,16 @@ def mainprg():
 						gwstring = lst_peso[2].lstrip()
 						gw = None
 						if "." in gwstring:
-						    gw = float(re.sub('[KkGg\x00\n]', '', lst_peso[2].lstrip()))
+							gw = float(re.sub('[KkGg\x00\n]', '', lst_peso[2].lstrip()))
 						else:
-						    gw = int(re.sub('[KkGg\x00\n]', '', lst_peso[2].lstrip()))
+							gw = int(re.sub('[KkGg\x00\n]', '', lst_peso[2].lstrip()))
 						tpt = re.sub('[KkGg\x00\n]', '', lst_peso[3].lstrip())
 						tstring = lst_peso[3].lstrip()
 						t = None
 						if "." in tstring:
-						    t = float(re.sub('[PTKkGg\x00\n]', '', lst_peso[3].lstrip()))
+							t = float(re.sub('[PTKkGg\x00\n]', '', lst_peso[3].lstrip()))
 						else:
-						    t = int(re.sub('[PTKkGg\x00\n]', '', lst_peso[3].lstrip()))
+							t = int(re.sub('[PTKkGg\x00\n]', '', lst_peso[3].lstrip()))
 						lb_config.pesa_real_time["status"] = lst_peso[0]
 						#calcolo il tipo di peso
 						lb_config.pesa_real_time["type"] = TypeWeight(lst_peso[3])

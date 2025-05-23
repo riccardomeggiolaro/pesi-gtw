@@ -3,17 +3,11 @@
 # =============================================================
 import os
 import time
-import hashlib
 import threading
 import sys
 import importlib
 import signal
-import subprocess
 import glob
-import fastapi
-
-from importlib import reload
-from datetime import datetime
 
 class GracefulKiller:
 	kill_now = False
@@ -110,15 +104,15 @@ def mainprg():
 
 import socket
 def Ip():
-    try:
-	    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-	    s.connect(("8.8.8.8", 80))
-	    hostname = s.getsockname()[0]
-	    s.close()
-	    host = socket.gethostname()
-	    return hostname, host
-    except:
-        return "0.0.0.0", "debianpesa"
+	try:
+		s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+		s.connect(("8.8.8.8", 80))
+		hostname = s.getsockname()[0]
+		s.close()
+		host = socket.gethostname()
+		return hostname, host
+	except:
+		return "0.0.0.0", "debianpesa"
 
 if __name__ == "__main__":
 	killer = GracefulKiller()
@@ -151,7 +145,8 @@ if __name__ == "__main__":
 	lb_config.g_workpath = x_workpath + "/"
 	lb_config.g_dbpath = lb_config.g_workpath + "db/"
 	lb_config.hostname, lb_config.host = Ip()
-	os.system("chmod 777 " + lb_config.nome_seriale)
+	if lb_config.nome_seriale:
+		os.system("chmod 777 " + lb_config.nome_seriale)
 	print("IP: " + lb_config.hostname)
 	
 	# Impostazione file di log

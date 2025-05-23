@@ -1,18 +1,12 @@
-from fastapi import FastAPI, Request, HTTPException
+from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 import uvicorn
 import lb_log
-import lb_tool
 from lb_tool import *
 from fastapi.middleware.cors import CORSMiddleware
-import subprocess
 import uvicorn
-from os.path import exists
-
-
-
 
 # ==== MAINLOOP ===============================================
 
