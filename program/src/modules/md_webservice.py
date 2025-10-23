@@ -534,7 +534,7 @@ def mainprg():
 		)
 
 		# Reorder columns to match the specified order
-		columns_order = ["TIPO", "ID", "PROG1", "PROG2", CLIENTE, TARGA, FORNITORE, MATERIALE, "BADGE", "NETTO", "DATA1", "ORA1", "PESO1", "DATA2", "ORA2", "PESO2", "PID1", "PID2", "NOTE1", "NOTE2", "BIL"]
+		columns_order = ["TIPO", "ID", "PROG1", "PROG2", TARGA, CLIENTE, FORNITORE, MATERIALE, "BADGE", "NETTO", "DATA1", "ORA1", "PESO1", "DATA2", "ORA2", "PESO2", "PID1", "PID2", "NOTE1", "NOTE2", "BIL"]
 		# Filter columns that are present in the dataframe and reorder them
 		df = df[[col for col in columns_order if col in df.columns]]  
   

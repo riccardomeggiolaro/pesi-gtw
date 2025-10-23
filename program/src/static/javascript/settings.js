@@ -95,36 +95,50 @@ window.onload = function(){
 				switch(element){
 					case "prog_one":
 						progOneCheckbox.checked = response.message.list_settings.prog_one;
+						break;
 					case "prog_two":
 						progTwoCheckbox.checked = response.message.list_settings.prog_two;
+						break;
 					case "pid_one":
 						pidOneCheckbox.checked = response.message.list_settings.pid_one;
-					case "pid_one":
+						break;
+					case "pid_two":
 						pidTwoCheckbox.checked = response.message.list_settings.pid_two;
+						break;
 					case "bil":
 						bilCheckbox.checked = response.message.list_settings.bil;
+						break;
 					case "customer":
 						customerCheckbox.checked = response.message.list_settings.customer.use;
 						customerRename.value = response.message.list_settings.customer.rename;
+						break;
 					case "supplier":
 						supplierCheckbox.checked = response.message.list_settings.supplier.use;
 						supplierRename.value = response.message.list_settings.supplier.rename;
+						break;
 					case "material":
 						materialCheckbox.checked = response.message.list_settings.material.use;
 						materialRename.value = response.message.list_settings.material.rename;
+						break;
 					case "plate":
 						plateCheckbox.checked = response.message.list_settings.plate.use;
 						plateRename.value = response.message.list_settings.plate.rename;
+						break;
 					case "net_weight":
 						netWeightCheckbox.checked = response.message.list_settings.net_weight;
+						break;
 					case "date_time_one":
 						dateTimeOneCheckbox.checked = response.message.list_settings.date_time_one;
+						break;
 					case "weight_one":
 						weightOneCheckbox.checked = response.message.list_settings.weight_one;
+						break;
 					case "date_time_two":
 						dateTimeTwoCheckbox.checked = response.message.list_settings.date_time_two;
+						break;
 					case "weight_two":
 						weightTwoCheckbox.checked = response.message.list_settings.weight_two;
+						break;
 				}
 			})
 			Object.keys(response.message.buttons_settings).forEach(element => {

@@ -1,6 +1,6 @@
 {
     "settings_machine": {
-        "name_serial": null,
+        "name_serial": "/dev/ttyUSB0",
         "license_plate_required": false,
         "options_divisions": [
             1,
@@ -22,7 +22,7 @@
             "bil": true,
             "customer": {
                 "use": true,
-                "rename": "Operatore"
+                "rename": null
             },
             "supplier": {
                 "use": true,
