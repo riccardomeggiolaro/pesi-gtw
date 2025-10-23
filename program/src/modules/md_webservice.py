@@ -697,10 +697,10 @@ def mainprg():
 			authorizated = lb_tool.IsAuthorizated(setup_nameserial.token)
 			if authorizated:
 				try:
+					os.system("chmod 777 " + setup_nameserial.name_serial)
 					lb_config.seriale = serial.Serial(setup_nameserial.name_serial, 9600, timeout=0.5)
-					os.system("chmod 777 " + lb_config.nome_seriale)
-				except:
-					return {"status_code": 500, "message": "La porta che hai inserito non è valida"}
+				except Exception as e:
+					return {"status_code": 500, "message": str(e)}
 				lb_config.setup["settings_machine"]["name_serial"] = setup_nameserial.name_serial
 				if lb_tool.Save(lb_config.path_setup, lb_config.setup):
 					lb_config.nome_seriale = lb_config.setup["settings_machine"]["name_serial"]
@@ -1136,7 +1136,7 @@ def mainprg():
 				lb_config.pesata_in_esecuzione = True
 				while len(idx) < 3:
 					idx = "0" + idx
-				stringa = "ID;" + idx + ";3;0;0";
+				stringa = "ID;" + idx + ";3;0;0"
 				checksum = lb_tool.Checksum(stringa)
 				md_pesa_dini.comando("WREC,2,0000," + stringa + "," + checksum)
 				await lb_utility.Attend()
