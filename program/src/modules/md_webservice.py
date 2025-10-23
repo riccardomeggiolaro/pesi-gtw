@@ -518,14 +518,23 @@ def mainprg():
 
 	# function to format list of weight by type pass as parameter 
 	async def Export(pesate: list, type: string):
+		plate_rename = lb_config.setup["settings_machine"]["list_settings"]["plate"]["rename"]
+		customer_rename = lb_config.setup["settings_machine"]["list_settings"]["customer"]["rename"]
+		supplier_rename = lb_config.setup["settings_machine"]["list_settings"]["supplier"]["rename"]
+		material_rename = lb_config.setup["settings_machine"]["list_settings"]["material"]["rename"]
+		TARGA = plate_rename.upper() if plate_rename else "TARGA"
+		CLIENTE = customer_rename.upper() if customer_rename else "CLIENTE"
+		FORNITORE = supplier_rename.upper() if supplier_rename else "FORNITORE"
+		MATERIALE = material_rename.upper() if material_rename else "MATERIALE"
+
 		df = pd.DataFrame(
 			pesate,			
-			columns=["TIPO", "ID", "BIL", "DATA1", "ORA1", "DATA2", "ORA2", "PROG1", "PROG2", "BADGE", "TARGA", "CLIENTE", "FORNITORE", "MATERIALE",
+			columns=["TIPO", "ID", "BIL", "DATA1", "ORA1", "DATA2", "ORA2", "PROG1", "PROG2", "BADGE", TARGA, CLIENTE, FORNITORE, MATERIALE,
 				"NOTE1", "NOTE2", "PESO1", "PID1", "PESO2", "PID2", "NETTO"]
 		)
 
 		# Reorder columns to match the specified order
-		columns_order = ["TIPO", "ID", "PROG1", "PROG2", "CLIENTE", "TARGA", "FORNITORE", "MATERIALE", "BADGE", "NETTO", "DATA1", "ORA1", "PESO1", "DATA2", "ORA2", "PESO2", "PID1", "PID2", "NOTE1", "NOTE2", "BIL"]
+		columns_order = ["TIPO", "ID", "PROG1", "PROG2", CLIENTE, TARGA, FORNITORE, MATERIALE, "BADGE", "NETTO", "DATA1", "ORA1", "PESO1", "DATA2", "ORA2", "PESO2", "PID1", "PID2", "NOTE1", "NOTE2", "BIL"]
 		# Filter columns that are present in the dataframe and reorder them
 		df = df[[col for col in columns_order if col in df.columns]]  
   
@@ -549,13 +558,13 @@ def mainprg():
 				df.rename(columns={"PID1": "PID"}, inplace=True)
 		if lb_config.setup["settings_machine"]["list_settings"]["bil"] == False:
 			df.drop(columns=["BIL"], inplace=True)
-		if lb_config.setup["settings_machine"]["list_settings"]["customer"] == False:
+		if lb_config.setup["settings_machine"]["list_settings"]["customer"]["use"] == False:
 			df.drop(columns=["CLIENTE"], inplace=True)
-		if lb_config.setup["settings_machine"]["list_settings"]["supplier"] == False:
+		if lb_config.setup["settings_machine"]["list_settings"]["supplier"]["use"] == False:
 			df.drop(columns=["FORNITORE"], inplace=True)
-		if lb_config.setup["settings_machine"]["list_settings"]["material"] == False:
+		if lb_config.setup["settings_machine"]["list_settings"]["material"]["use"] == False:
 			df.drop(columns=["MATERIALE"], inplace=True)
-		if lb_config.setup["settings_machine"]["list_settings"]["plate"] == False:
+		if lb_config.setup["settings_machine"]["list_settings"]["plate"]["use"] == False:
 			df.drop(columns=["TARGA"], inplace=True)
 		if lb_config.setup["settings_machine"]["list_settings"]["net_weight"] == False:
 			df.drop(columns=["NETTO"], inplace=True)
@@ -723,7 +732,10 @@ def mainprg():
 			if lb_tool.IsAuthorizated(token):
 				for key, value in setup:
 					if value != None:
-						lb_config.setup["settings_machine"]["list_settings"][key] = value					
+						if isinstance(value, bool):
+							lb_config.setup["settings_machine"]["list_settings"][key] = value
+						elif isinstance(value, lb_tool.use_rename):
+							lb_config.setup["settings_machine"]["list_settings"][key] = value.dict()
 				lb_tool.Save(lb_config.path_setup, lb_config.setup)
 				return lb_config.setup["settings_machine"]["list_settings"]
 			else:

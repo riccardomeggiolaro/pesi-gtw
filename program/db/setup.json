@@ -16,19 +16,31 @@
         "max_weigth": 60000,
         "list_settings": {
             "prog_one": true,
-            "prog_two": false,
+            "prog_two": true,
             "pid_one": true,
-            "pid_two": false,
+            "pid_two": true,
             "bil": true,
-            "customer": false,
-            "supplier": false,
-            "material": true,
-            "plate": false,
+            "customer": {
+                "use": true,
+                "rename": "Operatore"
+            },
+            "supplier": {
+                "use": true,
+                "rename": null
+            },
+            "material": {
+                "use": true,
+                "rename": null
+            },
+            "plate": {
+                "use": true,
+                "rename": null
+            },
             "net_weight": true,
             "date_time_one": true,
-            "weight_one": false,
-            "date_time_two": false,
-            "weight_two": false,
+            "weight_one": true,
+            "date_time_two": true,
+            "weight_two": true,
             "note_one": false,
             "note_two": false,
             "badge": false

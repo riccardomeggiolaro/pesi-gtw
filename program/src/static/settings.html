@@ -177,21 +177,25 @@
 			<input class="form-check-input" type="checkbox" value="" id="customer" onclick="IsRequired('customer')" checked>
 			<label class="form-check-label" for="customer">
 				Cliente
+				<input class="form-custom-name" type="text" value="" id="customer_rename" placeholder="Nome personalizzato" oninput="IsRequired('customer', this.value || null)">
 			</label>
 			<br>
 			<input class="form-check-input" type="checkbox" value="" id="supplier" onclick="IsRequired('supplier')" checked>
 			<label class="form-check-label" for="supplier">
 				Fornitore
+				<input class="form-custom-name" type="text" value="" id="supplier_rename" placeholder="Nome personalizzato" oninput="IsRequired('supplier', this.value || null)">
 		    </label>
 			<br>
 			<input class="form-check-input" type="checkbox" value="" id="material" onclick="IsRequired('material')" checked>
 			<label class="form-check-label" for="material">
 				Materiale
+				<input class="form-custom-name" type="text" value="" id="material_rename" placeholder="Nome personalizzato" oninput="IsRequired('material', this.value || null)">
 		    </label>
 			<br>
 			<input class="form-check-input" type="checkbox" value="" id="plate" onclick="IsRequired('plate')" checked>
 			<label class="form-check-label" for="plate">
 				Targa
+				<input class="form-custom-name" type="text" value="" id="plate_rename" placeholder="Nome personalizzato" oninput="IsRequired('plate', this.value || null)">
 		    </label>
 			<br>
 			<input class="form-check-input" type="checkbox" value="" id="netWeight" onclick="IsRequired('net_weight')" checked>
