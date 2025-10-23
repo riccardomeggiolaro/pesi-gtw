@@ -6751,3 +6751,358 @@ I 2025/05/23 10:43:07 md_pesa_d~|startI 2025/05/23 10:43:07 pes001    |app.initI
 I 2025/05/23 10:43:07 lb_config |start
 I 2025/05/23 10:43:07 lb_log    |start
 I 2025/05/23 10:43:07 lb_data   |start
+I 2025/10/23 11:40:03 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/10/23 11:40:03 main      |loading modules...
+I 2025/10/23 11:40:03 main      |...md_webservice_html
+I 2025/10/23 11:40:03 main      |...md_pesa_dini
+I 2025/10/23 11:40:03 md_webser~|start
+I 2025/10/23 11:40:03 main      |...md_webservice
+I 2025/10/23 11:40:03 main      |loading app module :PES001
+
+I 2025/10/23 11:40:03 md_pesa_d~|start
+I 2025/10/23 11:40:03 md_webser~|startI 2025/10/23 11:40:03 pes001    |app.init
+I 2025/10/23 11:40:03 lb_config |start
+
+I 2025/10/23 11:40:03 lb_log    |startI 2025/10/23 11:40:03 lb_data   |start
+I 2025/10/23 12:27:10 main      |SIGTEM exit
+I 2025/10/23 12:27:11 main      |exitpoint.
+I 2025/10/23 12:27:11 pes001    |PES001:end
+I 2025/10/23 12:27:11 lb_data   |end
+
+I 2025/10/23 12:27:12 lb_log    |endI 2025/10/23 12:27:12 lb_config |end
+I 2025/10/23 13:42:49 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/10/23 13:42:49 main      |loading modules...
+I 2025/10/23 13:42:49 main      |...md_webservice_html
+I 2025/10/23 13:42:49 main      |...md_pesa_dini
+I 2025/10/23 13:42:49 md_webser~|start
+I 2025/10/23 13:42:49 main      |...md_webservice
+I 2025/10/23 13:42:49 main      |loading app module :PES001
+
+I 2025/10/23 13:42:49 md_pesa_d~|start
+I 2025/10/23 13:42:49 pes001    |app.initI 2025/10/23 13:42:49 md_webser~|start
+
+I 2025/10/23 13:42:49 lb_config |startI 2025/10/23 13:42:49 lb_log    |start
+I 2025/10/23 13:42:49 lb_data   |start
+I 2025/10/23 13:46:53 main      |SIGTEM exit
+I 2025/10/23 13:46:53 main      |SIGTEM exit
+I 2025/10/23 13:46:53 pes001    |PES001:end
+
+I 2025/10/23 13:46:53 lb_data   |endI 2025/10/23 13:46:53 main      |exitpoint.
+I 2025/10/23 13:46:53 main      |SIGTEM exit
+I 2025/10/23 13:46:54 main      |SIGTEM exit
+I 2025/10/23 13:46:54 main      |SIGTEM exit
+I 2025/10/23 13:46:54 main      |SIGTEM exit
+I 2025/10/23 13:46:54 main      |SIGTEM exit
+
+I 2025/10/23 13:46:55 lb_config |endI 2025/10/23 13:46:55 lb_log    |end
+I 2025/10/23 13:47:06 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/10/23 13:47:06 main      |loading modules...
+I 2025/10/23 13:47:06 main      |...md_webservice_html
+I 2025/10/23 13:47:07 main      |...md_pesa_dini
+I 2025/10/23 13:47:07 md_webser~|start
+I 2025/10/23 13:47:07 main      |...md_webservice
+I 2025/10/23 13:47:07 main      |loading app module :PES001
+
+
+I 2025/10/23 13:47:07 md_pesa_d~|startI 2025/10/23 13:47:07 md_webser~|startI 2025/10/23 13:47:07 pes001    |app.init
+
+I 2025/10/23 13:47:07 lb_config |startI 2025/10/23 13:47:07 lb_log    |start
+I 2025/10/23 13:47:07 lb_data   |start
+I 2025/10/23 13:50:06 main      |SIGTEM exit
+I 2025/10/23 13:50:06 lb_data   |end
+I 2025/10/23 13:50:07 main      |exitpoint.
+I 2025/10/23 13:50:07 pes001    |PES001:end
+I 2025/10/23 13:50:07 lb_config |end
+I 2025/10/23 13:50:07 lb_log    |end
+I 2025/10/23 13:50:08 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/10/23 13:50:08 main      |loading modules...
+I 2025/10/23 13:50:08 main      |...md_webservice_html
+I 2025/10/23 13:50:08 main      |...md_pesa_dini
+I 2025/10/23 13:50:08 md_webser~|start
+I 2025/10/23 13:50:08 main      |...md_webservice
+I 2025/10/23 13:50:08 main      |loading app module :PES001
+I 2025/10/23 13:50:08 md_pesa_d~|start
+
+I 2025/10/23 13:50:08 md_webser~|startI 2025/10/23 13:50:08 pes001    |app.init
+
+I 2025/10/23 13:50:11 lb_config |startI 2025/10/23 13:50:11 lb_log    |start
+I 2025/10/23 13:50:11 lb_data   |start
+I 2025/10/23 13:51:09 main      |SIGTEM exit
+
+I 2025/10/23 13:51:09 main      |exitpoint.I 2025/10/23 13:51:09 pes001    |PES001:end
+I 2025/10/23 13:51:09 lb_data   |end
+
+I 2025/10/23 13:51:12 lb_config |endI 2025/10/23 13:51:12 lb_log    |end
+I 2025/10/23 13:51:13 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/10/23 13:51:13 main      |loading modules...
+I 2025/10/23 13:51:13 main      |...md_webservice_html
+I 2025/10/23 13:51:13 main      |...md_pesa_dini
+I 2025/10/23 13:51:13 md_webser~|start
+I 2025/10/23 13:51:13 main      |...md_webservice
+I 2025/10/23 13:51:13 main      |loading app module :PES001
+
+
+I 2025/10/23 13:51:13 pes001    |app.initI 2025/10/23 13:51:13 md_pesa_d~|startI 2025/10/23 13:51:13 md_webser~|start
+
+I 2025/10/23 13:51:13 lb_log    |startI 2025/10/23 13:51:13 lb_config |start
+I 2025/10/23 13:51:13 lb_data   |start
+E 2025/10/23 13:53:28 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 13:53:36 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 13:53:36 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 13:53:37 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 13:55:54 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 13:55:55 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 13:55:56 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 13:55:57 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 14:06:49 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 14:06:49 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 14:06:49 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 14:06:50 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 14:06:50 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 14:06:50 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 14:06:51 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 14:06:51 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 14:06:51 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 14:06:52 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 14:06:52 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 14:06:52 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+I 2025/10/23 14:08:56 main      |SIGTEM exit
+I 2025/10/23 14:08:57 main      |exitpoint.
+I 2025/10/23 14:08:57 lb_data   |end
+I 2025/10/23 14:08:57 pes001    |PES001:end
+I 2025/10/23 14:08:58 main      |SIGTEM exit
+I 2025/10/23 14:08:59 main      |SIGTEM exit
+I 2025/10/23 14:08:59 main      |SIGTEM exit
+I 2025/10/23 14:09:00 main      |SIGTEM exit
+I 2025/10/23 14:09:00 main      |SIGTEM exit
+I 2025/10/23 14:08:59 main      |SIGTEM exit
+I 2025/10/23 14:09:01 lb_log    |end
+
+I 2025/10/23 14:09:01 lb_config |endI 2025/10/23 14:08:59 main      |SIGTEM exit
+I 2025/10/23 14:08:59 main      |SIGTEM exit
+I 2025/10/23 14:08:59 main      |SIGTEM exit
+I 2025/10/23 14:08:59 main      |SIGTEM exit
+I 2025/10/23 14:10:12 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/10/23 14:10:12 main      |loading modules...
+I 2025/10/23 14:10:12 main      |...md_webservice_html
+I 2025/10/23 14:10:12 main      |...md_pesa_dini
+I 2025/10/23 14:10:12 md_webser~|start
+
+I 2025/10/23 14:10:12 md_pesa_d~|startI 2025/10/23 14:10:12 main      |...md_webservice
+I 2025/10/23 14:10:12 main      |loading app module :PES001
+I 2025/10/23 14:10:12 pes001    |app.init
+
+I 2025/10/23 14:10:12 md_webser~|startI 2025/10/23 14:10:15 lb_config |start
+
+I 2025/10/23 14:10:15 lb_log    |startI 2025/10/23 14:10:15 lb_data   |start
+E 2025/10/23 14:10:26 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 14:10:27 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 14:10:27 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 14:10:28 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 14:10:28 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+E 2025/10/23 14:10:29 lb_tool   |(Dumps)Impossibile sovrascrivere il file: /home/riccardo/Scrivania/projects/LOCAL/pesi-gtw/./program/db/setup.json
+I 2025/10/23 14:11:04 main      |SIGTEM exit
+I 2025/10/23 14:11:04 main      |exitpoint.
+I 2025/10/23 14:11:04 lb_data   |end
+I 2025/10/23 14:11:05 pes001    |PES001:end
+
+I 2025/10/23 14:11:05 lb_config |endI 2025/10/23 14:11:05 lb_log    |end
+I 2025/10/23 14:11:05 main      |SIGTEM exit
+I 2025/10/23 14:15:00 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/10/23 14:15:00 main      |loading modules...
+I 2025/10/23 14:15:00 main      |...md_webservice_html
+I 2025/10/23 14:15:00 main      |...md_pesa_dini
+I 2025/10/23 14:15:00 md_webser~|start
+I 2025/10/23 14:15:00 main      |...md_webservice
+
+I 2025/10/23 14:15:00 md_pesa_d~|startI 2025/10/23 14:15:00 main      |loading app module :PES001
+
+I 2025/10/23 14:15:00 md_webser~|startI 2025/10/23 14:15:00 pes001    |app.init
+
+I 2025/10/23 14:15:03 lb_config |startI 2025/10/23 14:15:03 lb_log    |start
+I 2025/10/23 14:15:03 lb_data   |start
+I 2025/10/23 14:17:09 main      |SIGTEM exit
+
+I 2025/10/23 14:17:09 main      |exitpoint.I 2025/10/23 14:17:09 pes001    |PES001:end
+I 2025/10/23 14:17:09 lb_data   |end
+I 2025/10/23 14:17:10 main      |SIGTEM exit
+I 2025/10/23 14:17:13 lb_log    |end
+I 2025/10/23 14:17:13 lb_config |end
+I 2025/10/23 14:18:10 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/10/23 14:18:10 main      |loading modules...
+I 2025/10/23 14:18:10 main      |...md_webservice_html
+I 2025/10/23 14:18:10 main      |...md_pesa_dini
+I 2025/10/23 14:18:10 md_webser~|start
+I 2025/10/23 14:18:10 main      |...md_webservice
+I 2025/10/23 14:18:10 main      |loading app module :PES001
+
+
+I 2025/10/23 14:18:10 md_pesa_d~|startI 2025/10/23 14:18:10 md_webser~|startI 2025/10/23 14:18:10 pes001    |app.init
+
+I 2025/10/23 14:18:10 lb_config |startI 2025/10/23 14:18:10 lb_log    |start
+I 2025/10/23 14:18:10 lb_data   |start
+I 2025/10/23 14:34:42 main      |SIGTEM exit
+I 2025/10/23 14:34:42 main      |exitpoint.
+I 2025/10/23 14:34:42 pes001    |PES001:end
+I 2025/10/23 14:34:42 lb_data   |end
+I 2025/10/23 14:34:43 main      |SIGTEM exit
+I 2025/10/23 14:34:43 main      |SIGTEM exit
+I 2025/10/23 14:34:43 main      |SIGTEM exit
+
+I 2025/10/23 14:34:43 lb_log    |end
+I 2025/10/23 14:34:43 lb_config |endI 2025/10/23 14:34:43 main      |SIGTEM exit
+I 2025/10/23 14:35:12 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/10/23 14:35:12 main      |loading modules...
+I 2025/10/23 14:35:12 main      |...md_webservice_html
+I 2025/10/23 14:35:12 main      |...md_pesa_dini
+I 2025/10/23 14:35:12 md_webser~|start
+
+I 2025/10/23 14:35:13 main      |...md_webserviceI 2025/10/23 14:35:13 md_pesa_d~|start
+I 2025/10/23 14:35:13 main      |loading app module :PES001
+I 2025/10/23 14:35:13 md_webser~|start
+I 2025/10/23 14:35:13 pes001    |app.init
+
+I 2025/10/23 14:35:16 lb_config |startI 2025/10/23 14:35:16 lb_log    |start
+I 2025/10/23 14:35:16 lb_data   |start
+I 2025/10/23 15:06:49 main      |SIGTEM exit
+I 2025/10/23 15:06:50 main      |exitpoint.
+
+I 2025/10/23 15:06:50 pes001    |PES001:endI 2025/10/23 15:06:50 lb_data   |end
+I 2025/10/23 15:06:51 main      |SIGTEM exit
+I 2025/10/23 15:06:51 main      |SIGTEM exit
+I 2025/10/23 15:06:51 main      |SIGTEM exit
+
+I 2025/10/23 15:06:52 lb_log    |endI 2025/10/23 15:06:52 main      |SIGTEM exit
+I 2025/10/23 15:06:52 lb_config |end
+I 2025/10/23 15:06:55 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/10/23 15:06:55 main      |loading modules...
+I 2025/10/23 15:06:55 main      |...md_webservice_html
+I 2025/10/23 15:06:55 main      |...md_pesa_dini
+I 2025/10/23 15:06:55 md_webser~|start
+I 2025/10/23 15:06:55 main      |...md_webservice
+I 2025/10/23 15:06:55 main      |loading app module :PES001
+
+
+I 2025/10/23 15:06:55 pes001    |app.initI 2025/10/23 15:06:55 md_webser~|startI 2025/10/23 15:06:55 md_pesa_d~|start
+I 2025/10/23 15:06:55 lb_config |start
+
+I 2025/10/23 15:06:55 lb_log    |startI 2025/10/23 15:06:55 lb_data   |start
+I 2025/10/23 15:07:19 main      |SIGTEM exit
+
+I 2025/10/23 15:07:19 main      |exitpoint.I 2025/10/23 15:07:19 pes001    |PES001:end
+I 2025/10/23 15:07:19 lb_data   |end
+I 2025/10/23 15:07:20 lb_config |end
+I 2025/10/23 15:07:21 lb_log    |end
+I 2025/10/23 15:07:22 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/10/23 15:07:22 main      |loading modules...
+I 2025/10/23 15:07:22 main      |...md_webservice_html
+I 2025/10/23 15:07:22 main      |...md_pesa_dini
+I 2025/10/23 15:07:22 md_webser~|start
+I 2025/10/23 15:07:22 main      |...md_webservice
+I 2025/10/23 15:07:22 main      |loading app module :PES001
+
+I 2025/10/23 15:07:22 pes001    |app.init
+I 2025/10/23 15:07:22 md_webser~|startI 2025/10/23 15:07:22 md_pesa_d~|start
+I 2025/10/23 15:07:22 lb_log    |start
+I 2025/10/23 15:07:22 lb_config |start
+I 2025/10/23 15:07:22 lb_data   |start
+I 2025/10/23 15:23:24 main      |SIGTEM exit
+
+I 2025/10/23 15:23:24 main      |exitpoint.I 2025/10/23 15:23:24 lb_data   |end
+I 2025/10/23 15:23:24 pes001    |PES001:end
+I 2025/10/23 15:23:25 lb_log    |end
+I 2025/10/23 15:23:25 lb_config |end
+I 2025/10/23 15:23:25 main      |SIGTEM exit
+I 2025/10/23 15:23:26 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/10/23 15:23:26 main      |loading modules...
+I 2025/10/23 15:23:26 main      |...md_webservice_html
+I 2025/10/23 15:23:26 main      |...md_pesa_dini
+I 2025/10/23 15:23:26 md_webser~|start
+I 2025/10/23 15:23:26 main      |...md_webservice
+
+I 2025/10/23 15:23:26 md_pesa_d~|startI 2025/10/23 15:23:26 main      |loading app module :PES001
+
+I 2025/10/23 15:23:26 md_webser~|startI 2025/10/23 15:23:26 pes001    |app.init
+
+I 2025/10/23 15:23:29 lb_config |start
+I 2025/10/23 15:23:29 lb_log    |startI 2025/10/23 15:23:29 lb_data   |start
+I 2025/10/23 15:27:51 md_webser~|CLIENTE LIKE 'ss%'
+I 2025/10/23 15:27:52 md_webser~|CLIENTE LIKE 'ssss%'
+I 2025/10/23 15:28:02 md_webser~|TARGA LIKE 'aaa%'
+I 2025/10/23 15:41:26 md_webser~|CLIENTE LIKE 'a%'
+I 2025/10/23 15:59:42 md_webser~|MATERIALE LIKE 'ba%'
+I 2025/10/23 15:59:43 md_webser~|MATERIALE LIKE 'ban%'
+I 2025/10/23 15:59:47 md_webser~|MATERIALE LIKE 'banq%'
+I 2025/10/23 15:59:49 md_webser~|MATERIALE LIKE 'b%'
+I 2025/10/23 15:59:53 md_webser~|FORNITORE LIKE 'www%'
+I 2025/10/23 16:13:52 main      |SIGTEM exit
+I 2025/10/23 16:13:52 main      |exitpoint.
+I 2025/10/23 16:13:52 pes001    |PES001:end
+I 2025/10/23 16:13:52 lb_data   |end
+I 2025/10/23 16:13:53 lb_log    |end
+I 2025/10/23 16:13:53 lb_config |end
+I 2025/10/23 16:13:56 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/10/23 16:13:56 main      |loading modules...
+I 2025/10/23 16:13:56 main      |...md_webservice_html
+I 2025/10/23 16:13:56 main      |...md_pesa_dini
+I 2025/10/23 16:13:56 md_webser~|start
+I 2025/10/23 16:13:56 main      |...md_webservice
+I 2025/10/23 16:13:56 main      |loading app module :PES001
+
+
+I 2025/10/23 16:13:56 md_pesa_d~|startI 2025/10/23 16:13:56 pes001    |app.initI 2025/10/23 16:13:56 md_webser~|start
+
+
+I 2025/10/23 16:13:56 lb_log    |startI 2025/10/23 16:13:56 lb_data   |startI 2025/10/23 16:13:56 lb_config |start
+I 2025/10/23 16:15:15 main      |SIGTEM exit
+I 2025/10/23 16:15:15 main      |exitpoint.
+I 2025/10/23 16:15:15 pes001    |PES001:end
+I 2025/10/23 16:15:15 lb_data   |end
+I 2025/10/23 16:15:16 main      |SIGTEM exit
+I 2025/10/23 16:15:16 main      |SIGTEM exit
+
+I 2025/10/23 16:15:16 lb_log    |end
+I 2025/10/23 16:15:16 main      |SIGTEM exitI 2025/10/23 16:15:16 lb_config |end
+I 2025/10/23 16:15:19 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/10/23 16:15:19 main      |loading modules...
+I 2025/10/23 16:15:19 main      |...md_webservice_html
+I 2025/10/23 16:15:19 main      |...md_pesa_dini
+I 2025/10/23 16:15:19 md_webser~|start
+I 2025/10/23 16:15:19 main      |...md_webservice
+I 2025/10/23 16:15:19 main      |loading app module :PES001
+
+
+I 2025/10/23 16:15:19 pes001    |app.initI 2025/10/23 16:15:19 md_webser~|start
+I 2025/10/23 16:15:19 md_pesa_d~|start
+I 2025/10/23 16:15:19 lb_config |startI 2025/10/23 16:15:19 lb_log    |start
+I 2025/10/23 16:15:19 lb_data   |start
+I 2025/10/23 16:36:05 main      |SIGTEM exit
+I 2025/10/23 16:36:05 main      |exitpoint.
+I 2025/10/23 16:36:05 lb_data   |end
+I 2025/10/23 16:36:05 pes001    |PES001:end
+I 2025/10/23 16:36:07 main      |SIGTEM exit
+I 2025/10/23 16:36:08 lb_config |end
+I 2025/10/23 16:36:08 lb_log    |end
+I 2025/10/23 16:36:10 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/10/23 16:36:10 main      |loading modules...
+I 2025/10/23 16:36:10 main      |...md_webservice_html
+I 2025/10/23 16:36:10 main      |...md_pesa_dini
+I 2025/10/23 16:37:22 main      |====================== BARON DAT GTW rel.0.0004 =======================
+I 2025/10/23 16:37:22 main      |loading modules...
+I 2025/10/23 16:37:22 main      |...md_webservice_html
+I 2025/10/23 16:37:22 main      |...md_pesa_dini
+I 2025/10/23 16:37:22 md_webser~|start
+I 2025/10/23 16:37:22 main      |...md_webservice
+I 2025/10/23 16:37:22 main      |loading app module :PES001
+
+I 2025/10/23 16:37:22 md_pesa_d~|start
+I 2025/10/23 16:37:22 pes001    |app.initI 2025/10/23 16:37:22 md_webser~|start
+
+I 2025/10/23 16:37:23 lb_config |startI 2025/10/23 16:37:23 lb_log    |start
+I 2025/10/23 16:37:23 lb_data   |start
+I 2025/10/23 16:38:02 main      |SIGTEM exit
+
+I 2025/10/23 16:38:03 pes001    |PES001:endI 2025/10/23 16:38:03 main      |exitpoint.
+I 2025/10/23 16:38:03 lb_data   |end
+I 2025/10/23 16:38:03 lb_config |end
+I 2025/10/23 16:38:03 lb_log    |end

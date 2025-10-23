@@ -1,6 +1,6 @@
 ######## MODELS ############################
 
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 import lb_config
 import json
 import string
@@ -43,16 +43,26 @@ class setup_nameserial(BaseModel):
 	token: str
 	name_serial: str
 
+class use_rename(BaseModel):
+    use: Union[bool, None]
+    rename: Union[str, None]
+
+    @validator('rename', pre=True, always=True)
+    def empty_string_to_none(cls, v):
+        if isinstance(v, str) and v.strip() == "":
+            return None
+        return v
+    
 class list_settings(BaseModel):
 	prog_one: Union[bool, None]
 	prog_two: Union[bool, None]
 	pid_one: Union[bool, None]
 	pid_two: Union[bool, None]
 	bil: Union[bool, None]
-	customer: Union[bool, None]
-	supplier: Union[bool, None]
-	material: Union[bool, None]
-	plate: Union[bool, None]
+	customer: Union[use_rename, None]
+	supplier: Union[use_rename, None]
+	material: Union[use_rename, None]
+	plate: Union[use_rename, None]
 	net_weight: Union[bool, None]
 	date_time_one: Union[bool, None]
 	weight_one: Union[bool, None]

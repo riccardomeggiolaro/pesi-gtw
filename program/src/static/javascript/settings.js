@@ -22,9 +22,13 @@ let pidOneCheckbox = document.getElementById("pid_one")
 let pidTwoCheckbox = document.getElementById("pid_two")
 let bilCheckbox = document.getElementById("bil")
 let customerCheckbox = document.getElementById("customer")
+let customerRename = document.getElementById("customer_rename")
 let supplierCheckbox = document.getElementById("supplier")
+let supplierRename = document.getElementById("supplier_rename")
 let materialCheckbox = document.getElementById("material")
+let materialRename = document.getElementById("material_rename")
 let plateCheckbox = document.getElementById("plate")
+let plateRename = document.getElementById("plate_rename")
 let netWeightCheckbox = document.getElementById("netWeight")
 let dateTimeOneCheckbox = document.getElementById("dateTimeOne")
 let weightOneCheckbox = document.getElementById("weightOne")
@@ -100,13 +104,17 @@ window.onload = function(){
 					case "bil":
 						bilCheckbox.checked = response.message.list_settings.bil;
 					case "customer":
-						customerCheckbox.checked = response.message.list_settings.customer;
+						customerCheckbox.checked = response.message.list_settings.customer.use;
+						customerRename.value = response.message.list_settings.customer.rename;
 					case "supplier":
-						supplierCheckbox.checked = response.message.list_settings.supplier;
+						supplierCheckbox.checked = response.message.list_settings.supplier.use;
+						supplierRename.value = response.message.list_settings.supplier.rename;
 					case "material":
-						materialCheckbox.checked = response.message.list_settings.material;
+						materialCheckbox.checked = response.message.list_settings.material.use;
+						materialRename.value = response.message.list_settings.material.rename;
 					case "plate":
-						plateCheckbox.checked = response.message.list_settings.plate;
+						plateCheckbox.checked = response.message.list_settings.plate.use;
+						plateRename.value = response.message.list_settings.plate.rename;
 					case "net_weight":
 						netWeightCheckbox.checked = response.message.list_settings.net_weight;
 					case "date_time_one":
@@ -360,7 +368,7 @@ function LicensePlateRequired(){
 	})
 }
 
-function IsRequired(key) {
+function IsRequired(key, rename) {
 	let checked_value = null
 
 	switch (key) {
@@ -380,16 +388,28 @@ function IsRequired(key) {
 			checked_value = bilCheckbox.checked
 			break
 		case "customer":
-			checked_value = customerCheckbox.checked
+			checked_value = {
+				use: customerCheckbox.checked,
+				rename: rename
+			}
 			break
 		case "supplier":
-			checked_value = supplierCheckbox.checked
+			checked_value = {
+				use: supplierCheckbox.checked,
+				rename: rename
+			}
 			break
 		case "material":
-			checked_value = materialCheckbox.checked
+			checked_value = {
+				use: materialCheckbox.checked,
+				rename: rename
+			}
 			break
 		case "plate":
-			checked_value = plateCheckbox.checked
+			checked_value = {
+				use: plateCheckbox.checked,
+				rename: rename
+			}
 			break
 		case "net_weight":
 			checked_value = netWeightCheckbox.checked

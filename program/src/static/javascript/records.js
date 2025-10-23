@@ -19,12 +19,16 @@ let input_dates = document.getElementById("date")
 let prog_delete = document.getElementById("prog_delete")
 let cliente_delete = document.getElementById("cliente_delete")
 let targa_delete = document.getElementById("targa_delete")
+let fornitore_delete = document.getElementById("fornitore_delete")
+let materiale_delete = document.getElementById("materiale_delete")
 let range = document.getElementById("range")
 let bil_delete = document.getElementById("bil_delete")
 let tipo_delete = document.getElementById("tipo_delete")
 let prog = document.getElementById("prog")
 let cliente = document.getElementById("cliente")
 let targa = document.getElementById("targa")
+let fornitore = document.getElementById("fornitore")
+let materiale = document.getElementById("materiale")
 let data = document.getElementById("data")
 let bil = document.getElementById("bil")
 let tipo = document.getElementById("tipo")
@@ -39,6 +43,8 @@ let totalNet = document.getElementById("totalNet");
 let prog_value = prog.value
 let cliente_value = cliente.value
 let targa_value = targa.value
+let fornitore_value = fornitore.value
+let materiale_value = materiale.value
 let bil_value = bil.value
 let data_value = data.value
 let tipo_value = tipo.checked
@@ -112,7 +118,7 @@ window.onload = (event) => {
 		};
 		Object.keys(response.message.list_settings).forEach(element => {
 			const index = columnMapping[element];
-			if (response.message.list_settings[element] === false) {
+			if (response.message.list_settings[element] === false || response.message.list_settings[element].use === false) {
 				let exe = true
 				if (['prog_one', 'prog_two', 'pid_one', 'pid_two'].includes(element)) {
 					exe = true ? element === 'prog_one' && response.message.list_settings.prog_two === false : false
@@ -165,6 +171,17 @@ window.onload = (event) => {
 				} else if (element === 'bil') {
 					bil.style.display = "none"
 				}
+			} else if (response.message.list_settings[element].rename) {
+				document.querySelector(`th:nth-child(${index})`).textContent = response.message.list_settings[element].rename;
+				if (element === 'customer') {
+					cliente.placeholder = response.message.list_settings[element].rename;
+				} else if (element === 'plate') {
+					targa.placeholder = response.message.list_settings[element].rename;
+				} else if (element === 'supplier') {
+					fornitore.placeholder = response.message.list_settings[element].rename;
+				} else if (element === 'material') {
+					materiale.placeholder = response.message.list_settings[element].rename;
+				}
 			}
 		})
 	})
@@ -174,11 +191,13 @@ window.onload = (event) => {
 }
 
 function IfChangeCerca() {
-	if (prog.value !== prog_value || cliente.value !== cliente_value || targa.value !== targa_value || bil.value !== bil_value || data.value !== data_value || tipo.checked !== tipo_value) { // Controlla se è cambiato
+	if (prog.value !== prog_value || cliente.value !== cliente_value || targa.value !== targa_value || fornitore.value !== fornitore_value || materiale.value !== materiale_value || bil.value !== bil_value || data.value !== data_value || tipo.checked !== tipo_value) { // Controlla se è cambiato
 		Cerca()
 		if (prog.value !== prog_value) prog_value = prog.value; // Aggiorna il valore precedente
 		if (cliente.value !== cliente_value) cliente_value = cliente.value;
 		if (targa.value !== targa_value) targa_value = targa.value;
+		if (fornitore.value !== fornitore_value) fornitore_value = fornitore.value;
+		if (materiale.value !== materiale_value) materiale_value = materiale.value;
 		if (bil.value !== bil_value) bil_value = bil.value;
 		if (data.value !== data_value) data_value = data.value;
 		if (tipo.checked !== tipo_value) tipo_value = tipo.checked;
@@ -309,13 +328,17 @@ function AddFilters(){
 	let f_prog = document.getElementById("prog")
 	let f_cliente = document.getElementById("cliente")
 	let f_targa = document.getElementById("targa")
+	let f_fornitore = document.getElementById("fornitore")
+	let f_materiale = document.getElementById("materiale")
 	let f_data = document.getElementById("data")
 	let f_bil = document.getElementById("bil")
 	let _prog = TryParseInt(f_prog.value, null)
 	let f_tipo = document.getElementById("tipo")
 	let filtri = [
 					{"CLIENTE": `${f_cliente.value}`},
-					{"TARGA": `${f_targa.value}`}
+					{"TARGA": `${f_targa.value}`},
+					{"FORNITORE": `${f_fornitore.value}`},
+					{"MATERIALE": `${f_materiale.value}`}
 				]
 	for (let i in filtri){
 		let obj = filtri[i]
@@ -344,6 +367,16 @@ function AddFilters(){
 		targa_delete.textContent = `- con targa che inizia con "${f_targa.value}"`
 	}else{
 		targa_delete.textContent = ""
+	}
+	if (f_fornitore.value != "" && f_fornitore.value != null && f_fornitore.value != undefined){
+		fornitore_delete.textContent = `- con fornitore che inizia con "${f_fornitore.value}"`
+	} else {
+		fornitore_delete.textContent = ""
+	}
+	if (f_materiale.value != "" && f_materiale.value != null && f_materiale.value != undefined){
+		materiale_delete.textContent = `- con materiale che inizia con "${f_materiale.value}"`
+	} else {
+		materiale_delete.textContent = ""
 	}
 	if (f_data.value != "" && f_data.value != null && f_data.value != undefined){
 		let arrdt = f_data.value.split(" ")
