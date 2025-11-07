@@ -393,20 +393,30 @@ function AddRows(data){
 		for(var i = 0; i < length; i++) {
 		  var d = data[i];
 		  let progs = `${prog_one_display ? d[7] : ""} ${prog_one_display && d[7] && prog_two_display && d[8] ? '<br> \n' : ""} ${prog_two_display ? d[8] : ""}`;
+		  let plate = d[10];
+     	  let customer = d[11];
+		  let supplier = d[12];
+		  let material = d[13];
+		  let net = d[20];
+		  let date1 = d[3] + "<br> \n" + d[4];
+		  let weight1 = d[16];
+		  let date2 = d[5] + "<br> \n" + d[6];
+		  let weight2 = d[18];
 		  let pids = `${pid_one_display ? d[17] : ""} ${pid_one_display && d[17] && pid_two_display && d[18] ? '<br> \n' : ""} ${pid_two_display ? d[19] : ""}`;
+		  let bil = d[2];
 		  const pesata = [
 			progs,
-			d[11],
-			d[10],
-			d[12],
-			d[13],
-			d[20],
-			d[3] + "<br> \n" + d[4],
-			d[16],
-			d[5] + "<br> \n" + d[6],
-			d[18],
+			plate,
+			customer,
+			supplier,
+			material,
+			net,
+			date1,
+			weight1,
+			date2,
+			weight2,
 			pids,
-			d[2]
+			bil
 		  ]
 		  $('#example').dataTable().fnAddData(pesata);
 		  p.push(pesata)
