@@ -22,7 +22,7 @@
             "bil": true,
             "customer": {
                 "use": true,
-                "rename": null
+                "rename": "Operatore"
             },
             "supplier": {
                 "use": true,
