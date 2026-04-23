@@ -67,15 +67,27 @@ $PYARMOR_CMD gen \
     "$SRC_DIR"
 
 echo ""
+echo ">>> Sposta runtime PyArmor dentro src/ (necessario per l'import)..."
+# pyarmor gen mette il runtime in dist/program/ ma main.py lo cerca
+# nella stessa cartella; lo spostiamo dentro src/
+RUNTIME_DIR=$(find "$OUTPUT_DIR/program" -maxdepth 1 -type d -name "pyarmor_runtime_*" | head -1)
+if [ -n "$RUNTIME_DIR" ]; then
+    mv "$RUNTIME_DIR" "$OUTPUT_DIR/program/src/"
+fi
+
+echo ""
 echo ">>> Copia file non-Python (HTML, JSON, config, log)..."
 
-# Copia tutti i file non-Python preservando la struttura
-find "$SRC_DIR" -type f ! -name "*.py" | while read -r file; do
+# Copia tutti i file non-Python (escluse __pycache__) preservando la struttura
+find "$SRC_DIR" -type f ! -name "*.py" ! -path "*/__pycache__/*" | while read -r file; do
     rel="${file#$SCRIPT_DIR/program/}"
     dest_dir="$OUTPUT_DIR/program/$(dirname "$rel")"
     mkdir -p "$dest_dir"
     cp "$file" "$dest_dir/"
 done
+
+# Rimuove eventuali __pycache__ copiati da pyarmor
+find "$OUTPUT_DIR" -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
 
 # Copia la cartella db (dati runtime, non cifrata)
 if [ -d "$SCRIPT_DIR/program/db" ]; then
@@ -91,15 +103,17 @@ cp "$SCRIPT_DIR/requirements.txt" "$OUTPUT_DIR/requirements.txt"
 cat > "$OUTPUT_DIR/start.sh" << 'EOF'
 #!/bin/bash
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-VENV_DIR="$SCRIPT_DIR/.env"
 
-if [ -f "$VENV_DIR/bin/activate" ]; then
-    source "$VENV_DIR/bin/activate"
-fi
+VENV_DIR=""
+for candidate in "$SCRIPT_DIR/.venv" "$SCRIPT_DIR/.env"; do
+    [ -f "$candidate/bin/activate" ] && VENV_DIR="$candidate" && break
+done
+
+[ -n "$VENV_DIR" ] && source "$VENV_DIR/bin/activate"
 
 python3 "$SCRIPT_DIR/program/src/main.py"
 
-[ -f "$VENV_DIR/bin/activate" ] && deactivate
+[ -n "$VENV_DIR" ] && deactivate
 EOF
 chmod +x "$OUTPUT_DIR/start.sh"
 
