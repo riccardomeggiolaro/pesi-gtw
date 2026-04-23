@@ -5,30 +5,36 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SRC_DIR="$SCRIPT_DIR/program/src"
 OUTPUT_DIR="$SCRIPT_DIR/dist"
-VENV_DIR="$SCRIPT_DIR/.env"
-
 echo "=== PyArmor Encryption Script ==="
 echo "Source:  $SRC_DIR"
 echo "Output:  $OUTPUT_DIR"
 
-# Attiva il virtualenv se presente, altrimenti usa python di sistema
-if [ -f "$VENV_DIR/bin/activate" ]; then
+# Cerca il virtualenv (.venv ha priorità su .env)
+VENV_DIR=""
+for candidate in "$SCRIPT_DIR/.venv" "$SCRIPT_DIR/.env"; do
+    if [ -f "$candidate/bin/activate" ]; then
+        VENV_DIR="$candidate"
+        break
+    fi
+done
+
+if [ -n "$VENV_DIR" ]; then
+    echo "Virtualenv: $VENV_DIR"
     source "$VENV_DIR/bin/activate"
-    PYTHON="python3"
     PIP="pip"
 else
-    PYTHON="python3"
+    echo "Nessun virtualenv trovato, uso Python di sistema."
     PIP="pip3"
 fi
 
-# Verifica che pyarmor sia installato
-if ! $PYTHON -m pyarmor --version &>/dev/null 2>&1; then
+# Verifica che pyarmor sia installato (come comando CLI)
+if ! command -v pyarmor &>/dev/null; then
     echo "PyArmor non trovato. Installazione..."
     $PIP install pyarmor
 fi
 
-PYARMOR_VERSION=$($PYTHON -m pyarmor --version 2>&1 | grep -oP '\d+\.\d+' | head -1)
-echo "PyArmor versione: $PYARMOR_VERSION"
+PYARMOR_CMD="pyarmor"
+echo "PyArmor versione: $($PYARMOR_CMD --version 2>&1 | head -1)"
 
 # Pulisce output precedente
 if [ -d "$OUTPUT_DIR" ]; then
@@ -41,7 +47,7 @@ echo ""
 echo ">>> Cifratura sorgenti Python..."
 
 # Cifra tutto src/ ricorsivamente mantenendo la struttura
-$PYTHON -m pyarmor gen \
+$PYARMOR_CMD gen \
     --recursive \
     --output "$OUTPUT_DIR/program/src" \
     "$SRC_DIR"
