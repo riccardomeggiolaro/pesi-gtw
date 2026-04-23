@@ -5,11 +5,22 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SRC_DIR="$SCRIPT_DIR/program/src"
 OUTPUT_DIR="$SCRIPT_DIR/dist"
-LICENSE_FILE="${1:-}"   # percorso opzionale: ./encrypt.sh pyarmor-regfile-xxxx.zip
+LICENSE_FILE=""
+MAC_ADDRESS=""
+
+# Parsing argomenti: --license <file>  --mac <xx:xx:xx:xx:xx:xx>
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --license) LICENSE_FILE="$2"; shift 2 ;;
+        --mac)     MAC_ADDRESS="$2";  shift 2 ;;
+        *) echo "Argomento sconosciuto: $1"; exit 1 ;;
+    esac
+done
 
 echo "=== PyArmor Encryption Script ==="
 echo "Source:  $SRC_DIR"
 echo "Output:  $OUTPUT_DIR"
+[ -n "$MAC_ADDRESS" ] && echo "MAC bind: $MAC_ADDRESS"
 
 # Cerca il virtualenv (.venv ha priorità su .env)
 VENV_DIR=""
@@ -48,6 +59,14 @@ if [ -n "$LICENSE_FILE" ]; then
     $PYARMOR_CMD reg "$LICENSE_FILE"
 fi
 
+# Valida formato MAC se fornito
+if [ -n "$MAC_ADDRESS" ]; then
+    if ! echo "$MAC_ADDRESS" | grep -qP '^([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}$'; then
+        echo "ERRORE: formato MAC non valido (atteso xx:xx:xx:xx:xx:xx): $MAC_ADDRESS"
+        exit 1
+    fi
+fi
+
 # Pulisce output precedente
 if [ -d "$OUTPUT_DIR" ]; then
     echo "Rimozione output precedente..."
@@ -61,9 +80,13 @@ echo ">>> Cifratura sorgenti Python..."
 # Cifra tutto src/ ricorsivamente.
 # PyArmor aggiunge automaticamente basename(SRC_DIR) all'output,
 # quindi --output dist/program produce dist/program/src/
+BIND_OPT=""
+[ -n "$MAC_ADDRESS" ] && BIND_OPT="--bind-device $MAC_ADDRESS"
+
 $PYARMOR_CMD gen \
     --recursive \
     --output "$OUTPUT_DIR/program" \
+    $BIND_OPT \
     "$SRC_DIR"
 
 echo ""
