@@ -5,6 +5,8 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SRC_DIR="$SCRIPT_DIR/program/src"
 OUTPUT_DIR="$SCRIPT_DIR/dist"
+LICENSE_FILE="${1:-}"   # percorso opzionale: ./encrypt.sh pyarmor-regfile-xxxx.zip
+
 echo "=== PyArmor Encryption Script ==="
 echo "Source:  $SRC_DIR"
 echo "Output:  $OUTPUT_DIR"
@@ -36,6 +38,16 @@ fi
 PYARMOR_CMD="pyarmor"
 echo "PyArmor versione: $($PYARMOR_CMD --version 2>&1 | head -1)"
 
+# Registra la licenza se passata come argomento
+if [ -n "$LICENSE_FILE" ]; then
+    if [ ! -f "$LICENSE_FILE" ]; then
+        echo "ERRORE: file licenza non trovato: $LICENSE_FILE"
+        exit 1
+    fi
+    echo ">>> Registrazione licenza: $LICENSE_FILE"
+    $PYARMOR_CMD reg "$LICENSE_FILE"
+fi
+
 # Pulisce output precedente
 if [ -d "$OUTPUT_DIR" ]; then
     echo "Rimozione output precedente..."
@@ -46,10 +58,12 @@ mkdir -p "$OUTPUT_DIR"
 echo ""
 echo ">>> Cifratura sorgenti Python..."
 
-# Cifra tutto src/ ricorsivamente mantenendo la struttura
+# Cifra tutto src/ ricorsivamente.
+# PyArmor aggiunge automaticamente basename(SRC_DIR) all'output,
+# quindi --output dist/program produce dist/program/src/
 $PYARMOR_CMD gen \
     --recursive \
-    --output "$OUTPUT_DIR/program/src" \
+    --output "$OUTPUT_DIR/program" \
     "$SRC_DIR"
 
 echo ""
@@ -57,8 +71,8 @@ echo ">>> Copia file non-Python (HTML, JSON, config, log)..."
 
 # Copia tutti i file non-Python preservando la struttura
 find "$SRC_DIR" -type f ! -name "*.py" | while read -r file; do
-    rel="${file#$SRC_DIR/}"
-    dest_dir="$OUTPUT_DIR/program/src/$(dirname "$rel")"
+    rel="${file#$SCRIPT_DIR/program/}"
+    dest_dir="$OUTPUT_DIR/program/$(dirname "$rel")"
     mkdir -p "$dest_dir"
     cp "$file" "$dest_dir/"
 done
