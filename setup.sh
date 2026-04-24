@@ -4,7 +4,7 @@ set -e  # Termina lo script in caso di errore
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 INSTALL_DIR="/var/pesi-gtw"
-VENV_DIR="$INSTALL_DIR/.env"
+VENV_DIR="$INSTALL_DIR/.venv"
 SERVICE_FILE="/etc/systemd/system/pesi-gtw.service"
 
 echo "Directory dello script: $SCRIPT_DIR"

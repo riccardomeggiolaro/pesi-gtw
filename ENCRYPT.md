@@ -7,7 +7,7 @@ Lo script `encrypt.sh` offusca tutti i sorgenti Python del progetto usando [PyAr
 ## Prerequisiti
 
 - Python 3.x
-- Virtualenv (`.venv` o `.env` nella root del progetto)
+- Virtualenv (`.venv` nella root del progetto)
 - Licenza PyArmor (Group License) registrata sul dispositivo
 
 ### Registrazione licenza (prima volta)
