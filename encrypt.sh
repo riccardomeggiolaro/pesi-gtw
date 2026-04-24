@@ -4,7 +4,7 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SRC_DIR="$SCRIPT_DIR/program/src"
-OUTPUT_DIR="$SCRIPT_DIR/dist"
+OUTPUT_DIR="$SCRIPT_DIR/dist/pesi-gtw"
 LICENSE_FILE=""
 MAC_ADDRESS=""
 
@@ -118,9 +118,12 @@ if [ -d "$SCRIPT_DIR/program/db" ]; then
     cp -r "$SCRIPT_DIR/program/db" "$OUTPUT_DIR/program/db"
 fi
 
-# Copia requirements.txt
+# Copia requirements.txt, setup.sh e start.sh
 echo ">>> Copia file di supporto..."
 cp "$SCRIPT_DIR/requirements.txt" "$OUTPUT_DIR/requirements.txt"
+cp "$SCRIPT_DIR/setup.sh"         "$OUTPUT_DIR/setup.sh"
+cp "$SCRIPT_DIR/start.sh"         "$OUTPUT_DIR/start.sh"
+chmod +x "$OUTPUT_DIR/setup.sh" "$OUTPUT_DIR/start.sh"
 
 echo ""
 echo "=== Completato ==="

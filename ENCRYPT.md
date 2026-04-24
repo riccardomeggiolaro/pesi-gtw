@@ -58,20 +58,23 @@ ip link show | grep "link/ether"
 
 ```
 dist/
-├── requirements.txt
-└── program/
-    ├── db/                          ← dati runtime copiati intatti
-    └── src/
-        ├── main.py                  ← cifrato
-        ├── pyarmor_runtime_xxxxxx/  ← runtime PyArmor
-        │   ├── __init__.py
-        │   └── pyarmor_runtime.so
-        ├── config.json
-        ├── gateway.log
-        ├── lib/                     ← cifrato
-        ├── modules/                 ← cifrato
-        ├── app/                     ← cifrato
-        └── static/                  ← HTML copiati intatti
+└── pesi-gtw/                        ← cartella pronta al deploy
+    ├── requirements.txt
+    ├── setup.sh
+    ├── start.sh
+    └── program/
+        ├── db/                      ← dati runtime copiati intatti
+        └── src/
+            ├── main.py              ← cifrato
+            ├── pyarmor_runtime_xxxxxx/  ← runtime PyArmor
+            │   ├── __init__.py
+            │   └── pyarmor_runtime.so
+            ├── config.json
+            ├── gateway.log
+            ├── lib/                 ← cifrato
+            ├── modules/             ← cifrato
+            ├── app/                 ← cifrato
+            └── static/              ← HTML copiati intatti
 ```
 
 > I file `.py` originali non vengono modificati. La cartella `dist/` è rigenerata ad ogni esecuzione. Il deploy sul server è gestito da `setup.sh`.
