@@ -7,7 +7,7 @@ Lo script `encrypt.sh` offusca tutti i sorgenti Python del progetto usando [PyAr
 ## Prerequisiti
 
 - Python 3.x
-- Virtualenv (`.venv` o `.env` nella root del progetto)
+- Virtualenv (`.venv` nella root del progetto)
 - Licenza PyArmor (Group License) registrata sul dispositivo
 
 ### Registrazione licenza (prima volta)
@@ -62,6 +62,7 @@ dist/
     ├── requirements.txt
     ├── setup.sh
     ├── start.sh
+    ├── license.key                  ← chiave licenza del cliente
     └── program/
         ├── db/                      ← dati runtime copiati intatti
         └── src/
@@ -71,13 +72,33 @@ dist/
             │   └── pyarmor_runtime.so
             ├── config.json
             ├── gateway.log
-            ├── lib/                 ← cifrato
+            ├── lib/                 ← cifrato (include lb_license.py)
             ├── modules/             ← cifrato
             ├── app/                 ← cifrato
             └── static/              ← HTML copiati intatti
 ```
 
 > I file `.py` originali non vengono modificati. La cartella `dist/` è rigenerata ad ogni esecuzione. Il deploy sul server è gestito da `setup.sh`.
+
+---
+
+## Gestione licenze cliente
+
+### Generare una chiave per un cliente
+
+```bash
+# Ottieni il MAC della macchina del cliente
+ip link show | grep "link/ether"
+
+# Genera la chiave e salvala su file
+python gen_license.py aa:bb:cc:dd:ee:ff --out license.key
+```
+
+Metti `license.key` nella root del progetto prima di eseguire `./encrypt.sh`: verrà copiato automaticamente in `dist/pesi-gtw/`.
+
+### Revocare una licenza
+
+Non distribuire un nuovo pacchetto con la chiave di quel cliente. La chiave è valida solo sul MAC originale.
 
 ---
 

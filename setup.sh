@@ -3,12 +3,12 @@
 set -e  # Termina lo script in caso di errore
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-echo "Directory dello script: $SCRIPT_DIR"
-
-VENV_DIR="/etc/pesi-gtw/.env"
-echo "Percorso dell'ambiente virtuale: $VENV_DIR"
-
+INSTALL_DIR="/var/pesi-gtw"
+VENV_DIR="$INSTALL_DIR/.venv"
 SERVICE_FILE="/etc/systemd/system/pesi-gtw.service"
+
+echo "Directory dello script: $SCRIPT_DIR"
+echo "Directory di installazione: $INSTALL_DIR"
 
 # Assicura che l'ambiente abbia gli strumenti necessari
 if ! command -v python3 &> /dev/null; then
@@ -33,23 +33,23 @@ if ! dpkg -l | grep -q "ufw"; then
 fi
 
 # Configura UFW
-sudo ufw allow 80
-sudo ufw allow 8000
+ufw allow 80
+ufw allow 8000
+
+# Copia il pacchetto in /var/pesi-gtw
+echo "Copia file in $INSTALL_DIR..."
+mkdir -p "$INSTALL_DIR"
+cp -r "$SCRIPT_DIR/." "$INSTALL_DIR/"
 
 # Crea l'ambiente virtuale (solo se non esiste)
 if [ ! -f "$VENV_DIR/bin/activate" ]; then
     echo "Creazione dell'ambiente virtuale..."
     virtualenv "$VENV_DIR"
-    echo "Ambiente virtuale creato in $VENV_DIR"
 fi
 
-# Attiva l'ambiente virtuale
+# Installa i pacchetti
 source "$VENV_DIR/bin/activate"
-
-# Installa i pacchetti da requirements.txt
-pip install -r "$SCRIPT_DIR/requirements.txt"
-
-# Disattiva l'ambiente virtuale
+pip install -r "$INSTALL_DIR/requirements.txt"
 deactivate
 
 # Crea il servizio solo se non esiste
@@ -59,23 +59,23 @@ if [ -e "$SERVICE_FILE" ]; then
 fi
 
 # Crea il file systemd
-SERVICE_CONTENT="[Unit]
+cat > "$SERVICE_FILE" << EOF
+[Unit]
 Description=PesiGTW application start
 After=network-online.target
 Wants=network-online.target
 
 [Service]
-WorkingDirectory=$SCRIPT_DIR
-ExecStart=$SCRIPT_DIR/start.sh
+WorkingDirectory=$INSTALL_DIR
+ExecStart=$INSTALL_DIR/start.sh
 Restart=always
 
 [Install]
-WantedBy=multi-user.target"
-
-echo "$SERVICE_CONTENT" | tee "$SERVICE_FILE" > /dev/null
+WantedBy=multi-user.target
+EOF
 
 # Attiva il servizio
 systemctl daemon-reload
 systemctl enable pesi-gtw.service
 systemctl start pesi-gtw.service
-echo "Servizio systemd creato e avviato."
+echo "Servizio systemd creato e avviato da $INSTALL_DIR."
