@@ -118,77 +118,9 @@ if [ -d "$SCRIPT_DIR/program/db" ]; then
     cp -r "$SCRIPT_DIR/program/db" "$OUTPUT_DIR/program/db"
 fi
 
-# Copia requirements.txt e script di avvio
+# Copia requirements.txt
 echo ">>> Copia file di supporto..."
 cp "$SCRIPT_DIR/requirements.txt" "$OUTPUT_DIR/requirements.txt"
-
-# Genera start.sh puntando alla cartella dist
-cat > "$OUTPUT_DIR/start.sh" << 'EOF'
-#!/bin/bash
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-VENV_DIR=""
-for candidate in "$SCRIPT_DIR/.venv" "$SCRIPT_DIR/.env"; do
-    [ -f "$candidate/bin/activate" ] && VENV_DIR="$candidate" && break
-done
-
-[ -n "$VENV_DIR" ] && source "$VENV_DIR/bin/activate"
-
-python3 "$SCRIPT_DIR/program/src/main.py"
-
-[ -n "$VENV_DIR" ] && deactivate
-EOF
-chmod +x "$OUTPUT_DIR/start.sh"
-
-# Genera setup.sh per il deploy del pacchetto cifrato
-cat > "$OUTPUT_DIR/setup.sh" << 'SETUPEOF'
-#!/bin/bash
-set -e
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-VENV_DIR="/etc/pesi-gtw/.env"
-SERVICE_FILE="/etc/systemd/system/pesi-gtw.service"
-
-command -v python3 &>/dev/null || { apt update && apt install -y python3; }
-command -v pip3    &>/dev/null || apt install -y python3-pip
-command -v virtualenv &>/dev/null || apt install -y virtualenv
-
-sudo ufw allow 80
-sudo ufw allow 8000
-
-if [ ! -f "$VENV_DIR/bin/activate" ]; then
-    virtualenv "$VENV_DIR"
-fi
-
-source "$VENV_DIR/bin/activate"
-pip install -r "$SCRIPT_DIR/requirements.txt"
-deactivate
-
-if [ -e "$SERVICE_FILE" ]; then
-    echo "Servizio già presente. Aggiornamento..."
-    systemctl stop pesi-gtw.service || true
-fi
-
-cat > "$SERVICE_FILE" << EOF
-[Unit]
-Description=PesiGTW application start
-After=network-online.target
-Wants=network-online.target
-
-[Service]
-WorkingDirectory=$SCRIPT_DIR
-ExecStart=$SCRIPT_DIR/start.sh
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-systemctl daemon-reload
-systemctl enable pesi-gtw.service
-systemctl start pesi-gtw.service
-echo "Servizio avviato."
-SETUPEOF
-chmod +x "$OUTPUT_DIR/setup.sh"
 
 echo ""
 echo "=== Completato ==="
