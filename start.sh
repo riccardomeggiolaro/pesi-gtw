@@ -6,7 +6,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "Directory dello script: $SCRIPT_DIR"
 
 # Percorso dell'ambiente virtuale relativo alla stessa directory di start.sh
-VENV_DIR="$SCRIPT_DIR/.env"
+VENV_DIR="$SCRIPT_DIR/.venv"
 
 # Attiva l'ambiente virtuale
 source "$VENV_DIR/bin/activate"
