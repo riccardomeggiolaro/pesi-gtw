@@ -70,6 +70,7 @@ def initialize():
 	anagrafica_in_corso = ""
 	config_path = os.path.dirname(__file__)
 	pesigtw_path = config_path.replace("/src/lib", "")
+	g_defalogfile = pesigtw_path + "/file.log"
 	weigher_on = False
 	pesata_in_esecuzione = False
 	valore_alterno = 0
@@ -127,7 +128,6 @@ def initialize():
 	g_serversock = None
 	g_workpath = ""
 	g_config_ts = ""
-	g_defalogfile = pesigtw_path + "/file.log"
 	g_tz = tz.gettz('Europe / Rome')
 	g_bt_client_socket = None
 	g_wifi_client_socket = None
