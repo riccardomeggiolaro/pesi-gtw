@@ -1,3 +1,0 @@
-su root
-chmod +x setup.sh
-./setup.sh
