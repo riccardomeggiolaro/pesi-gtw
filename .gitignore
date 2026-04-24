@@ -164,8 +164,8 @@ cython_debug/
 # Output
 /client/.output
 /client/.vercel
-/client//.svelte-kit
-/client//build
+/client/.svelte-kit
+/client/build
 
 # OS
 /client/.DS_Store
@@ -174,8 +174,8 @@ cython_debug/
 # Env
 /client/.env
 /client/.env.*
-/client/!.env.example
-/client/!.env.test
+!/client/.env.example
+!/client/.env.test
 
 # Vite
 /client/vite.config.js.timestamp-*
@@ -186,7 +186,17 @@ ssh_tools.jsonc
 main.spec
 
 service.log
-        
+
 /dist
 
 /build
+
+# Project-specific
+*.db
+*.log
+.vscode/
+.pyarmor/group/tokens/
+pyarmor-device-regfile-*.zip
+program/db/pesate*.json
+program/db/tokens.json
+program/db/users.json
