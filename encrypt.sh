@@ -122,14 +122,6 @@ cp "$SCRIPT_DIR/setup.sh"         "$OUTPUT_DIR/setup.sh"
 cp "$SCRIPT_DIR/start.sh"         "$OUTPUT_DIR/start.sh"
 chmod +x "$OUTPUT_DIR/setup.sh" "$OUTPUT_DIR/start.sh"
 
-# Copia license.key se presente
-if [ -f "$SCRIPT_DIR/license.key" ]; then
-    cp "$SCRIPT_DIR/license.key" "$OUTPUT_DIR/license.key"
-    echo ">>> Copiato license.key"
-else
-    echo ">>> ATTENZIONE: license.key non trovato — generalo con: python gen_license.py <mac> --out license.key"
-fi
-
 echo ""
 echo "=== Completato ==="
 echo "Pacchetto cifrato in: $OUTPUT_DIR"
