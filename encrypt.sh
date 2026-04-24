@@ -22,14 +22,11 @@ echo "Source:  $SRC_DIR"
 echo "Output:  $OUTPUT_DIR"
 [ -n "$MAC_ADDRESS" ] && echo "MAC bind: $MAC_ADDRESS"
 
-# Cerca il virtualenv (.venv ha priorità su .env)
+# Cerca il virtualenv
 VENV_DIR=""
-for candidate in "$SCRIPT_DIR/.venv" "$SCRIPT_DIR/.env"; do
-    if [ -f "$candidate/bin/activate" ]; then
-        VENV_DIR="$candidate"
-        break
-    fi
-done
+if [ -f "$SCRIPT_DIR/.venv/bin/activate" ]; then
+    VENV_DIR="$SCRIPT_DIR/.venv"
+fi
 
 if [ -n "$VENV_DIR" ]; then
     echo "Virtualenv: $VENV_DIR"
