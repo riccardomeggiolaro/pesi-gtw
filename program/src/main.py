@@ -117,9 +117,6 @@ def Ip():
 if __name__ == "__main__":
 	killer = GracefulKiller()
 	x_workpath = os.path.dirname(__file__) + "/"
-	sys.path.insert(0, os.path.join(os.path.dirname(__file__), "lib/"))
-	from lb_license import check as _check_license
-	_check_license(os.path.join(os.path.dirname(__file__), "../../license.key"))
 #	pesigtw_path = x_workpath.replace("/src/", "/")
 #	ssh = pesigtw_path + "start.sh"
 #	os.system(ssh)
