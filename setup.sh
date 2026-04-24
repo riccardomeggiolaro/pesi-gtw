@@ -52,13 +52,7 @@ source "$VENV_DIR/bin/activate"
 pip install -r "$INSTALL_DIR/requirements.txt"
 deactivate
 
-# Crea il servizio solo se non esiste
-if [ -e "$SERVICE_FILE" ]; then
-    echo "Il file $SERVICE_FILE esiste già. Non è stato creato nulla."
-    exit 1
-fi
-
-# Crea il file systemd
+# Crea o aggiorna il file systemd
 cat > "$SERVICE_FILE" << EOF
 [Unit]
 Description=PesiGTW application start
@@ -74,8 +68,13 @@ Restart=always
 WantedBy=multi-user.target
 EOF
 
-# Attiva il servizio
 systemctl daemon-reload
-systemctl enable pesi-gtw.service
-systemctl start pesi-gtw.service
-echo "Servizio systemd creato e avviato da $INSTALL_DIR."
+
+if systemctl is-enabled --quiet pesi-gtw.service 2>/dev/null; then
+    echo "Servizio systemd aggiornato. Riavvio in corso..."
+    systemctl restart pesi-gtw.service
+else
+    systemctl enable pesi-gtw.service
+    systemctl start pesi-gtw.service
+    echo "Servizio systemd creato e avviato da $INSTALL_DIR."
+fi
