@@ -1,6 +1,6 @@
 # Cifratura del progetto con PyArmor
 
-Lo script `encrypt.sh` offusca tutti i sorgenti Python del progetto usando [PyArmor 9](https://pyarmor.readthedocs.io/) e produce nella cartella `dist/` un pacchetto pronto al deploy, con i file non-Python copiati intatti.
+Lo script `encrypt.sh` offusca tutti i sorgenti Python del progetto usando [PyArmor 9](https://pyarmor.readthedocs.io/) e produce nella cartella `dist/` il codice cifrato con i file non-Python copiati intatti.
 
 ---
 
@@ -58,45 +58,23 @@ ip link show | grep "link/ether"
 
 ```
 dist/
-├── program/
-│   ├── src/
-│   │   ├── main.py                  ← cifrato
-│   │   ├── pyarmor_runtime_xxxxxx/  ← runtime PyArmor
-│   │   │   ├── __init__.py
-│   │   │   └── pyarmor_runtime.so
-│   │   ├── config.json
-│   │   ├── gateway.log
-│   │   ├── lib/                     ← cifrato
-│   │   ├── modules/                 ← cifrato
-│   │   ├── app/                     ← cifrato
-│   │   └── static/                  ← HTML copiati intatti
-│   └── db/                          ← dati runtime copiati intatti
 ├── requirements.txt
-├── start.sh                         ← avvio applicazione
-└── setup.sh                         ← installazione servizio systemd
+└── program/
+    ├── db/                          ← dati runtime copiati intatti
+    └── src/
+        ├── main.py                  ← cifrato
+        ├── pyarmor_runtime_xxxxxx/  ← runtime PyArmor
+        │   ├── __init__.py
+        │   └── pyarmor_runtime.so
+        ├── config.json
+        ├── gateway.log
+        ├── lib/                     ← cifrato
+        ├── modules/                 ← cifrato
+        ├── app/                     ← cifrato
+        └── static/                  ← HTML copiati intatti
 ```
 
-> I file `.py` originali non vengono modificati. La cartella `dist/` è rigenerata ad ogni esecuzione.
-
----
-
-## Deploy sulla macchina di destinazione
-
-Copia la cartella `dist/` sul server, poi:
-
-```bash
-# Installa dipendenze e crea il servizio systemd
-sudo ./setup.sh
-
-# Oppure avvia manualmente
-./start.sh
-```
-
-### Requisiti sulla macchina di destinazione
-
-- Python 3.x della stessa versione major/minor usata in fase di cifratura
-- Stessa architettura (es. `linux.x86_64`)
-- Se usato `--mac`: la macchina deve avere quell'indirizzo MAC
+> I file `.py` originali non vengono modificati. La cartella `dist/` è rigenerata ad ogni esecuzione. Il deploy sul server è gestito da `setup.sh`.
 
 ---
 
