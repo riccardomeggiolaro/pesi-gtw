@@ -186,6 +186,88 @@ ws.onmessage = (event) => {
 
 ---
 
+## 4. Configurazione della pesa
+
+```
+GET /setup/settingsmachine
+```
+
+Restituisce la configurazione corrente della bilancia. **Non richiede token.**
+
+**Esempio**
+
+```bash
+curl http://localhost:8000/setup/settingsmachine
+```
+
+**Risposta**
+
+```json
+{
+  "message": {
+    "name_serial": "/dev/ttyUSB0",
+    "license_plate_required": false,
+    "options_divisions": [1, 2, 5, 10, 20, 50, 100, 200],
+    "division_selected": 10,
+    "max_weigth": 60000,
+    "list_settings": {
+      "prog_one": true,
+      "prog_two": true,
+      "pid_one": true,
+      "pid_two": true,
+      "bil": true,
+      "customer": { "use": true, "rename": "Operatore" },
+      "supplier": { "use": true, "rename": null },
+      "material": { "use": true, "rename": null },
+      "plate":    { "use": true, "rename": null },
+      "net_weight": true,
+      "date_time_one": true,
+      "weight_one": true,
+      "date_time_two": true,
+      "weight_two": true,
+      "note_one": false,
+      "note_two": false,
+      "badge": false
+    },
+    "buttons_settings": {
+      "tare": true,
+      "p_tare": true,
+      "zero": true,
+      "print": false,
+      "weight_one": false,
+      "weight_two": false
+    }
+  }
+}
+```
+
+| Campo                  | Descrizione                                                  |
+|------------------------|--------------------------------------------------------------|
+| `name_serial`          | Porta seriale a cui è collegata la bilancia                  |
+| `license_plate_required` | Se `true` la targa è obbligatoria per completare la pesata |
+| `options_divisions`    | Valori di divisione disponibili                              |
+| `division_selected`    | Divisione attualmente in uso                                 |
+| `max_weigth`           | Portata massima della bilancia (stessa unità delle pesate)   |
+| `list_settings`        | Visibilità e rinomina dei campi nella lista pesate           |
+| `buttons_settings`     | Pulsanti abilitati nell'interfaccia operatore                |
+
+**Dettaglio `list_settings`**
+
+Ogni campo con `use: false` è nascosto nell'interfaccia. Il campo `rename` sostituisce l'etichetta di default (`null` = etichetta originale).
+
+**Dettaglio `buttons_settings`**
+
+| Chiave       | Pulsante                       |
+|--------------|--------------------------------|
+| `tare`       | Tara manuale                   |
+| `p_tare`     | Tara pre-impostata             |
+| `zero`       | Azzeramento bilancia           |
+| `print`      | Stampa scontrino               |
+| `weight_one` | Acquisizione prima pesata      |
+| `weight_two` | Acquisizione seconda pesata    |
+
+---
+
 ## Note generali
 
 - Tutti i pesi sono espressi nell'unità riportata in `unite_measure` (default `Kg`).

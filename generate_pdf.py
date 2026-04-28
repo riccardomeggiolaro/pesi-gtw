@@ -292,5 +292,81 @@ story += [Paragraph(
     'Il valore "-" indica che la bilancia non è ancora connessa o non ha fornito una lettura.',
     s_note)]
 
+story += [HRFlowable(width="100%", thickness=0.5, color=colors.HexColor("#e5e7eb"), spaceAfter=8)]
+
+# ── 4. CONFIGURAZIONE PESA ────────────────────────────────────────────────────
+story += [Paragraph("4. Configurazione della pesa", s_h1)]
+story += [Paragraph(
+    "Restituisce la configurazione corrente della bilancia. "
+    "<b>Non richiede token.</b>", s_body)]
+
+story += [Paragraph("Endpoint", s_h2)]
+story += [Paragraph("GET &nbsp;/setup/settingsmachine", s_method)]
+
+story += [Paragraph("Esempio cURL", s_h2)]
+story += code_block("curl http://localhost:8000/setup/settingsmachine")
+
+story += [Paragraph("Risposta", s_h2)]
+story += code_block("""\
+{
+  "message": {
+    "name_serial": "/dev/ttyUSB0",
+    "license_plate_required": false,
+    "options_divisions": [1, 2, 5, 10, 20, 50, 100, 200],
+    "division_selected": 10,
+    "max_weigth": 60000,
+    "list_settings": {
+      "prog_one": true,   "prog_two": true,
+      "pid_one": true,    "pid_two": true,
+      "bil": true,
+      "customer": { "use": true, "rename": "Operatore" },
+      "supplier": { "use": true, "rename": null },
+      "material": { "use": true, "rename": null },
+      "plate":    { "use": true, "rename": null },
+      "net_weight": true,
+      "date_time_one": true,  "weight_one": true,
+      "date_time_two": true,  "weight_two": true,
+      "note_one": false,      "note_two": false,
+      "badge": false
+    },
+    "buttons_settings": {
+      "tare": true,  "p_tare": true,  "zero": true,
+      "print": false, "weight_one": false, "weight_two": false
+    }
+  }
+}""")
+
+story += param_table(
+    ["Campo", "Descrizione"],
+    [
+        ["name_serial",             "Porta seriale a cui è collegata la bilancia"],
+        ["license_plate_required",  "Se true la targa è obbligatoria per completare la pesata"],
+        ["options_divisions",       "Valori di divisione disponibili"],
+        ["division_selected",       "Divisione attualmente in uso"],
+        ["max_weigth",              "Portata massima della bilancia (stessa unità delle pesate)"],
+        ["list_settings",           "Visibilità e rinomina dei campi nella lista pesate"],
+        ["buttons_settings",        "Pulsanti abilitati nell'interfaccia operatore"],
+    ]
+)
+
+story += [Paragraph("Dettaglio list_settings", s_h2)]
+story += [Paragraph(
+    "Ogni campo con <b>use: false</b> è nascosto nell'interfaccia. "
+    "Il campo <b>rename</b> sostituisce l'etichetta di default (null = etichetta originale).",
+    s_body)]
+
+story += [Paragraph("Dettaglio buttons_settings", s_h2)]
+story += param_table(
+    ["Chiave", "Pulsante"],
+    [
+        ["tare",       "Tara manuale"],
+        ["p_tare",     "Tara pre-impostata"],
+        ["zero",       "Azzeramento bilancia"],
+        ["print",      "Stampa scontrino"],
+        ["weight_one", "Acquisizione prima pesata"],
+        ["weight_two", "Acquisizione seconda pesata"],
+    ]
+)
+
 doc.build(story)
 print("PDF generato: API.pdf")
