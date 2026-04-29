@@ -111,16 +111,20 @@ def mainprg():
 						lb_log.warning(e)
 			elif lb_config.read_seriale.split(",")[1] == "VL":
 				lst_vl = lb_config.read_seriale.split(",")
-				lb_config.diagnostic["vl"] = str(lst_vl[2]) + " " + str(lst_vl[3])
+				if len(lst_vl) >= 4:
+					lb_config.diagnostic["vl"] = str(lst_vl[2]) + " " + str(lst_vl[3])
 #				print(lb_config.diagnostic["vl"])
 			elif lb_config.read_seriale.split(",")[1] == "RZ":
 				lst_rz = lb_config.read_seriale.split(",")
-				lb_config.diagnostic["rz"] = str(lst_rz[2]) + " " + str(lst_rz[3])
+				if len(lst_rz) >= 4:
+					lb_config.diagnostic["rz"] = str(lst_rz[2]) + " " + str(lst_rz[3])
 #				print(lb_config.diagnostic["rz"])
 		elif lb_config.read_seriale.split(" ")[0] == "PW:":
 			lst_pw_bt = lb_config.read_seriale.split(" ")
-			lb_config.diagnostic["pw"] = str(lst_pw_bt[1]) + " V"
-			lb_config.diagnostic["bt"] = str(lst_pw_bt[3]) + " V"
+			if len(lst_pw_bt) >= 2:
+				lb_config.diagnostic["pw"] = str(lst_pw_bt[1]) + " V"
+			if len(lst_pw_bt) >= 4:
+				lb_config.diagnostic["bt"] = str(lst_pw_bt[3]) + " V"
 		time.sleep(0.4)
 
 def PesataCheck():
@@ -212,8 +216,9 @@ def ver():
 				comando("VER")
 				lb_config.read_seriale = lb_config.seriale.readline().decode().replace("\r\n", "")
 				values = lb_config.read_seriale.split(",")
-				lb_config.diagnostic["firmware"] = values[1]
-				lb_config.diagnostic["model_name"] = values[2]
+				if len(values) >= 3:
+					lb_config.diagnostic["firmware"] = values[1]
+					lb_config.diagnostic["model_name"] = values[2]
 				comando("SN")
 				lb_config.read_seriale = lb_config.seriale.readline().decode().replace("\r\n", "")
 				lb_config.diagnostic["serial_number"] = int(lb_config.read_seriale[3:].lstrip())
