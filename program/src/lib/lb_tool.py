@@ -137,7 +137,7 @@ def IsAuthorizated(token):
 
 def FromIdUser():
 	idUser = 0
-	if lb_config.db_users[0]["username"] == "admin":
+	if lb_config.db_users[0]["username"] == lb_config.superuser:
 		idUser = 1
 	return idUser
 
