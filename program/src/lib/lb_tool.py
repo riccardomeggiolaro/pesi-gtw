@@ -41,7 +41,7 @@ class setup_opcua(BaseModel):
 
 class setup_nameserial(BaseModel):
 	token: str
-	name_serial: str
+	name_serial: Union[str, None] = ""
 
 class use_rename(BaseModel):
     use: Union[bool, None]
