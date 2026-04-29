@@ -796,6 +796,19 @@ def mainprg():
 				return {"message": "non autenticato"}
 		except:
 			return HTTPException(status_code=400, detail="SYNTAX ERROR")
+
+	@app.get("/setup/baudrate/{baudrate}/{token}")
+	async def SetBaudrate(baudrate: int, token: str):
+		try:
+			if lb_tool.TokenTrue(token):
+				lb_config.setup["settings_machine"]["baudrate"] = baudrate
+				if lb_tool.Save(lb_config.path_setup, lb_config.setup):
+					return {"message": "Modificato con successo"}
+				return {"message": "Errore nel salvataggio"}
+			else:
+				return {"message": "non autenticato"}
+		except:
+			return HTTPException(status_code=400, detail="SYNTAX ERROR")
 	
 	# function to get checksum
 	@app.get("/checksum/{stringa}")

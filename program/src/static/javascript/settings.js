@@ -169,6 +169,7 @@ window.onload = function(){
 			}
 			maxWeight.placeholder = response.message.max_weigth
 			nameSerial.placeholder = response.message.name_serial
+			baudrate.placeholder = response.message.baudrate
 		})
 		body.classList.remove("displayNone")
 	}
@@ -520,6 +521,23 @@ function SaveMaxWeigth(){
 	fetch(urlmaxweigth)
 	.then(response => response.json())
 	.then(response => alert(response.message))
+}
+
+function SaveBaudrate(){
+	let newBaudrate = baudrate.value
+	if(newBaudrate != ""){
+		fetch('http://'+hostname+':8000/setup/baudrate/'+newBaudrate+'/'+token)
+		.then(response => response.json())
+		.then(response => {
+			alert(response.message)
+			if(response.message == "Modificato con successo"){
+				baudrate.placeholder = newBaudrate
+				baudrate.value = ""
+			}
+		})
+	}else{
+		alert("Necessario inserire valore")
+	}
 }
 
 function SetNameSerial(){
