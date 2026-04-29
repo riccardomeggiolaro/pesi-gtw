@@ -205,8 +205,10 @@ def UniteMeasure(weight: Union[float, int]):
 
 #comando da mandare alla pesa
 def comando(cmd):
+	lb_config.seriale.reset_input_buffer()
 	command = (cmd + chr(13)+chr(10)).encode()
 	lb_config.seriale.write(command)
+	time.sleep(0.2)
 
 def ver():
 	while True:
