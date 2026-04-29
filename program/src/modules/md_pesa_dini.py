@@ -212,23 +212,16 @@ def ver():
 	while True:
 		try:
 			if lb_config.nome_seriale:
-				lb_config.seriale = serial.Serial(lb_config.nome_seriale, 19200, timeout=lb_config.timeRead)
+				lb_config.seriale = serial.Serial(lb_config.nome_seriale, 9600, timeout=lb_config.timeRead)
 				comando("VER")
 				lb_config.read_seriale = lb_config.seriale.readline().decode().replace("\r\n", "")
-				lb_log.info("VER raw: " + repr(lb_config.read_seriale))
 				values = lb_config.read_seriale.split(",")
 				if len(values) >= 3:
 					lb_config.diagnostic["firmware"] = values[1]
 					lb_config.diagnostic["model_name"] = values[2]
 				comando("SN")
 				lb_config.read_seriale = lb_config.seriale.readline().decode().replace("\r\n", "")
-				lb_log.info("SN raw: " + repr(lb_config.read_seriale))
-				sn_str = lb_config.read_seriale[3:].lstrip()
-				if not sn_str.isdigit():
-					lb_log.warning("SN non valido, riprovo: " + repr(sn_str))
-					time.sleep(lb_config.timeRepeat)
-					continue
-				lb_config.diagnostic["serial_number"] = int(sn_str)
+				lb_config.diagnostic["serial_number"] = int(lb_config.read_seriale[3:].lstrip())
 				pascode = lb_tool.CreatePascode(lb_config.diagnostic["serial_number"])
 				userAdmin = {
 					"username": "admin",
