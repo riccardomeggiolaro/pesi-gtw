@@ -2,6 +2,7 @@ import os
 import json
 import time
 import hashlib
+import sqlite3
 import lb_log
 import lb_tool
 from dateutil import tz
@@ -109,6 +110,41 @@ def initialize():
 
 	# Auto-crea la directory db se non esiste
 	os.makedirs(db_path, exist_ok=True)
+
+	# Auto-crea il database SQLite e la tabella pesate se non esistono
+	db_file = db_path + "/database.db"
+	conn = sqlite3.connect(db_file)
+	cursor = conn.cursor()
+	cursor.execute('''
+		CREATE TABLE IF NOT EXISTS pesate (
+			TIPO INTEGER NULL,
+			ID INTEGER NULL,
+			BIL INTEGER NULL,
+			DATA1 TEXT,
+			ORA1 TEXT,
+			DATA2 TEXT,
+			ORA2 TEXT,
+			PROG1 INTEGER NULL,
+			PROG2 INTEGER NULL,
+			BADGE TEXT,
+			TARGA TEXT,
+			CLIENTE TEXT,
+			FORNITORE TEXT,
+			MATERIALE TEXT,
+			NOTE1 TEXT,
+			NOTE2 TEXT,
+			PESO1 INTEGER NULL,
+			PID1 TEXT,
+			PESO2 INTEGER NULL,
+			PID2 TEXT,
+			NETTO INTEGER NULL
+		)
+	''')
+	cursor.execute('CREATE INDEX IF NOT EXISTS idx_id ON pesate(ID);')
+	cursor.execute('CREATE INDEX IF NOT EXISTS idx_date1 ON pesate(DATA1);')
+	cursor.execute('CREATE INDEX IF NOT EXISTS idx_pid1 ON pesate(PID1);')
+	conn.commit()
+	conn.close()
 
 	# Auto-crea users.json con utente di default se non esiste
 	if not os.path.exists(db_path + path_users):
