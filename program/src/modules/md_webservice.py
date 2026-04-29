@@ -696,14 +696,23 @@ def mainprg():
 		try:
 			authorizated = lb_tool.IsAuthorizated(setup_nameserial.token)
 			if authorizated:
-				try:
-					os.system("chmod 777 " + setup_nameserial.name_serial)
-					lb_config.seriale = serial.Serial(setup_nameserial.name_serial, 9600, timeout=0.5)
-				except Exception as e:
-					return {"status_code": 500, "message": str(e)}
-				lb_config.setup["settings_machine"]["name_serial"] = setup_nameserial.name_serial
+				name = setup_nameserial.name_serial or ""
+				if name:
+					try:
+						os.system("chmod 777 " + name)
+						lb_config.seriale = serial.Serial(name, 9600, timeout=0.5)
+					except Exception as e:
+						return {"status_code": 500, "message": str(e)}
+				else:
+					try:
+						if lb_config.seriale and hasattr(lb_config.seriale, "close"):
+							lb_config.seriale.close()
+					except:
+						pass
+					lb_config.seriale = ""
+				lb_config.setup["settings_machine"]["name_serial"] = name
 				if lb_tool.Save(lb_config.path_setup, lb_config.setup):
-					lb_config.nome_seriale = lb_config.setup["settings_machine"]["name_serial"]
+					lb_config.nome_seriale = name
 					return {"status_code": 200, "message": "Porta seriale modificata con successo"}
 			else:
 				message = HTTPException(status_code=404, detail="NOT AUTHORIZATION")
