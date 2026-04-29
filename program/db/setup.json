@@ -1,6 +1,7 @@
 {
     "settings_machine": {
         "name_serial": "",
+        "baudrate": 9600,
         "license_plate_required": false,
         "options_divisions": [
             1,
