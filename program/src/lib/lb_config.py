@@ -1,6 +1,7 @@
 import os
 import json
 import time
+import hashlib
 import lb_log
 import lb_tool
 from dateutil import tz
@@ -105,6 +106,34 @@ def initialize():
 	path_tokens = "/tokens.json"
 	path_pesate = "/pesate.json"
 	path_setup = "/setup.json"
+
+	# Auto-crea la directory db se non esiste
+	os.makedirs(db_path, exist_ok=True)
+
+	# Auto-crea users.json con utente admin di default se non esiste
+	if not os.path.exists(db_path + path_users):
+		default_password = hashlib.sha3_256("admin".encode()).hexdigest()
+		default_users = [
+			{
+				"username": "admin",
+				"password": default_password,
+				"descrizione": "Amministratore",
+				"seclev": 5
+			}
+		]
+		with open(db_path + path_users, "w") as f:
+			f.write(json.dumps(default_users, indent=4))
+
+	# Auto-crea tokens.json vuoto se non esiste
+	if not os.path.exists(db_path + path_tokens):
+		with open(db_path + path_tokens, "w") as f:
+			f.write(json.dumps([], indent=4))
+
+	# Auto-crea pesate.json vuoto se non esiste
+	if not os.path.exists(db_path + path_pesate):
+		with open(db_path + path_pesate, "w") as f:
+			f.write(json.dumps([], indent=4))
+
 	db_users = lb_tool.Load(path_users)
 	db_tokens = lb_tool.Load(path_tokens)
 	db_pesate = lb_tool.Load(path_pesate)
