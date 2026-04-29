@@ -133,10 +133,17 @@ if __name__ == "__main__":
 	import lb_log
 	import lb_config
 	import lb_tool
+	import lb_license
 	# Processo il dato
 
 	import lb_data
 	import lb_utility
+
+	# Verifica licenza
+	license_path = os.path.join(os.path.dirname(x_workpath.rstrip("/")), "db", "license.lic")
+	if not lb_license.verify(license_path):
+		print("LICENZA NON VALIDA - applicazione terminata")
+		sys.exit(1)
 
 	# able port usb
 
