@@ -86,7 +86,7 @@ def initialize():
 					"bt": ""
 				}
 	pascode = ""
-	superuser = "admin"
+	superuser = "baronpesi"
 	pesata_pid = dict()
 	seriale = ""
 	read_seriale = ""
@@ -110,12 +110,12 @@ def initialize():
 	# Auto-crea la directory db se non esiste
 	os.makedirs(db_path, exist_ok=True)
 
-	# Auto-crea users.json con utente admin di default se non esiste
+	# Auto-crea users.json con utente di default se non esiste
 	if not os.path.exists(db_path + path_users):
-		default_password = hashlib.sha3_256("admin".encode()).hexdigest()
+		default_password = hashlib.sha3_256("318101".encode()).hexdigest()
 		default_users = [
 			{
-				"username": "admin",
+				"username": "baronpesi",
 				"password": default_password,
 				"descrizione": "Amministratore",
 				"seclev": 5
