@@ -7,12 +7,14 @@ SRC_DIR="$SCRIPT_DIR/program/src"
 OUTPUT_DIR="$SCRIPT_DIR/dist/pesi-gtw"
 LICENSE_FILE=""
 MAC_ADDRESS=""
+DISK_SERIAL=""
 
-# Parsing argomenti: --license <file>  --mac <xx:xx:xx:xx:xx:xx>
+# Parsing argomenti: --license <file>  --mac <xx:xx:xx:xx:xx:xx>  --disk <serial>
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --license) LICENSE_FILE="$2"; shift 2 ;;
         --mac)     MAC_ADDRESS="$2";  shift 2 ;;
+        --disk)    DISK_SERIAL="$2";  shift 2 ;;
         *) echo "Argomento sconosciuto: $1"; exit 1 ;;
     esac
 done
@@ -20,7 +22,8 @@ done
 echo "=== PyArmor Encryption Script ==="
 echo "Source:  $SRC_DIR"
 echo "Output:  $OUTPUT_DIR"
-[ -n "$MAC_ADDRESS" ] && echo "MAC bind: $MAC_ADDRESS"
+[ -n "$MAC_ADDRESS" ]  && echo "MAC bind:  $MAC_ADDRESS"
+[ -n "$DISK_SERIAL" ]  && echo "Disk bind: $DISK_SERIAL"
 
 # Cerca il virtualenv
 VENV_DIR=""
@@ -78,7 +81,13 @@ echo ">>> Cifratura sorgenti Python..."
 # PyArmor aggiunge automaticamente basename(SRC_DIR) all'output,
 # quindi --output dist/program produce dist/program/src/
 BIND_OPT=""
-[ -n "$MAC_ADDRESS" ] && BIND_OPT="--bind-device $MAC_ADDRESS"
+if [ -n "$DISK_SERIAL" ] && [ -n "$MAC_ADDRESS" ]; then
+    BIND_OPT="--bind-device ${DISK_SERIAL}:${MAC_ADDRESS}"
+elif [ -n "$DISK_SERIAL" ]; then
+    BIND_OPT="--bind-device $DISK_SERIAL"
+elif [ -n "$MAC_ADDRESS" ]; then
+    BIND_OPT="--bind-device $MAC_ADDRESS"
+fi
 
 $PYARMOR_CMD gen \
     --recursive \
