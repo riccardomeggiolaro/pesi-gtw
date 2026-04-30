@@ -157,7 +157,9 @@ ZIP_PATH="$SCRIPT_DIR/dist/$ZIP_NAME"
 
 echo ""
 echo ">>> Creazione archivio: $ZIP_NAME"
-(cd "$SCRIPT_DIR/dist" && zip -r "$ZIP_PATH" "pesi-gtw" -x "*.git*" > /dev/null)
+cd "$SCRIPT_DIR/dist"
+zip -r "$ZIP_PATH" "pesi-gtw" -x "*.git*"
+cd "$SCRIPT_DIR"
 
 echo ""
 echo "=== Completato ==="
