@@ -131,9 +131,38 @@ cp "$SCRIPT_DIR/setup.sh"         "$OUTPUT_DIR/setup.sh"
 cp "$SCRIPT_DIR/start.sh"         "$OUTPUT_DIR/start.sh"
 chmod +x "$OUTPUT_DIR/setup.sh" "$OUTPUT_DIR/start.sh"
 
+# Genera file con le specifiche di cifratura
+SPEC_FILE="$OUTPUT_DIR/encrypt_info.txt"
+{
+    echo "=== PyArmor Encryption Info ==="
+    echo "Data:    $(date '+%Y-%m-%d %H:%M:%S')"
+    echo "Sorgente: $SRC_DIR"
+    if [ -n "$DISK_SERIAL" ] && [ -n "$MAC_ADDRESS" ]; then
+        echo "Bind:    disk=$DISK_SERIAL  mac=$MAC_ADDRESS"
+    elif [ -n "$DISK_SERIAL" ]; then
+        echo "Bind:    disk=$DISK_SERIAL"
+    elif [ -n "$MAC_ADDRESS" ]; then
+        echo "Bind:    mac=$MAC_ADDRESS"
+    else
+        echo "Bind:    nessuno"
+    fi
+} > "$SPEC_FILE"
+
+# Costruisce il nome ZIP con le specifiche usate
+ZIP_SUFFIX=""
+[ -n "$DISK_SERIAL" ] && ZIP_SUFFIX="${ZIP_SUFFIX}_disk-${DISK_SERIAL}"
+[ -n "$MAC_ADDRESS" ] && ZIP_SUFFIX="${ZIP_SUFFIX}_mac-${MAC_ADDRESS//:/-}"
+ZIP_NAME="pesi-gtw${ZIP_SUFFIX}.zip"
+ZIP_PATH="$SCRIPT_DIR/dist/$ZIP_NAME"
+
+echo ""
+echo ">>> Creazione archivio: $ZIP_NAME"
+(cd "$SCRIPT_DIR/dist" && zip -r "$ZIP_PATH" "pesi-gtw" -x "*.git*" > /dev/null)
+
 echo ""
 echo "=== Completato ==="
 echo "Pacchetto cifrato in: $OUTPUT_DIR"
+echo "Archivio ZIP:         $ZIP_PATH"
 echo ""
 echo "Struttura generata:"
 find "$OUTPUT_DIR" -not -path '*/.git/*' | sort | sed "s|$OUTPUT_DIR||" | head -40
