@@ -95,6 +95,12 @@ $PYARMOR_CMD gen \
     $BIND_OPT \
     "$SRC_DIR"
 
+echo $PYARMOR_CMD gen \
+    --recursive \
+    --output "$OUTPUT_DIR/program" \
+    $BIND_OPT \
+    "$SRC_DIR"
+
 echo ""
 echo ">>> Sposta runtime PyArmor dentro src/ (necessario per l'import)..."
 # pyarmor gen mette il runtime in dist/program/ ma main.py lo cerca
