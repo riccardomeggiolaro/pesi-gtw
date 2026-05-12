@@ -170,6 +170,8 @@ window.onload = (event) => {
 					targa.style.display = "none"
 				} else if (element === 'bil') {
 					bil.style.display = "none"
+				} else if (element === 'net_weight') {
+					totalNet.parentElement.style.display = "none"
 				}
 			} else if (response.message.list_settings[element].rename) {
 				document.querySelector(`th:nth-child(${index})`).textContent = response.message.list_settings[element].rename;
