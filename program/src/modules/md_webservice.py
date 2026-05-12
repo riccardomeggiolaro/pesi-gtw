@@ -809,6 +809,20 @@ def mainprg():
 				return {"message": "non autenticato"}
 		except:
 			return HTTPException(status_code=400, detail="SYNTAX ERROR")
+
+	@app.post("/setup/bookings/{token}")
+	async def SetBookings(token: str, setup: lb_tool.bookings_settings):
+		try:
+			if lb_tool.IsAuthorizated(token):
+				for key, value in setup:
+					if value is not None:
+						lb_config.setup["settings_machine"]["bookings_settings"][key] = value
+				lb_tool.Save(lb_config.path_setup, lb_config.setup)
+				return lb_config.setup["settings_machine"]["bookings_settings"]
+			else:
+				return HTTPException(status_code=404, detail="NOT AUTHORIZATION")
+		except:
+			return HTTPException(status_code=400, detail="SYNTAX ERROR")
 	
 	# function to get checksum
 	@app.get("/checksum/{stringa}")

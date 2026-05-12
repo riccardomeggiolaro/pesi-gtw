@@ -6,6 +6,7 @@ let buttonProfile = document.getElementById("buttonProfile")
 let buttonPassword = document.getElementById("buttonPassword")
 let buttonUsers = document.getElementById("buttonUsers")
 let buttonSetup = document.getElementById("buttonSetup")
+let buttonBookings = document.getElementById("buttonBookings")
 let formProfile = document.getElementById("formProfile")
 let inputUsername = document.getElementById("inputUsername")
 let inputDescription = document.getElementById("inputDescription")
@@ -15,6 +16,8 @@ let inputNewPassword = document.getElementById("newPassword")
 let inputRepeatPassword = document.getElementById("repeatPassword")
 let formPassword = document.getElementById("formPassword")
 let formSetup = document.getElementById("formSetup")
+let formBookings = document.getElementById("formBookings")
+let useTransitsCheckbox = document.getElementById("useTransits")
 let checkbox = document.getElementById("flexCheckChecked")
 let progOneCheckbox = document.getElementById("prog_one")
 let progTwoCheckbox = document.getElementById("prog_two")
@@ -71,6 +74,7 @@ window.onload = function(){
 				} else {
 					buttonUsers.classList.toggle("displayNone")
 					buttonSetup.classList.toggle("displayNone")
+					buttonBookings.classList.toggle("displayNone")
 					inputSeclev.placeholder = "USER"
 				}
 			}
@@ -170,6 +174,9 @@ window.onload = function(){
 			maxWeight.placeholder = response.message.max_weigth
 			nameSerial.placeholder = response.message.name_serial
 			baudrate.placeholder = response.message.baudrate
+			if (response.message.bookings_settings) {
+				useTransitsCheckbox.checked = response.message.bookings_settings.use_transits
+			}
 		})
 		body.classList.remove("displayNone")
 	}
@@ -180,6 +187,7 @@ function profileShow(){
 		if(!formPassword.classList.contains("displayNone")){formPassword.classList.toggle("displayNone")}
 		if(!tableUsers.classList.contains("displayNone")){tableUsers.classList.toggle("displayNone")}
 		if(!formSetup.classList.contains("displayNone")){formSetup.classList.toggle("displayNone")}
+		if(!formBookings.classList.contains("displayNone")){formBookings.classList.toggle("displayNone")}
 		formProfile.classList.remove("displayNone")
 	}
 }
@@ -187,8 +195,9 @@ function profileShow(){
 function passwordShow(){
 	if(formPassword.classList.contains("displayNone")){
 		if(!formProfile.classList.contains("displayNone")){formProfile.classList.toggle("displayNone")}
-		if(!tableUsers.classList.contains("displayNone")){tableUsers.classList.toggle("displayNone")}	
+		if(!tableUsers.classList.contains("displayNone")){tableUsers.classList.toggle("displayNone")}
 		if(!formSetup.classList.contains("displayNone")){formSetup.classList.toggle("displayNone")}
+		if(!formBookings.classList.contains("displayNone")){formBookings.classList.toggle("displayNone")}
 		formPassword.classList.remove("displayNone")
 	}
 }
@@ -198,6 +207,7 @@ function usersShow(){
 		if(!formProfile.classList.contains("displayNone")){formProfile.classList.toggle("displayNone")}
 		if(!formPassword.classList.contains("displayNone")){formPassword.classList.toggle("displayNone")}
 		if(!formSetup.classList.contains("displayNone")){formSetup.classList.toggle("displayNone")}
+		if(!formBookings.classList.contains("displayNone")){formBookings.classList.toggle("displayNone")}
 		tableUsers.classList.remove("displayNone")
 	}
 	getUsers()
@@ -208,7 +218,18 @@ function setupShow(){
 		if(!formProfile.classList.contains("displayNone")){formProfile.classList.toggle("displayNone")}
 		if(!formPassword.classList.contains("displayNone")){formPassword.classList.toggle("displayNone")}
 		if(!tableUsers.classList.contains("displayNone")){tableUsers.classList.toggle("displayNone")}
+		if(!formBookings.classList.contains("displayNone")){formBookings.classList.toggle("displayNone")}
 		formSetup.classList.remove("displayNone")
+	}
+}
+
+function bookingsShow(){
+	if (formBookings.classList.contains("displayNone")){
+		if(!formProfile.classList.contains("displayNone")){formProfile.classList.toggle("displayNone")}
+		if(!formPassword.classList.contains("displayNone")){formPassword.classList.toggle("displayNone")}
+		if(!tableUsers.classList.contains("displayNone")){tableUsers.classList.toggle("displayNone")}
+		if(!formSetup.classList.contains("displayNone")){formSetup.classList.toggle("displayNone")}
+		formBookings.classList.remove("displayNone")
 	}
 }
 
@@ -366,6 +387,20 @@ function addUser(){
 		}else{
 			alert("Problema nell'aggiunta dell'utente")
 		}
+	})
+}
+
+function UseTransits(){
+	fetch("http://" + hostname + ":8000/setup/bookings/" + token, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify({ use_transits: useTransitsCheckbox.checked })
+	})
+	.then(response => response.json())
+	.then(response => {
+		console.log(response)
 	})
 }
 

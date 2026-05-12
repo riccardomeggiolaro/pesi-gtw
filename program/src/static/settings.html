@@ -47,6 +47,7 @@
 			<button type="submit" class="btn btn-primary" id="buttonPassword" onclick="passwordShow()">Password</button>
 			<button type="submit" class="btn btn-primary" id="buttonUsers" onclick="usersShow()">Utenti</button>
 			<button type="submit" class="btn btn-primary" id="buttonSetup" onclick="setupShow()">Setup</button>
+			<button type="submit" class="btn btn-primary" id="buttonBookings" onclick="bookingsShow()">Prenotazioni</button>
 		</span>
 		<hr>
 		<div id="formProfile">
@@ -253,7 +254,19 @@
 			  </div>
 			</div>
 		  <hr>
-		</div> 
+		</div>
+
+		<div class="displayNone" id="formBookings">
+		  <hr>
+		  <div>
+			<h5>Prenotazioni</h5>
+			<input class="form-check-input" type="checkbox" value="" id="useTransits" onclick="UseTransits()">
+			<label class="form-check-label" for="useTransits">
+				Usa transiti
+			</label>
+		  </div>
+		  <hr>
+		</div>
 	</div>
 
 	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

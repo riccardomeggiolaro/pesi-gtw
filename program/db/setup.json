@@ -53,6 +53,9 @@
             "print": false,
             "weight_one": false,
             "weight_two": false
+        },
+        "bookings_settings": {
+            "use_transits": false
         }
     }
 }

@@ -77,6 +77,9 @@ class buttons_settings(BaseModel):
 	weight_one: Union[bool, None]
 	weight_two: Union[bool, None]
 
+class bookings_settings(BaseModel):
+	use_transits: Union[bool, None]
+
 ######## UTILITY ############################
 
 import os
