@@ -213,7 +213,7 @@ function weights2(){
 		.then(result => result.json())
 		.then(result => {
 			console.log(result)
-			result.forEach(pesata => {
+			result.weighings.forEach(pesata => {
 				if(pesata['TARGA'] != ""){
 					var opt = document.createElement('option');
 					opt.value = pesata[1];
@@ -417,15 +417,15 @@ var pesata1 = document.getElementById('pesata1Modal')
 pesata1.addEventListener('show.bs.modal', function (event) {
   var button = event.relatedTarget
   var recipient = button.getAttribute('data-bs-whatever')
-  var modalTitle = exampleModal.querySelector('.modal-title')
-  var modalBodyInput = exampleModal.querySelector('.modal-body input')
+  var modalTitle = pesata1.querySelector('.modal-title')
+  var modalBodyInput = pesata1.querySelector('.modal-body input')
 })
 var pesata2 = document.getElementById('pesata2Modal')
 pesata2.addEventListener('show.bs.modal', function (event) {
   var button = event.relatedTarget
   var recipient = button.getAttribute('data-bs-whatever')
-  var modalTitle = exampleModal.querySelector('.modal-title')
-  var modalBodyInput = exampleModal.querySelector('.modal-body input')
+  var modalTitle = pesata2.querySelector('.modal-title')
+  var modalBodyInput = pesata2.querySelector('.modal-body input')
 })
 
 weight.addEventListener("dblclick", function(event){
