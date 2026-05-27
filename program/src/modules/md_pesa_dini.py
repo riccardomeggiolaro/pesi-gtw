@@ -215,7 +215,7 @@ def ver():
 			if lb_config.nome_seriale:
 				if not os.path.exists(lb_config.nome_seriale):
 					lb_log.error(f"Porta seriale '{lb_config.nome_seriale}' non trovata")
-					time.sleep(5)
+					time.sleep(2)
 					continue
 				baudrate = lb_config.setup["settings_machine"].get("baudrate", 9600)
 				lb_config.seriale = serial.Serial(lb_config.nome_seriale, baudrate, timeout=lb_config.timeRead)
