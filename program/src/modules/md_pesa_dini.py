@@ -9,6 +9,7 @@
 # ==============================================================
 import time
 import json
+import os
 import lb_config
 import lb_tool
 import lb_utility
@@ -212,6 +213,10 @@ def ver():
 	while True:
 		try:
 			if lb_config.nome_seriale:
+				if not os.path.exists(lb_config.nome_seriale):
+					lb_log.error(f"Porta seriale '{lb_config.nome_seriale}' non trovata")
+					time.sleep(1)
+					continue
 				baudrate = lb_config.setup["settings_machine"].get("baudrate", 9600)
 				lb_config.seriale = serial.Serial(lb_config.nome_seriale, baudrate, timeout=lb_config.timeRead)
 				comando("VER")
