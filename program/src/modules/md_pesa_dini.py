@@ -31,14 +31,14 @@ class RepeatTimer(Timer):
 def mainprg():
 
 	while lb_config.g_enabled:
-		if lb_config.nome_seriale and not os.path.exists(lb_config.nome_seriale):
-			lb_config.read_seriale = ""
-			time.sleep(1)
-			continue
 		try:
 			pesata_continua()
 		except Exception as e:
 			lb_log.error(e)
+		if lb_config.nome_seriale and not os.path.exists(lb_config.nome_seriale):
+			lb_config.read_seriale = ""
+			time.sleep(1)
+			continue
 		try:
 			lb_config.read_seriale = lb_config.seriale.readline().decode().replace("\r\n", "")
 		except Exception as e:
