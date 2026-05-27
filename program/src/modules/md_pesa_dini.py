@@ -36,6 +36,7 @@ def mainprg():
 			lb_config.read_seriale = lb_config.seriale.readline().decode().replace("\r\n", "")
 		except Exception as e:
 			lb_log.error(e)
+			lb_config.read_seriale = ""
 #		print(lb_config.read_seriale)
 		if not lb_config.read_seriale:
 			lb_config.diagnostic["vl"] = ""
