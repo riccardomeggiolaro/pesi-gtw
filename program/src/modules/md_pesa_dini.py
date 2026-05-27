@@ -31,10 +31,7 @@ class RepeatTimer(Timer):
 def mainprg():
 
 	while lb_config.g_enabled:
-		try:
-			pesata_continua()
-		except Exception as e:
-			lb_log.error(e)
+		pesata_continua()
 		if lb_config.nome_seriale and not os.path.exists(lb_config.nome_seriale):
 			lb_config.read_seriale = ""
 			time.sleep(1)
@@ -214,8 +211,11 @@ def UniteMeasure(weight: Union[float, int]):
 
 #comando da mandare alla pesa
 def comando(cmd):
-	command = (cmd + chr(13)+chr(10)).encode()
-	lb_config.seriale.write(command)
+	try:
+		command = (cmd + chr(13)+chr(10)).encode()
+		lb_config.seriale.write(command)
+	except Exception as e:
+		lb_log.error(e)
 
 def ver():
 	while True:
