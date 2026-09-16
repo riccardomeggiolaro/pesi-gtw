@@ -8,16 +8,35 @@ OUTPUT_DIR="$SCRIPT_DIR/dist/pesi-gtw"
 LICENSE_FILE=""
 MAC_ADDRESS=""
 DISK_SERIAL=""
+IFACE=""
 
-# Parsing argomenti: --license <file>  --mac <xx:xx:xx:xx:xx:xx>  --disk <serial>
+# Parsing argomenti: --license <file>  --mac <xx:xx:xx:xx:xx:xx>  --iface <nome>  --disk <serial>
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --license) LICENSE_FILE="$2"; shift 2 ;;
         --mac)     MAC_ADDRESS="$2";  shift 2 ;;
+        --iface)   IFACE="$2";        shift 2 ;;
         --disk)    DISK_SERIAL="$2";  shift 2 ;;
         *) echo "Argomento sconosciuto: $1"; exit 1 ;;
     esac
 done
+
+# Risolve --iface nel MAC dell'interfaccia (mutuamente esclusivo con --mac)
+if [ -n "$IFACE" ]; then
+    if [ -n "$MAC_ADDRESS" ]; then
+        echo "ERRORE: usa --mac oppure --iface, non entrambi"
+        exit 1
+    fi
+    IFACE_MAC_FILE="/sys/class/net/$IFACE/address"
+    if [ ! -f "$IFACE_MAC_FILE" ]; then
+        echo "ERRORE: interfaccia di rete non trovata: $IFACE"
+        echo "Interfacce disponibili:"
+        ls /sys/class/net/ | sed 's/^/  - /'
+        exit 1
+    fi
+    MAC_ADDRESS="$(cat "$IFACE_MAC_FILE")"
+    echo "Interfaccia $IFACE -> MAC risolto: $MAC_ADDRESS"
+fi
 
 echo "=== PyArmor Encryption Script ==="
 echo "Source:  $SRC_DIR"
