@@ -39,6 +39,9 @@ pyarmor --version
 # Con binding al MAC — il codice funziona SOLO sulla macchina specificata
 ./encrypt.sh --mac aa:bb:cc:dd:ee:ff
 
+# Con binding al MAC risolto automaticamente dal nome dell'interfaccia
+./encrypt.sh --iface eth0
+
 # Registra la licenza e cifra in un solo comando
 ./encrypt.sh --license ~/pyarmor-regfile-6962.zip
 
@@ -51,6 +54,8 @@ pyarmor --version
 ```bash
 ip link show | grep "link/ether"
 ```
+
+In alternativa, se conosci il nome dell'interfaccia (es. `eth0`) puoi passarlo direttamente con `--iface`: lo script legge `/sys/class/net/<iface>/address` e usa quel MAC per il binding, senza doverlo copiare a mano. `--mac` e `--iface` sono mutuamente esclusivi.
 
 ---
 
