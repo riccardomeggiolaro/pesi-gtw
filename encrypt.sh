@@ -59,13 +59,26 @@ else
     PIP="pip3"
 fi
 
-# Verifica che pyarmor sia installato (come comando CLI)
-if ! command -v pyarmor &>/dev/null; then
-    echo "PyArmor non trovato. Installazione..."
-    $PIP install pyarmor
+# Verifica che pyarmor sia installato (come comando CLI).
+# Se c'è un virtualenv, punta direttamente al suo binario: cercare "pyarmor"
+# nel PATH può trovare un'installazione --user/di sistema diversa e rotta
+# (es. ~/.local/bin/pyarmor) anche quando il venv è attivo.
+if [ -n "$VENV_DIR" ]; then
+    PYARMOR_CMD="$VENV_DIR/bin/pyarmor"
+    if [ ! -x "$PYARMOR_CMD" ]; then
+        # "pip install pyarmor" da solo non basta se il pacchetto risulta già
+        # installato (site-packages presente) ma manca lo script in bin/:
+        # pip salta la reinstallazione e lo script resta mancante.
+        echo "PyArmor non trovato (o incompleto) nel virtualenv. (Re)installazione..."
+        $PIP install --force-reinstall --no-deps pyarmor
+    fi
+else
+    if ! command -v pyarmor &>/dev/null; then
+        echo "PyArmor non trovato. Installazione..."
+        $PIP install pyarmor
+    fi
+    PYARMOR_CMD="pyarmor"
 fi
-
-PYARMOR_CMD="pyarmor"
 echo "PyArmor versione: $($PYARMOR_CMD --version 2>&1 | head -1)"
 
 # Registra la licenza se passata come argomento
