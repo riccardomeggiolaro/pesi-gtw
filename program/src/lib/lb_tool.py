@@ -1,6 +1,6 @@
 ######## MODELS ############################
 
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, field_validator
 import lb_config
 import json
 import string
@@ -44,38 +44,38 @@ class setup_nameserial(BaseModel):
 	name_serial: Union[str, None] = ""
 
 class use_rename(BaseModel):
-    use: Union[bool, None]
-    rename: Union[str, None]
+    use: Union[bool, None] = None
+    rename: Union[str, None] = None
 
-    @validator('rename', pre=True, always=True)
+    @field_validator('rename', mode='before')
     def empty_string_to_none(cls, v):
         if isinstance(v, str) and v.strip() == "":
             return None
         return v
-    
+
 class list_settings(BaseModel):
-	prog_one: Union[bool, None]
-	prog_two: Union[bool, None]
-	pid_one: Union[bool, None]
-	pid_two: Union[bool, None]
-	bil: Union[bool, None]
-	customer: Union[use_rename, None]
-	supplier: Union[use_rename, None]
-	material: Union[use_rename, None]
-	plate: Union[use_rename, None]
-	net_weight: Union[bool, None]
-	date_time_one: Union[bool, None]
-	weight_one: Union[bool, None]
-	date_time_two: Union[bool, None]
-	weight_two: Union[bool, None]
+	prog_one: Union[bool, None] = None
+	prog_two: Union[bool, None] = None
+	pid_one: Union[bool, None] = None
+	pid_two: Union[bool, None] = None
+	bil: Union[bool, None] = None
+	customer: Union[use_rename, None] = None
+	supplier: Union[use_rename, None] = None
+	material: Union[use_rename, None] = None
+	plate: Union[use_rename, None] = None
+	net_weight: Union[bool, None] = None
+	date_time_one: Union[bool, None] = None
+	weight_one: Union[bool, None] = None
+	date_time_two: Union[bool, None] = None
+	weight_two: Union[bool, None] = None
 
 class buttons_settings(BaseModel):
-	tare: Union[bool, None]
-	p_tare: Union[bool, None]
-	zero: Union[bool, None]
-	print: Union[bool, None]
-	weight_one: Union[bool, None]
-	weight_two: Union[bool, None]
+	tare: Union[bool, None] = None
+	p_tare: Union[bool, None] = None
+	zero: Union[bool, None] = None
+	print: Union[bool, None] = None
+	weight_one: Union[bool, None] = None
+	weight_two: Union[bool, None] = None
 
 ######## UTILITY ############################
 

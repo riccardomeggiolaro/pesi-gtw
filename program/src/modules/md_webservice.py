@@ -744,7 +744,7 @@ def mainprg():
 						if isinstance(value, bool):
 							lb_config.setup["settings_machine"]["list_settings"][key] = value
 						elif isinstance(value, lb_tool.use_rename):
-							lb_config.setup["settings_machine"]["list_settings"][key] = value.dict()
+							lb_config.setup["settings_machine"]["list_settings"][key] = value.model_dump()
 				lb_tool.Save(lb_config.path_setup, lb_config.setup)
 				return lb_config.setup["settings_machine"]["list_settings"]
 			else:
