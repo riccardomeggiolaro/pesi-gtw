@@ -32,12 +32,12 @@ def mainprg():
 	async def Static(request: Request, filename: str):
 		file_exist = os.path.isfile(lb_config.pesigtw_path + "/src/static/"+filename)
 		if file_exist:
-			return templates.TemplateResponse(filename, {"request": request})
-		return templates.TemplateResponse("404.html", {"request": request})	
-	
+			return templates.TemplateResponse(request, filename)
+		return templates.TemplateResponse(request, "404.html")
+
 	@app.get("/", response_class=HTMLResponse)
 	async def Render(request: Request):
-		return templates.TemplateResponse("login.html", {"request": request})
+		return templates.TemplateResponse(request, "login.html")
 	
 	uvicorn.run(app, host="0.0.0.0", port=80, log_level="info")
 
