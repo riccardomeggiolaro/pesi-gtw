@@ -99,10 +99,19 @@ if [ -n "$MAC_ADDRESS" ]; then
     fi
 fi
 
-# Pulisce output precedente
+# Pulisce output precedente.
+# Con "set -e" un rm -rf fallito (es. file root-owned da una run precedente
+# con sudo dentro dist/) farebbe uscire lo script qui silenziosamente, senza
+# mai arrivare alla cifratura: rendiamo l'errore esplicito.
 if [ -d "$OUTPUT_DIR" ]; then
     echo "Rimozione output precedente..."
-    rm -rf "$OUTPUT_DIR"
+    if ! rm -rf "$OUTPUT_DIR"; then
+        echo ""
+        echo "ERRORE: impossibile rimuovere $OUTPUT_DIR."
+        echo "Probabile causa: contiene file creati da una precedente esecuzione con sudo (es. sudo ./start.sh dentro dist/)."
+        echo "Soluzione: sudo rm -rf \"$OUTPUT_DIR\"  e poi rilancia questo script."
+        exit 1
+    fi
 fi
 mkdir -p "$OUTPUT_DIR"
 
