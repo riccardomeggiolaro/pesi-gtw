@@ -36,6 +36,19 @@ fi
 ufw allow 80
 ufw allow 8000
 
+# Installa e abilita Cockpit se non è presente
+if ! dpkg -l | grep -q "^ii  cockpit "; then
+    echo "Cockpit non è installato. Installazione..."
+    apt install -y cockpit
+    echo "Cockpit installato con successo"
+else
+    echo "Cockpit è già installato"
+fi
+
+echo "Abilitazione e avvio del socket Cockpit..."
+systemctl enable --now cockpit.socket
+echo "Cockpit è attivo"
+
 # Copia il pacchetto in /var/pesi-gtw
 echo "Copia file in $INSTALL_DIR..."
 mkdir -p "$INSTALL_DIR"
