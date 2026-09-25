@@ -408,7 +408,10 @@ def mainprg():
 			return f"Errore nel recupero dei dati: {str(e)}"
 
 	@app.delete("/delete/pesate/{token}")
-	async def DeletePesate(filtri: list, token: str):
+	async def DeletePesate(token: str, filtri: list = Body(default=None)):
+		# senza body non si cancella nulla: per svuotare la tabella serve inviare [] esplicitamente
+		if filtri is None:
+			raise HTTPException(status_code=400, detail="Body mancante: inviare un array di filtri ([] per cancellare tutte le pesate)")
 		try:
 			if lb_tool.TokenTrue(token):
 				if filtri != []:
