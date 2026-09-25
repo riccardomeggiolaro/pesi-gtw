@@ -820,7 +820,7 @@ def mainprg():
 
 	# function to insert anagrafic of license plate
 	@app.post("/anagrafica_automezzi/{action}")
-	async def Automezzi(automezzi: list, action: str):
+	async def Automezzi(action: str, automezzi: list = Body()):
 		try:
 			quantity = len(automezzi)
 			i = 1
@@ -875,7 +875,7 @@ def mainprg():
 			return HTTPException(status_code=400, detail="SYNTAX ERROR")
 
 	@app.post("/anagrafica_materiali/{action}")
-	async def Materiali(materiali: list, action: str):
+	async def Materiali(action: str, materiali: list = Body()):
 		try:
 			quantity = len(materiali)
 			i = 1
@@ -928,7 +928,7 @@ def mainprg():
 			return HTTPException(status_code=400, detail="SYNTAX ERROR")
 
 	@app.post("/anagrafica_fornitori/{action}")
-	async def Fornitori(fornitori: list, action: str):
+	async def Fornitori(action: str, fornitori: list = Body()):
 		try:
 			quantity = len(fornitori)
 			i = 1
@@ -983,7 +983,7 @@ def mainprg():
 			return HTTPException(status_code=400, detail="SYNTAX ERROR")
 
 	@app.post("/anagrafica_clienti/{action}")
-	async def Clienti(clienti: list, action: str):
+	async def Clienti(action: str, clienti: list = Body()):
 		try:
 			quantity = len(clienti)
 			i = 1
@@ -1038,7 +1038,7 @@ def mainprg():
 			return HTTPException(status_code=400, detail="SYNTAX ERROR")
 
 	@app.post("/anagrafica_tessere/{action}")
-	async def Tessere(tessere: list, action: str):
+	async def Tessere(action: str, tessere: list = Body()):
 		try:
 			quantity = len(tessere)
 			i = 1
