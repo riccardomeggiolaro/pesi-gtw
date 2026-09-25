@@ -4,7 +4,7 @@ import aiosqlite
 import lb_config
 import lb_log
 import lb_config
-from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect, Body
 from typing import Union
 import uvicorn
 import lb_tool
@@ -267,7 +267,7 @@ def mainprg():
 
 	# function get list of weight filtered
 	@app.post("/pesate/{token}")
-	async def Pesate(filtri: list, token: str, offset: int = 0, limit: int = 3000):
+	async def Pesate(token: str, filtri: list = Body(default=[]), offset: int = 0, limit: int = 3000):
 		try:
 			if lb_tool.TokenTrue(token):
 				if filtri != []:
@@ -481,7 +481,7 @@ def mainprg():
 
 	# function to export list of weight
 	@app.post("/export/{type}/{token}")
-	async def get_export_data(filtri: list, type: str, token: str):
+	async def get_export_data(type: str, token: str, filtri: list = Body(default=[])):
 		try:
 			if lb_tool.TokenTrue(token):
 				if filtri != []:
