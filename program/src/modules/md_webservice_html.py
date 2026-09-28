@@ -28,6 +28,11 @@ def mainprg():
     	allow_headers=["*"],
 	)
 	
+	# usata dallo scanner di rete per riconoscere il dispositivo
+	@app.get("/whoami")
+	async def WhoAmI():
+		return {"program_name": "pesi-gtw"}
+
 	@app.get("/{filename}", response_class=HTMLResponse)
 	async def Static(request: Request, filename: str):
 		file_exist = os.path.isfile(lb_config.pesigtw_path + "/src/static/"+filename)
